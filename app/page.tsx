@@ -211,7 +211,7 @@ export default function Home() {
           </p>
           <div className="hero-ctas">
             <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              join creatopia — $97/mo →
+              join creatopia — $107/mo →
             </a>
             <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
           </div>

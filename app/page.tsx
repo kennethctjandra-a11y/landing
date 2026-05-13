@@ -462,7 +462,7 @@ export default function Home() {
             <div className="about-visual">
               <div className="about-photo-wrap">
                 <Image
-                  src="/ken.jpg"
+                  src="/img/ken.jpg"
                   alt="Ken Tjandra"
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"

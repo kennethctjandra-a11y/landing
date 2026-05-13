@@ -170,7 +170,7 @@ body {
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   max-width: 760px;
   display: flex;
   flex-direction: column;
@@ -1032,6 +1032,32 @@ body {
 .footer-links a:hover { color: rgba(255,255,255,0.55); }
 .footer-copy  { font-size: 0.68rem; color: rgba(255,255,255,0.12); letter-spacing: 0.06em; }
 .footer-faith { font-size: 0.68rem; color: rgba(255,255,255,0.12); font-style: italic; }
+
+/* ─── CURSOR TRAIL ─────────────────────────────────────────── */
+
+.cursor-trail-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.cursor-trail {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  font-size: 2.2rem;
+  line-height: 1;
+  animation: cursorTrailFade 0.85s ease-out forwards;
+  transform-origin: center;
+}
+
+@keyframes cursorTrailFade {
+  0%   { transform: translate(-50%, -50%) scale(0.2) rotate(-8deg); opacity: 0; }
+  14%  { transform: translate(-50%, -58%) scale(1.25) rotate(4deg); opacity: 0.88; }
+  100% { transform: translate(-50%, -125%) scale(0.85) rotate(14deg); opacity: 0; }
+}
 
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
 

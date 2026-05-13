@@ -67,6 +67,9 @@ export default function Home() {
   const heroRef    = useRef<HTMLElement>(null);
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const trailContainerRef = useRef<HTMLDivElement>(null);
+  const trailIdxRef       = useRef(0);
+  const lastTrailPos      = useRef({ x: 0, y: 0 });
 
   /* scroll → nav */
   useEffect(() => {
@@ -88,6 +91,32 @@ export default function Home() {
         const d = floatingElements[i].depth;
         el.style.transform = `translate(${xPct * d * 55}px, ${yPct * d * 55}px)`;
       });
+    };
+    hero.addEventListener("mousemove", onMove);
+    return () => hero.removeEventListener("mousemove", onMove);
+  }, []);
+
+  /* cursor trail */
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    // swap emoji strings for "/trail/photo.jpg" paths once Ken provides images
+    const items = ["📷","🌸","✝️","⛩️","🧧","🕊️","道","✦","🏮","🎬","🌿","福","☦","壽","🎵"];
+    const onMove = (e: MouseEvent) => {
+      const rect = hero.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dist = Math.hypot(x - lastTrailPos.current.x, y - lastTrailPos.current.y);
+      if (dist < 65) return;
+      lastTrailPos.current = { x, y };
+      const el = document.createElement("span");
+      el.className = "cursor-trail";
+      el.textContent = items[trailIdxRef.current % items.length];
+      trailIdxRef.current++;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      trailContainerRef.current?.appendChild(el);
+      setTimeout(() => el.remove(), 900);
     };
     hero.addEventListener("mousemove", onMove);
     return () => hero.removeEventListener("mousemove", onMove);
@@ -122,6 +151,7 @@ export default function Home() {
       <section className="hero" ref={heroRef}>
         <div className="hero-grain" />
         <div className="hero-glow" />
+        <div className="cursor-trail-container" ref={trailContainerRef} />
 
         {/* floating collage */}
         {floatingElements.map((f, i) => (

@@ -162,8 +162,7 @@ export default function Home() {
       <nav className={`nav${scrolled ? " scrolled" : ""}`}>
         <a href="#" className="nav-logo">ken tjandra<span>.</span></a>
         <div className="nav-actions">
-          <a href="#offers" className="btn-ghost">the offers</a>
-          <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-red">join creatopia →</a>
+          <a href="#offers" className="btn-red">see the offers →</a>
         </div>
       </nav>
 
@@ -348,7 +347,7 @@ export default function Home() {
                 <h3 className="offer-title">The Garden<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>creatopia</span></h3>
               </div>
               <div className="offer-price">
-                <span className="price-amount">$97</span>
+                <span className="price-amount">$107</span>
                 <span className="price-period">/month</span>
               </div>
               <p className="offer-tagline">for asian and christian creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
@@ -522,7 +521,7 @@ export default function Home() {
           <h2>come as you are.<br /><em>leave as who you&apos;re meant to be.</em></h2>
           <p>your story is not too ordinary. your background is not a disadvantage. your faith is not a filter. it&apos;s all the content.</p>
           <div className="final-cta-btns">
-            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary-light">join creatopia — $97/mo →</a>
+            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary-light">join creatopia — $107/mo →</a>
             <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="btn-secondary-light">apply for coaching</a>
           </div>
           <p className="final-micro">30-day money back guarantee · cancel anytime · hosted on skool</p>

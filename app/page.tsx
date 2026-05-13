@@ -162,7 +162,8 @@ export default function Home() {
       <nav className={`nav${scrolled ? " scrolled" : ""}`}>
         <a href="#" className="nav-logo">ken tjandra<span>.</span></a>
         <div className="nav-actions">
-          <a href="#offers" className="btn-red">see the offers →</a>
+          <a href="#offers" className="btn-ghost">the offers</a>
+          <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-red">join creatopia →</a>
         </div>
       </nav>
 
@@ -214,6 +215,7 @@ export default function Home() {
             </a>
             <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
           </div>
+          <a href="#offers" className="hero-see-offers">see the offers ↓</a>
           <p className="hero-tagline">real is the new viral.</p>
         </div>
 
@@ -227,7 +229,7 @@ export default function Home() {
       <section className="stats">
         <div className="stats-inner">
           {[
-            { value: "700K+",   label: "combined followers" },
+            { value: "1.9M+",   label: "combined followers" },
             { value: "1,000+",  label: "creators helped" },
             { value: "$16K/m",  label: "community scaled" },
             { value: "90 days", label: "avg. to first 10K" },

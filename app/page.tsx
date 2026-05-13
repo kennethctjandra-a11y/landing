@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 /* ─── DATA ───────────────────────────────────────────────── */
 
@@ -165,7 +166,9 @@ const faqs = [
   },
 ];
 
-/* ─── COMPONENT ──────────────────────────────────────────── */
+const SKOOL = "https://www.skool.com/creatopia/about";
+
+/* ─── PAGE ───────────────────────────────────────────────── */
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -188,12 +191,7 @@ export default function Home() {
           <a href="#offers" className="btn-ghost">
             the offers
           </a>
-          <a
-            href="https://www.skool.com/creatopia"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-yellow"
-          >
+          <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-red">
             join creatopia →
           </a>
         </div>
@@ -203,7 +201,9 @@ export default function Home() {
       <section className="hero">
         <div className="hero-grain" />
         <div className="hero-glow" />
-        <div className="hero-content">
+
+        {/* Left: text */}
+        <div className="hero-left">
           <div className="hero-eyebrow">
             <span className="hero-dot" />
             for asian founders · creators · entrepreneurs
@@ -218,12 +218,7 @@ export default function Home() {
             sounds like you.
           </p>
           <div className="hero-ctas">
-            <a
-              href="https://www.skool.com/creatopia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
+            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
               join creatopia — $97/mo →
             </a>
             <a href="#offers" className="btn-secondary">
@@ -232,9 +227,27 @@ export default function Home() {
           </div>
           <p className="hero-tagline">real is the new viral.</p>
         </div>
-        <div className="scroll-hint">
-          <span>scroll</span>
-          <div className="scroll-line" />
+
+        {/* Right: photo */}
+        <div className="hero-right">
+          <div className="hero-photo-wrap">
+            <Image
+              src="/ken.jpg"
+              alt="Ken Tjandra — personal brand coach"
+              fill
+              priority
+              sizes="(max-width: 900px) 0px, 44vw"
+              style={{ objectFit: "cover", objectPosition: "center 15%" }}
+            />
+            <div className="hero-photo-tag">
+              <span className="photo-tag-name">ken tjandra</span>
+              <span className="photo-tag-sub">700K+ followers built</span>
+            </div>
+          </div>
+          <div className="hero-badge">
+            <div className="badge-num">🧧</div>
+            <div className="badge-label">in christ</div>
+          </div>
         </div>
       </section>
 
@@ -242,9 +255,9 @@ export default function Home() {
       <section className="stats">
         <div className="stats-inner">
           {[
-            { value: "700K+", label: "combined followers" },
-            { value: "400+", label: "creatopia members" },
-            { value: "$15K/mo", label: "community revenue" },
+            { value: "700K+",  label: "combined followers" },
+            { value: "1,000+", label: "creators helped" },
+            { value: "$16K/m", label: "community scaled" },
             { value: "90 days", label: "avg. to first 10K" },
           ].map((s) => (
             <div key={s.label}>
@@ -258,7 +271,7 @@ export default function Home() {
       {/* ── PROBLEM ── */}
       <section className="section section-light">
         <div className="section-inner">
-          <p className="eyebrow eyebrow-muted">sound familiar?</p>
+          <span className="eyebrow eyebrow-muted">sound familiar?</span>
           <h2 className="section-h2 section-h2-dark">
             you&apos;re not the problem.
             <br />
@@ -296,14 +309,13 @@ export default function Home() {
       <section className="section section-black">
         <div className="section-inner">
           <div className="creator-intro">
-            <p className="eyebrow eyebrow-yellow">student results</p>
+            <span className="eyebrow eyebrow-red">student results</span>
             <h2 className="section-h2 section-h2-light">
               creators who stopped waiting.
             </h2>
             <p className="section-lead section-lead-light">
-              these are real people from the community. second-gen asian
-              founders and creators who used their story to build something
-              real.
+              real people from the community — second-gen asian founders who
+              used their story to build something real.
             </p>
           </div>
           <div className="creator-grid">
@@ -321,9 +333,7 @@ export default function Home() {
                     <div className="creator-handle">{c.handle}</div>
                     <div className="creator-platforms">
                       {c.platforms.map((p) => (
-                        <span className="platform-badge" key={p}>
-                          {p}
-                        </span>
+                        <span className="platform-badge" key={p}>{p}</span>
                       ))}
                     </div>
                   </div>
@@ -346,7 +356,7 @@ export default function Home() {
       {/* ── TRANSFORMATION ── */}
       <section className="section section-light">
         <div className="section-inner">
-          <p className="eyebrow eyebrow-muted">the shift</p>
+          <span className="eyebrow eyebrow-muted">the shift</span>
           <h2 className="section-h2 section-h2-dark">
             from creating out of fear
             <br />
@@ -358,10 +368,10 @@ export default function Home() {
               <div className="transform-items">
                 {[
                   ["😮‍💨", "creating from fear and comparison"],
-                  ["📉", "chasing metrics that don't move"],
-                  ["📋", "copy-paste content that sounds like everyone else"],
-                  ["🧱", "stuck in a loop of overthinking and not posting"],
-                  ["🌫️", "invisible online despite real-world success"],
+                  ["📉",   "chasing metrics that don't move"],
+                  ["📋",   "copy-paste content that sounds like everyone else"],
+                  ["🧱",   "stuck in a loop of overthinking and not posting"],
+                  ["🌫️",  "invisible online despite real-world success"],
                 ].map(([icon, text]) => (
                   <div className="transform-item" key={text}>
                     <span className="transform-icon">{icon}</span>
@@ -377,11 +387,11 @@ export default function Home() {
               <div className="transform-label">after creatopia</div>
               <div className="transform-items">
                 {[
-                  ["✦", "creating from clarity and conviction"],
+                  ["✦",  "creating from clarity and conviction"],
                   ["📈", "attracting the right people with the right content"],
-                  ["🎙️", "content that sounds unmistakably like you"],
+                  ["🎙️","content that sounds unmistakably like you"],
                   ["⚡", "a system that makes posting feel natural, not forced"],
-                  ["🌿", "a growing audience that trusts you before you sell"],
+                  ["🌿","a growing audience that trusts you before you sell"],
                 ].map(([icon, text]) => (
                   <div className="transform-item" key={text}>
                     <span className="transform-icon">{icon}</span>
@@ -397,7 +407,7 @@ export default function Home() {
       {/* ── OFFERS ── */}
       <section id="offers" className="section section-white">
         <div className="section-inner">
-          <p className="eyebrow eyebrow-muted">where to start</p>
+          <span className="eyebrow eyebrow-muted">where to start</span>
           <h2 className="section-h2 section-h2-dark">two ways in.</h2>
           <p className="section-lead section-lead-dark">
             pick the one that matches where you are right now.
@@ -405,15 +415,13 @@ export default function Home() {
           <div className="offers-grid">
             {/* The Garden */}
             <div className="offer-card offer-garden">
-              <span className="offer-badge badge-yellow">most popular</span>
+              <span className="offer-badge badge-red">most popular</span>
               <div>
                 <div className="offer-who">the community</div>
                 <h3 className="offer-title">
                   The Garden
                   <br />
-                  <span style={{ opacity: 0.5, fontSize: "1.1rem" }}>
-                    creatopia
-                  </span>
+                  <span style={{ opacity: 0.45, fontSize: "1.1rem" }}>creatopia</span>
                 </h3>
               </div>
               <div className="offer-price">
@@ -429,7 +437,7 @@ export default function Home() {
                 {[
                   "full story system curriculum",
                   "weekly live group calls with ken",
-                  "400+ member community on skool",
+                  "1,000+ member community on skool",
                   "platform playbooks (IG, TT, YT, LI)",
                   "content vault — hooks, templates, swipe files",
                   "asian creator advantage modules",
@@ -442,12 +450,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://www.skool.com/creatopia"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="offer-cta cta-garden"
-              >
+              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">
                 join the garden →
               </a>
             </div>
@@ -460,9 +463,7 @@ export default function Home() {
                 <h3 className="offer-title">
                   The Greenhouse
                   <br />
-                  <span style={{ opacity: 0.5, fontSize: "1.1rem" }}>
-                    private coaching
-                  </span>
+                  <span style={{ opacity: 0.45, fontSize: "1.1rem" }}>private coaching</span>
                 </h3>
               </div>
               <div className="offer-price">
@@ -506,7 +507,7 @@ export default function Home() {
       {/* ── TESTIMONIALS ── */}
       <section className="section section-dark">
         <div className="section-inner">
-          <p className="eyebrow eyebrow-yellow">in their words</p>
+          <span className="eyebrow eyebrow-red">in their words</span>
           <h2 className="section-h2 section-h2-light">
             real people. real results.
           </h2>
@@ -538,9 +539,14 @@ export default function Home() {
         <div className="section-inner">
           <div className="about-grid">
             <div className="about-visual">
-              <div className="about-img-placeholder">
-                <span>📸</span>
-                add your photo here
+              <div className="about-photo-wrap">
+                <Image
+                  src="/ken.jpg"
+                  alt="Ken Tjandra"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                  style={{ objectFit: "cover", objectPosition: "center 10%" }}
+                />
               </div>
               <div className="about-tag">
                 <div className="about-tag-num">700K+</div>
@@ -548,7 +554,7 @@ export default function Home() {
               </div>
             </div>
             <div className="about-text">
-              <p className="eyebrow eyebrow-muted">who is ken?</p>
+              <span className="eyebrow eyebrow-muted">who is ken?</span>
               <h2>
                 21. indo-australian.
                 <br />
@@ -558,13 +564,9 @@ export default function Home() {
                 <p>
                   3 years ago i was grinding in a 3 square meter room with zero
                   followers, zero dollars, and zero direction.{" "}
-                  <strong>
-                    then i gave my life to Jesus and everything changed.
-                  </strong>
+                  <strong>then i gave my life to Jesus and everything changed.</strong>
                 </p>
-                <p>
-                  not because i got a strategy. because i got a story.
-                </p>
+                <p>not because i got a strategy. because i got a story.</p>
                 <p>
                   i grew 700K+ followers across platforms by sharing my raw
                   testimony in a cinematic format — the faith journey, the
@@ -580,12 +582,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="about-ctas">
-                <a
-                  href="https://www.skool.com/creatopia"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-dark"
-                >
+                <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-dark">
                   join the community →
                 </a>
                 <a
@@ -605,7 +602,7 @@ export default function Home() {
       {/* ── FAQ ── */}
       <section className="section section-white">
         <div className="section-inner-sm">
-          <p className="eyebrow eyebrow-muted">questions</p>
+          <span className="eyebrow eyebrow-muted">questions</span>
           <h2 className="section-h2 section-h2-dark">before you join.</h2>
           <div className="faq-list">
             {faqs.map((faq, i) => (
@@ -631,7 +628,7 @@ export default function Home() {
       <section className="final-cta">
         <div className="final-cta-glow" />
         <div className="final-cta-inner">
-          <p className="eyebrow eyebrow-yellow">the garden is open</p>
+          <span className="eyebrow eyebrow-light">the garden is open</span>
           <h2>
             come as you are.
             <br />
@@ -639,23 +636,17 @@ export default function Home() {
           </h2>
           <p>
             your story is not too ordinary. your background is not a
-            disadvantage. your faith is not a filter. it&apos;s all the
-            content.
+            disadvantage. your faith is not a filter. it&apos;s all the content.
           </p>
           <div className="final-cta-btns">
-            <a
-              href="https://www.skool.com/creatopia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
+            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary-light">
               join creatopia — $97/mo →
             </a>
             <a
               href="https://form.typeform.com/to/io6ZyWkn"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary"
+              className="btn-secondary-light"
             >
               apply for coaching
             </a>
@@ -672,41 +663,13 @@ export default function Home() {
           ken tjandra<span>.</span>
         </a>
         <div className="footer-links">
-          <a
-            href="https://www.instagram.com/kentjandraa"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            instagram
-          </a>
-          <a
-            href="https://www.tiktok.com/@kentjandraa"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            tiktok
-          </a>
-          <a
-            href="https://www.youtube.com/@kentjandra"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            youtube
-          </a>
-          <a
-            href="https://www.skool.com/creatopia"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            skool community
-          </a>
-          <a href="https://www.kentjandra.com/coaching" target="_blank" rel="noopener noreferrer">
-            coaching
-          </a>
+          <a href="https://www.instagram.com/kentjandraa" target="_blank" rel="noopener noreferrer">instagram</a>
+          <a href="https://www.tiktok.com/@kentjandraa" target="_blank" rel="noopener noreferrer">tiktok</a>
+          <a href="https://www.youtube.com/@kentjandra" target="_blank" rel="noopener noreferrer">youtube</a>
+          <a href={SKOOL} target="_blank" rel="noopener noreferrer">skool community</a>
+          <a href="https://www.kentjandra.com/coaching" target="_blank" rel="noopener noreferrer">coaching</a>
         </div>
-        <p className="footer-copy">
-          © {new Date().getFullYear()} ken tjandra. all rights reserved.
-        </p>
+        <p className="footer-copy">© {new Date().getFullYear()} ken tjandra. all rights reserved.</p>
         <p className="footer-faith">built in faith. rooted in story.</p>
       </footer>
     </>

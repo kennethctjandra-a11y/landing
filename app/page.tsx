@@ -133,9 +133,10 @@ export default function Home() {
       img.style.width  = `${size.w}px`;
       img.style.height = `${size.h}px`;
       img.style.setProperty("--r",   `${(Math.random() - 0.5) * 30}deg`);
-      img.style.setProperty("--dur", `${0.9 + Math.random() * 0.6}s`);
+      img.style.setProperty("--dx",  `${(Math.random() - 0.5) * 160}px`);
+      img.style.setProperty("--dur", `${1.5 + Math.random() * 2.5}s`);
       trailContainerRef.current?.appendChild(img);
-      setTimeout(() => img.remove(), 1600);
+      setTimeout(() => img.remove(), 4100);
     };
     hero.addEventListener("mousemove", onMove);
     return () => hero.removeEventListener("mousemove", onMove);

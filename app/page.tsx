@@ -108,24 +108,34 @@ export default function Home() {
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
+    const sizes = [
+      { w: 110, h: 110 }, { w: 160, h: 105 }, { w: 105, h: 165 },
+      { w: 190, h: 125 }, { w: 95,  h: 155 }, { w: 175, h: 140 },
+      { w: 130, h: 190 }, { w: 145, h: 145 }, { w: 200, h: 110 },
+      { w: 115, h: 200 }, { w: 135, h: 115 }, { w: 170, h: 170 },
+    ];
     const onMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const dist = Math.hypot(x - lastSpawnRef.current.x, y - lastSpawnRef.current.y);
-      if (dist < 75) return;
+      if (dist < 42) return;
       lastSpawnRef.current = { x, y };
-      const src = trailSrcs[trailIndexRef.current % trailSrcs.length];
+      const src  = trailSrcs[trailIndexRef.current % trailSrcs.length];
+      const size = sizes[trailIndexRef.current % sizes.length];
       trailIndexRef.current++;
       const img = document.createElement("img");
       img.className = "cursor-trail";
       img.src = src;
       img.alt = "";
-      img.style.left = `${x}px`;
-      img.style.top  = `${y}px`;
-      img.style.setProperty("--r", `${(Math.random() - 0.5) * 24}deg`);
+      img.style.left   = `${x}px`;
+      img.style.top    = `${y}px`;
+      img.style.width  = `${size.w}px`;
+      img.style.height = `${size.h}px`;
+      img.style.setProperty("--r",   `${(Math.random() - 0.5) * 30}deg`);
+      img.style.setProperty("--dur", `${0.9 + Math.random() * 0.6}s`);
       trailContainerRef.current?.appendChild(img);
-      setTimeout(() => img.remove(), 1150);
+      setTimeout(() => img.remove(), 1600);
     };
     hero.addEventListener("mousemove", onMove);
     return () => hero.removeEventListener("mousemove", onMove);

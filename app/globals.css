@@ -178,21 +178,19 @@ body {
 }
 .cursor-trail {
   position: absolute;
-  width: 78px;
-  height: 78px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
   pointer-events: none;
   user-select: none;
-  animation: cursorTrailFade 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  border: 1px solid rgba(201,168,76,0.3);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+  animation: cursorTrailFade var(--dur, 1.2s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  border: 1px solid rgba(201,168,76,0.35);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.28);
   transform-origin: center center;
 }
 @keyframes cursorTrailFade {
   0%   { transform: translate(-50%, -50%) scale(0)    rotate(var(--r, 0deg));                      opacity: 0;    }
-  14%  { transform: translate(-50%, -65%) scale(1.08) rotate(calc(var(--r, 0deg) * 0.4));          opacity: 0.82; }
-  100% { transform: translate(-50%,-140%) scale(0.72) rotate(calc(var(--r, 0deg) * 1.6));          opacity: 0;    }
+  14%  { transform: translate(-50%, -55%) scale(1.06) rotate(calc(var(--r, 0deg) * 0.4));          opacity: 0.88; }
+  100% { transform: translate(-50%,-130%) scale(0.78) rotate(calc(var(--r, 0deg) * 1.5));          opacity: 0;    }
 }
 
 .hero-content {

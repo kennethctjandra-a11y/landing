@@ -48,6 +48,14 @@ const champions = [
   { name: "Matthew Kim",   handle: "@matthewkim10",     initials: "MK", ig:  "10K", tt:   "—", total:  "10K", avatarBg: "#2a2a1a", avatarColor: "#ada85a" },
 ];
 
+const trailSrcs = [
+  1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+  21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+  41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,
+  61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,
+  95,96,99,101,
+].map(n => `/trail/${n}.png`);
+
 const faqs = [
   { q: "do i need to be christian?",             a: "no. the community is built on faith-first values, but we welcome anyone who resonates with authentic, values-driven content creation. you'll see faith referenced in the culture here because it's part of ken's story — but it's never a requirement." },
   { q: "what if i'm just starting out?",         a: "this is actually the best time to join. starting with the right framework means you don't spend years unlearning bad habits. some of our fastest-growing members came in with zero followers." },
@@ -68,8 +76,8 @@ export default function Home() {
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const trailContainerRef = useRef<HTMLDivElement>(null);
-  const trailIdxRef       = useRef(0);
-  const lastTrailPos      = useRef({ x: 0, y: 0 });
+  const trailIndexRef     = useRef(0);
+  const lastSpawnRef      = useRef({ x: -999, y: -999 });
 
   /* scroll → nav */
   useEffect(() => {
@@ -100,23 +108,24 @@ export default function Home() {
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
-    // swap emoji strings for "/trail/photo.jpg" paths once Ken provides images
-    const items = ["📷","🌸","✝️","⛩️","🧧","🕊️","道","✦","🏮","🎬","🌿","福","☦","壽","🎵"];
     const onMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const dist = Math.hypot(x - lastTrailPos.current.x, y - lastTrailPos.current.y);
-      if (dist < 65) return;
-      lastTrailPos.current = { x, y };
-      const el = document.createElement("span");
-      el.className = "cursor-trail";
-      el.textContent = items[trailIdxRef.current % items.length];
-      trailIdxRef.current++;
-      el.style.left = `${x}px`;
-      el.style.top = `${y}px`;
-      trailContainerRef.current?.appendChild(el);
-      setTimeout(() => el.remove(), 900);
+      const dist = Math.hypot(x - lastSpawnRef.current.x, y - lastSpawnRef.current.y);
+      if (dist < 75) return;
+      lastSpawnRef.current = { x, y };
+      const src = trailSrcs[trailIndexRef.current % trailSrcs.length];
+      trailIndexRef.current++;
+      const img = document.createElement("img");
+      img.className = "cursor-trail";
+      img.src = src;
+      img.alt = "";
+      img.style.left = `${x}px`;
+      img.style.top  = `${y}px`;
+      img.style.setProperty("--r", `${(Math.random() - 0.5) * 24}deg`);
+      trailContainerRef.current?.appendChild(img);
+      setTimeout(() => img.remove(), 1150);
     };
     hero.addEventListener("mousemove", onMove);
     return () => hero.removeEventListener("mousemove", onMove);

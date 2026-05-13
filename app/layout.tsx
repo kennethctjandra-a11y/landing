@@ -1,26 +1,18 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Creatopia — Grow Your Personal Brand to 10k–100k Followers",
+  title: "Ken Tjandra — Real Creators. Real Brands.",
   description:
-    "A premium Skool community for Asian creators, founders & entrepreneurs. Learn organic, authentic storytelling to build a magnetic personal brand audience.",
+    "I help Asian and Christian founders build authentic personal brands with storytelling content. Join Creatopia or work 1-on-1.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

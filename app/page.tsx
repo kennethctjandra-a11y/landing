@@ -54,7 +54,7 @@ const trailSrcs = [
   41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,
   61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,
   95,96,99,101,
-].map(n => `/trail/${n}.png`);
+].map(n => `/trail/${n}.png`).sort(() => Math.random() - 0.5);
 
 const faqs = [
   { q: "do i need to be christian?",             a: "no. the community is built on faith-first values, but we welcome anyone who resonates with authentic, values-driven content creation. you'll see faith referenced in the culture here because it's part of ken's story — but it's never a requirement." },

@@ -270,6 +270,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── PHILOSOPHY ── */}
+      <section className="philosophy">
+        <p className="philosophy-quote">
+          &ldquo;I live at the intersection of faith, culture &amp; content. Not because it&apos;s a good brand position — because it&apos;s my testimony. I believe you don&apos;t go viral by manufacturing a story, but by living it first. Real growth starts the same way every morning: prayer. seek His kingdom first. everything else follows.&rdquo;
+        </p>
+        <p className="philosophy-attr">— ken tjandra</p>
+      </section>
+
       <div className="section-divider section-divider-light" />
 
       {/* ── PROBLEM ── */}

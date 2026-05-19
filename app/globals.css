@@ -1074,6 +1074,31 @@ body {
 .btn-secondary-light:hover { color: var(--white); border-color: rgba(255,255,255,0.35); }
 .final-micro { font-size: 0.7rem; color: rgba(255,255,255,0.18); letter-spacing: 0.08em; }
 
+/* ─── PHILOSOPHY STRIP ─────────────────────────────────────── */
+
+.philosophy {
+  background: var(--dark);
+  padding: 5.5rem 2rem;
+  text-align: center;
+}
+.philosophy-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.1vw, 1.6rem);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.philosophy-attr {
+  margin-top: 1.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
 /* ─── WORK / PROJECTS ─────────────────────────────────────── */
 
 .work-grid {

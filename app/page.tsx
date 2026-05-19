@@ -56,6 +56,23 @@ const trailSrcs = [
   95,96,99,101,
 ].map(n => `/trail/${n}.png`).sort(() => Math.random() - 0.5);
 
+const projects = [
+  { tag: "community",        name: "Creatopia",         desc: "A $107/m Skool community for Asian founders and creators building authentic personal brands through storytelling.",                                           status: "live",           link: SKOOL,                                    cta: "join →" },
+  { tag: "1-on-1 coaching",  name: "The Greenhouse",    desc: "Private coaching for founders ready to go all-in. Strategy, content, daily access, and a custom 90-day brand roadmap.",                                      status: "limited spots",  link: "https://form.typeform.com/to/io6ZyWkn",  cta: "apply →" },
+  { tag: "presets · tools",  name: "Colour Grade",      desc: "Coming back soon — cinematic colour grading tools built for storytellers.",                                                                                    status: "coming soon",    link: "#",                                      cta: "coming soon" },
+  { tag: "more in the lab",  name: "What's Next",       desc: "More products and projects in the works. Follow along on Instagram and YouTube to see what's brewing.",                                                       status: "coming soon",    link: "https://www.instagram.com/kentjandraa",   cta: "follow along →" },
+];
+
+const values = [
+  { num: "01", name: "Faith",           desc: "Everything I build starts here. Faith is not a filter — it's the foundation." },
+  { num: "02", name: "Authenticity",    desc: "Creating from who you actually are, not who the algorithm wants you to be." },
+  { num: "03", name: "Storytelling",    desc: "The most powerful tool a person can hold. Story outlasts every trend." },
+  { num: "04", name: "Growth",          desc: "Always learning. Always becoming. Never arriving." },
+  { num: "05", name: "Community",       desc: "You rise by lifting others. Real wins are shared wins." },
+  { num: "06", name: "Identity",        desc: "Knowing who you are is your unfair advantage. Your background is not a limitation." },
+  { num: "07", name: "Excellence",      desc: "Not for applause — for God. Do your best work because it matters, not because it's noticed." },
+];
+
 const faqs = [
   { q: "do i need to be christian?",             a: "no. the community is built on faith-first values, but we welcome anyone who resonates with authentic, values-driven content creation. you'll see faith referenced in the culture here because it's part of ken's story — but it's never a requirement." },
   { q: "what if i'm just starting out?",         a: "this is actually the best time to join. starting with the right framework means you don't spend years unlearning bad habits. some of our fastest-growing members came in with zero followers." },
@@ -109,10 +126,10 @@ export default function Home() {
     const hero = heroRef.current;
     if (!hero) return;
     const sizes = [
-      { w: 110, h: 110 }, { w: 160, h: 105 }, { w: 105, h: 165 },
-      { w: 190, h: 125 }, { w: 95,  h: 155 }, { w: 175, h: 140 },
-      { w: 130, h: 190 }, { w: 145, h: 145 }, { w: 200, h: 110 },
-      { w: 115, h: 200 }, { w: 135, h: 115 }, { w: 170, h: 170 },
+      { w: 68, h: 68 }, { w: 96, h: 63 }, { w: 63, h: 99 },
+      { w: 114, h: 75 }, { w: 57, h: 93 }, { w: 105, h: 84 },
+      { w: 78, h: 114 }, { w: 87, h: 87 }, { w: 120, h: 66 },
+      { w: 69, h: 120 }, { w: 81, h: 69 }, { w: 99, h: 99 },
     ];
     const onMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect();
@@ -195,28 +212,39 @@ export default function Home() {
           </div>
         ))}
 
-        {/* headline */}
-        <div className="hero-content">
-          <div className="hero-eyebrow">
-            <span className="hero-dot" />
-            for asian founders · creators · entrepreneurs
+        {/* split: text left, video right */}
+        <div className="hero-body">
+          <div className="hero-content">
+            <div className="hero-eyebrow">
+              <span className="hero-dot" />
+              for asian founders · creators · entrepreneurs
+            </div>
+            <h1>
+              your story is your
+              <br />
+              <em>unfair advantage.</em>
+            </h1>
+            <p className="hero-sub">
+              stop overthinking. start creating. build a brand that actually sounds like you.
+            </p>
+            <div className="hero-ctas">
+              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                join creatopia — $107/mo →
+              </a>
+              <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
+            </div>
+            <a href="#offers" className="hero-see-offers">see the offers ↓</a>
+            <p className="hero-tagline">real is the new viral.</p>
           </div>
-          <h1>
-            your story is your
-            <br />
-            <em>unfair advantage.</em>
-          </h1>
-          <p className="hero-sub">
-            stop overthinking. start creating. build a brand that actually sounds like you.
-          </p>
-          <div className="hero-ctas">
-            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              join creatopia — $107/mo →
-            </a>
-            <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
+
+          <div className="hero-video">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/LBO6gY3Jeu4?rel=0&modestbranding=1"
+              title="Ken Tjandra — Your Story Is Your Unfair Advantage"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </div>
-          <a href="#offers" className="hero-see-offers">see the offers ↓</a>
-          <p className="hero-tagline">real is the new viral.</p>
         </div>
 
         <div className="scroll-hint">
@@ -384,6 +412,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── WORK ── */}
+      <section className="section section-light">
+        <div className="section-inner">
+          <span className="eyebrow eyebrow-muted">✦ what i&apos;ve built</span>
+          <h2 className="section-h2 section-h2-dark">the work.</h2>
+          <p className="section-lead section-lead-dark">products, communities, and tools built for creators who want to grow with purpose.</p>
+          <div className="work-grid">
+            {projects.map(p => (
+              <a key={p.name} href={p.link} target={p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
+                <div className="work-card-tag">{p.tag}</div>
+                <div className="work-card-name">{p.name}</div>
+                <div className="work-card-desc">{p.desc}</div>
+                <div className="work-card-footer">
+                  <span className={`work-status${p.status === "live" ? " work-status-live" : ""}`}>{p.status}</span>
+                  <span className="work-cta">{p.cta}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CHAMPIONS CAROUSEL ── */}
       <section className="section section-dark">
         <div className="section-inner">
@@ -452,6 +502,24 @@ export default function Home() {
               </div>
               <button className="carousel-btn" onClick={carouselNext} aria-label="Next">→</button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── VALUES ── */}
+      <section className="section section-white">
+        <div className="section-inner">
+          <span className="eyebrow eyebrow-muted">✦ what i stand for</span>
+          <h2 className="section-h2 section-h2-dark">core values.</h2>
+          <p className="section-lead section-lead-dark">seven things i keep coming back to — in work, in faith, in life.</p>
+          <div className="values-grid">
+            {values.map(v => (
+              <div key={v.num} className="value-card">
+                <div className="value-num">{v.num}</div>
+                <div className="value-name">{v.name}</div>
+                <div className="value-desc">{v.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

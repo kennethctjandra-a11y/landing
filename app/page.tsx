@@ -467,7 +467,7 @@ export default function Home() {
           <div className="ss-track">
             {[1, 2, 1, 2].map((n, i) => (
               /* eslint-disable-next-line @next/next/no-img-element */
-              <img key={i} src={`/screenshots/collage-${n}.jpg`} alt="Community results" className="ss-img" />
+              <img key={i} src={`/img/collage-${n}.jpg`} alt="Community results" className="ss-img" />
             ))}
           </div>
         </div>

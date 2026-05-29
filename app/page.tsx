@@ -56,6 +56,11 @@ const trailSrcs = [
   95,96,99,101,
 ].map(n => `/trail/${n}.png`).sort(() => Math.random() - 0.5);
 
+const screenshots: string[] = [
+  // Drop individual screenshots into /public/img/ and list paths here
+  // e.g. "/img/win-dm-1.jpg", "/img/win-views-1.jpg"
+];
+
 const projects = [
   { tag: "presets · tools",       name: "Colour Grade",    desc: "Cinematic colour grading presets and tools built for storytellers. Live and exclusively available now.",                                     status: "live",        link: "#",  cta: "explore →" },
   { tag: "in-person · sydney",    name: "S.A.F.E.",        desc: "Sydney Asian Founders Exclusive — a private in-person community for asian founders to build, share values, and grow together.",             status: "coming soon", link: "#",  cta: "coming soon" },
@@ -258,23 +263,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="stats">
-        <div className="stats-inner">
-          {[
-            { value: "1.9M+",      label: "combined followers" },
-            { value: "1,000+",     label: "creators helped" },
-            { value: "10–30 days", label: "avg. to first 10K" },
-          ].map(s => (
-            <div key={s.label}>
-              <div className="stat-value">{s.value}</div>
-              <div className="stat-label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
       {/* ── PROBLEM ── */}
       <section className="section section-light">
         <div className="section-inner">
@@ -300,39 +288,34 @@ export default function Home() {
 
       <div className="section-divider section-divider-white" />
 
-      {/* ── CREATOR COLLAGE ── */}
-      <section className="section section-black">
-        <div className="section-inner">
-          <div className="creator-intro">
-            <span className="eyebrow eyebrow-red">✦ student results</span>
-            <h2 className="section-h2 section-h2-light">creators who stopped waiting.</h2>
-            <p className="section-lead section-lead-light">
-              real people from the community — founders who used their story to build something real.
-            </p>
-          </div>
-          <div className="creator-grid">
-            {creators.map(c => (
-              <div className="creator-card" key={c.handle}>
-                <div className="creator-top">
-                  <div className="creator-avatar" style={{ background: c.avatarBg, color: c.avatarColor }}>{c.initials}</div>
-                  <div className="creator-meta">
-                    <div className="creator-name">{c.name}</div>
-                    <a href={c.igUrl} target="_blank" rel="noopener noreferrer" className="creator-handle">{c.handle}</a>
-                    <div className="creator-platforms">
-                      {c.platforms.map(p => <span className="platform-badge" key={p}>{p}</span>)}
-                    </div>
+      {/* ── STUDENT WINS ── */}
+      <section className="section-black ss-section">
+        <div className="section-inner ss-header">
+          <span className="eyebrow eyebrow-red">✦ student wins</span>
+          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
+        </div>
+        {screenshots.length > 0 ? (
+          <div className="ss-rows">
+            {([0, 1] as const).map(ri => {
+              const row = screenshots.filter((_, i) => i % 2 === ri);
+              if (!row.length) return null;
+              return (
+                <div key={ri} className="ss-row-wrap">
+                  <div className={`ss-row-track${ri === 1 ? " ss-row-track-r" : ""}`}>
+                    {[...row, ...row].map((src, i) => (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img key={i} src={src} alt="Student win" className="ss-item" />
+                    ))}
                   </div>
                 </div>
-                <div className="creator-growth">
-                  <span className="growth-before">{c.before}</span>
-                  <span className="growth-arrow">→</span>
-                  <span className="growth-after">{c.after}</span>
-                </div>
-                <p className="creator-quote">&ldquo;{c.quote}&rdquo;</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
-        </div>
+        ) : (
+          <div className="ss-placeholder">
+            <p>screenshots coming soon.</p>
+          </div>
+        )}
       </section>
 
       {/* ── TRANSFORMATION ── */}
@@ -457,23 +440,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SCREENSHOTS ── */}
-      <section className="section-black ss-section">
-        <div className="section-inner ss-header">
-          <span className="eyebrow eyebrow-red">✦ community wins</span>
-          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
-        </div>
-        <div className="ss-outer">
-          <div className="ss-track">
-            {[1, 2, 1, 2].map((n, i) => (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img key={i} src={`/img/collage-${n}.jpg`} alt="Community results" className="ss-img" />
-            ))}
-          </div>
-        </div>
-      </section>
-
-
       <div className="section-divider section-divider-white" />
 
       {/* ── FAQ ── */}
@@ -497,17 +463,13 @@ export default function Home() {
 
       {/* ── FINAL CTA ── */}
       <section className="final-cta">
-        <div className="final-cta-glow" />
-        <div className="final-cta-watermark">α</div>
         <div className="final-cta-inner">
-          <span className="eyebrow eyebrow-light">✦ the garden is open</span>
+          <span className="eyebrow eyebrow-light">✦ ready?</span>
           <h2>come as you are.<br /><em>leave as who you&apos;re meant to be.</em></h2>
-          <p>your story is not too ordinary. your background is not a disadvantage. your faith is not a filter. it&apos;s all the content.</p>
           <div className="final-cta-btns">
             <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary-light">join creatopia — $107/mo →</a>
-            <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="btn-secondary-light">apply for coaching</a>
+            <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="btn-secondary-light">apply for 1-1 coaching →</a>
           </div>
-          <p className="final-micro">30-day money back guarantee · cancel anytime · hosted on skool</p>
         </div>
       </section>
 

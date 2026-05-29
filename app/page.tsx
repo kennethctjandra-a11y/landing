@@ -31,21 +31,21 @@ const floatingElements = [
 ];
 
 const creators = [
-  { name: "Jesse Ongkili",  handle: "@jesse_ongkili",  initials: "JO", platforms: ["IG","TT"], before: "800",  after: "511K", quote: "had my first 100K reel 3 weeks after joining. the framework works.",        avatarBg: "#3a2a1a", avatarColor: "#d4a853" },
-  { name: "Aung Kaw Sett",  handle: "@aungsett_",       initials: "AS", platforms: ["IG","TT"], before: "0",    after: "373K", quote: "ken taught me my story was the content. now i can't stop creating.",       avatarBg: "#2a3a2a", avatarColor: "#7aad7a" },
-  { name: "Andy Xu",        handle: "@cafeandy_",        initials: "AX", platforms: ["IG"],      before: "4K",   after: "250K", quote: "grew my café audience faster than any paid ad ever did.",                  avatarBg: "#1a2a2a", avatarColor: "#5aada8" },
-  { name: "Chris Vu",       handle: "@lolchrisvu",       initials: "CV", platforms: ["IG"],      before: "2K",   after: "45K",  quote: "used to hate making content. now i look forward to it every day.",        avatarBg: "#2a1a2a", avatarColor: "#c06aa0" },
-  { name: "Ryan Devine",    handle: "@itsryandevine",    initials: "RD", platforms: ["IG"],      before: "1.2K", after: "14K",  quote: "stopped chasing trends. started telling my story. everything changed.",   avatarBg: "#1e2f4a", avatarColor: "#6a9fd8" },
-  { name: "Matthew Kim",    handle: "@matthewkim10",     initials: "MK", platforms: ["IG"],      before: "500",  after: "10K",  quote: "creatopia gave me the clarity to know what to say and how to say it.",   avatarBg: "#2a2a1a", avatarColor: "#ada85a" },
+  { name: "Jesse Ongkili",  handle: "@jesse_ongkili",  igUrl: "https://www.instagram.com/jesse_ongkili/",  initials: "JO", platforms: ["IG","TT"], before: "800",  after: "511K", quote: "had my first 100K reel 3 weeks after joining. the framework works.",        avatarBg: "#3a2a1a", avatarColor: "#d4a853" },
+  { name: "Aung Kaw Sett",  handle: "@aungsett_",       igUrl: "https://www.instagram.com/aungsett_/",       initials: "AS", platforms: ["IG","TT"], before: "0",    after: "373K", quote: "ken taught me my story was the content. now i can't stop creating.",       avatarBg: "#2a3a2a", avatarColor: "#7aad7a" },
+  { name: "Andy Xu",        handle: "@cafeandy_",        igUrl: "https://www.instagram.com/cafeandy_/",        initials: "AX", platforms: ["IG"],      before: "4K",   after: "250K", quote: "grew my café audience faster than any paid ad ever did.",                  avatarBg: "#1a2a2a", avatarColor: "#5aada8" },
+  { name: "Chris Vu",       handle: "@lolchrisvu",       igUrl: "https://www.instagram.com/lolchrisvu/",       initials: "CV", platforms: ["IG"],      before: "2K",   after: "45K",  quote: "used to hate making content. now i look forward to it every day.",        avatarBg: "#2a1a2a", avatarColor: "#c06aa0" },
+  { name: "Ryan Devine",    handle: "@itsryandevine",    igUrl: "https://www.instagram.com/itsryandevine/",    initials: "RD", platforms: ["IG"],      before: "1.2K", after: "14K",  quote: "stopped chasing trends. started telling my story. everything changed.",   avatarBg: "#1e2f4a", avatarColor: "#6a9fd8" },
+  { name: "Matthew Kim",    handle: "@matthewkim10",     igUrl: "https://www.instagram.com/matthewkim10/",     initials: "MK", platforms: ["IG"],      before: "500",  after: "10K",  quote: "creatopia gave me the clarity to know what to say and how to say it.",   avatarBg: "#2a2a1a", avatarColor: "#ada85a" },
 ];
 
 const champions = [
-  { name: "Jesse Ongkili", handle: "@jesse_ongkili",  initials: "JO", ig: "217K", tt: "294K", total: "511K", avatarBg: "#3a2a1a", avatarColor: "#d4a853" },
-  { name: "Aung Kaw Sett", handle: "@aungsett_",       initials: "AS", ig: "129K", tt: "244K", total: "373K", avatarBg: "#2a3a2a", avatarColor: "#7aad7a" },
-  { name: "Andy Xu",       handle: "@cafeandy_",        initials: "AX", ig: "245K", tt:  "5K", total: "250K", avatarBg: "#1a2a2a", avatarColor: "#5aada8" },
-  { name: "Chris Vu",      handle: "@lolchrisvu",       initials: "CV", ig:  "40K", tt: "5.2K",total:  "45K", avatarBg: "#2a1a2a", avatarColor: "#c06aa0" },
-  { name: "Ryan Devine",   handle: "@itsryandevine",    initials: "RD", ig: "10.4K",tt: "3.8K",total:  "14K", avatarBg: "#1e2f4a", avatarColor: "#6a9fd8" },
-  { name: "Matthew Kim",   handle: "@matthewkim10",     initials: "MK", ig:  "10K", tt:   "—", total:  "10K", avatarBg: "#2a2a1a", avatarColor: "#ada85a" },
+  { name: "Jesse Ongkili", handle: "@jesse_ongkili",  igUrl: "https://www.instagram.com/jesse_ongkili/",  initials: "JO", ig: "217K", tt: "294K", total: "511K", avatarBg: "#3a2a1a", avatarColor: "#d4a853" },
+  { name: "Aung Kaw Sett", handle: "@aungsett_",       igUrl: "https://www.instagram.com/aungsett_/",       initials: "AS", ig: "129K", tt: "244K", total: "373K", avatarBg: "#2a3a2a", avatarColor: "#7aad7a" },
+  { name: "Andy Xu",       handle: "@cafeandy_",        igUrl: "https://www.instagram.com/cafeandy_/",        initials: "AX", ig: "245K", tt:  "5K", total: "250K", avatarBg: "#1a2a2a", avatarColor: "#5aada8" },
+  { name: "Chris Vu",      handle: "@lolchrisvu",       igUrl: "https://www.instagram.com/lolchrisvu/",       initials: "CV", ig:  "40K", tt: "5.2K",total:  "45K", avatarBg: "#2a1a2a", avatarColor: "#c06aa0" },
+  { name: "Ryan Devine",   handle: "@itsryandevine",    igUrl: "https://www.instagram.com/itsryandevine/",    initials: "RD", ig: "10.4K",tt: "3.8K",total:  "14K", avatarBg: "#1e2f4a", avatarColor: "#6a9fd8" },
+  { name: "Matthew Kim",   handle: "@matthewkim10",     igUrl: "https://www.instagram.com/matthewkim10/",     initials: "MK", ig:  "10K", tt:   "—", total:  "10K", avatarBg: "#2a2a1a", avatarColor: "#ada85a" },
 ];
 
 const trailSrcs = [
@@ -212,39 +212,27 @@ export default function Home() {
           </div>
         ))}
 
-        {/* split: text left, video right */}
-        <div className="hero-body">
-          <div className="hero-content">
-            <div className="hero-eyebrow">
-              <span className="hero-dot" />
-              for asian founders · creators · entrepreneurs
-            </div>
-            <h1>
-              your story is your
-              <br />
-              <em>unfair advantage.</em>
-            </h1>
-            <p className="hero-sub">
-              stop overthinking. start creating. build a brand that actually sounds like you.
-            </p>
-            <div className="hero-ctas">
-              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                join creatopia — $107/mo →
-              </a>
-              <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
-            </div>
-            <a href="#offers" className="hero-see-offers">see the offers ↓</a>
-            <p className="hero-tagline">real is the new viral.</p>
+        <div className="hero-content">
+          <div className="hero-eyebrow">
+            <span className="hero-dot" />
+            for faith-first founders &amp; creators
           </div>
-
-          <div className="hero-video">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/LBO6gY3Jeu4?rel=0&modestbranding=1"
-              title="Ken Tjandra — Your Story Is Your Unfair Advantage"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+          <h1>
+            your story is your
+            <br />
+            <em>unfair advantage.</em>
+          </h1>
+          <p className="hero-sub">
+            stop overthinking. start creating. build a brand that actually sounds like you.
+          </p>
+          <div className="hero-ctas">
+            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              join creatopia — $107/mo →
+            </a>
+            <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
           </div>
+          <a href="#offers" className="hero-see-offers">see the offers ↓</a>
+          <p className="hero-tagline">real is the new viral.</p>
         </div>
 
         <div className="scroll-hint">
@@ -312,7 +300,7 @@ export default function Home() {
             <span className="eyebrow eyebrow-red">✦ student results</span>
             <h2 className="section-h2 section-h2-light">creators who stopped waiting.</h2>
             <p className="section-lead section-lead-light">
-              real people from the community — second-gen asian founders who used their story to build something real.
+              real people from the community — founders who used their story to build something real.
             </p>
           </div>
           <div className="creator-grid">
@@ -322,7 +310,7 @@ export default function Home() {
                   <div className="creator-avatar" style={{ background: c.avatarBg, color: c.avatarColor }}>{c.initials}</div>
                   <div className="creator-meta">
                     <div className="creator-name">{c.name}</div>
-                    <div className="creator-handle">{c.handle}</div>
+                    <a href={c.igUrl} target="_blank" rel="noopener noreferrer" className="creator-handle">{c.handle}</a>
                     <div className="creator-platforms">
                       {c.platforms.map(p => <span className="platform-badge" key={p}>{p}</span>)}
                     </div>
@@ -375,7 +363,7 @@ export default function Home() {
       <section id="offers" className="section section-white">
         <div className="section-inner">
           <span className="eyebrow eyebrow-muted">✦ where to start</span>
-          <h2 className="section-h2 section-h2-dark">two ways in.</h2>
+          <h2 className="section-h2 section-h2-dark">ways to work together.</h2>
           <p className="section-lead section-lead-dark">pick the one that matches where you are right now.</p>
           <div className="offers-grid">
             <div className="offer-card offer-garden">
@@ -388,7 +376,7 @@ export default function Home() {
                 <span className="price-amount">$107</span>
                 <span className="price-period">/month</span>
               </div>
-              <p className="offer-tagline">for asian and christian creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
+              <p className="offer-tagline">for founders and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
                 {["full story system curriculum","weekly live group calls with ken","1,000+ member community on skool","platform playbooks (IG, TT, YT, LI)","content vault — hooks, templates, swipe files","asian creator advantage modules","peer feedback on your content","cancel anytime"].map(f => (
@@ -416,6 +404,37 @@ export default function Home() {
               </ul>
               <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-greenhouse">apply for coaching →</a>
             </div>
+            <div className="offer-card offer-safe">
+              <span className="offer-badge badge-outline">sydney only</span>
+              <div>
+                <div className="offer-who">in-person community</div>
+                <h3 className="offer-title">S.A.F.E.<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>sydney asian founders exclusive</span></h3>
+              </div>
+              <p className="offer-tagline">a private group in sydney for asian founders to hang out, share values, and build together in person. exploring what this looks like — apply to be considered for the founding group.</p>
+              <div className="offer-divider" />
+              <ul className="offer-features">
+                {["in-person sydney hangouts","faith & values-aligned community","peer support + accountability","founding member consideration","no commitment yet — just express interest"].map(f => (
+                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
+                ))}
+              </ul>
+              <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-safe">express interest →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── COACHING FORM ── */}
+      <section className="section section-light" id="coaching-form">
+        <div className="section-inner-sm">
+          <span className="eyebrow eyebrow-muted">✦ apply</span>
+          <h2 className="section-h2 section-h2-dark">ready to work together?</h2>
+          <p className="section-lead section-lead-dark">fill out the form below and ken will be in touch within 48 hours.</p>
+          <div className="typeform-wrap">
+            <iframe
+              src="https://form.typeform.com/to/io6ZyWkn"
+              style={{ width: "100%", height: "600px", border: "none" }}
+              title="Work with Ken Tjandra — Application"
+            />
           </div>
         </div>
       </section>
@@ -471,7 +490,7 @@ export default function Home() {
                       <div className="champ-avatar" style={{ background: c.avatarBg, color: c.avatarColor }}>{c.initials}</div>
                       <div>
                         <div className="champ-name">{c.name}</div>
-                        <div className="champ-handle">{c.handle}</div>
+                        <a href={c.igUrl} target="_blank" rel="noopener noreferrer" className="champ-handle">{c.handle}</a>
                       </div>
                     </div>
                     <div className="champ-divider" />

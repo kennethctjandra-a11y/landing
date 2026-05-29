@@ -57,10 +57,9 @@ const trailSrcs = [
 ].map(n => `/trail/${n}.png`).sort(() => Math.random() - 0.5);
 
 const projects = [
-  { tag: "community",        name: "Creatopia",         desc: "A $107/m Skool community for Asian founders and creators building authentic personal brands through storytelling.",                                           status: "live",           link: SKOOL,                                    cta: "join →" },
-  { tag: "1-on-1 coaching",  name: "The Greenhouse",    desc: "Private coaching for founders ready to go all-in. Strategy, content, daily access, and a custom 90-day brand roadmap.",                                      status: "limited spots",  link: "https://form.typeform.com/to/io6ZyWkn",  cta: "apply →" },
-  { tag: "presets · tools",  name: "Colour Grade",      desc: "Coming back soon — cinematic colour grading tools built for storytellers.",                                                                                    status: "coming soon",    link: "#",                                      cta: "coming soon" },
-  { tag: "more in the lab",  name: "What's Next",       desc: "More products and projects in the works. Follow along on Instagram and YouTube to see what's brewing.",                                                       status: "coming soon",    link: "https://www.instagram.com/kentjandraa",   cta: "follow along →" },
+  { tag: "presets · tools",       name: "Colour Grade",    desc: "Cinematic colour grading presets and tools built for storytellers. Live and exclusively available now.",                                     status: "live",        link: "#",  cta: "explore →" },
+  { tag: "in-person · sydney",    name: "S.A.F.E.",        desc: "Sydney Asian Founders Exclusive — a private in-person community for asian founders to build, share values, and grow together.",             status: "coming soon", link: "#",  cta: "coming soon" },
+  { tag: "youtube · documentary", name: "Asia Solo Trip",  desc: "Documenting a solo journey across asia — faith, identity, and creativity on the road. the next youtube series.",                            status: "coming soon", link: "#",  cta: "coming soon" },
 ];
 
 const values = [
@@ -178,6 +177,7 @@ export default function Home() {
       {/* ── NAV ── */}
       <nav className={`nav${scrolled ? " scrolled" : ""}`}>
         <a href="#" className="nav-logo">ken tjandra<span>.</span></a>
+        <a href="mailto:support@kentjandra.com" className="nav-email">support@kentjandra.com</a>
         <div className="nav-actions">
           <a href="#offers" className="btn-ghost">the offers</a>
           <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-red">join creatopia →</a>
@@ -258,15 +258,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PHILOSOPHY ── */}
-      <section className="philosophy">
-        <p className="philosophy-quote">
-          &ldquo;I live at the intersection of faith, culture &amp; content. Not because it&apos;s a good brand position — because it&apos;s my testimony. I believe you don&apos;t go viral by manufacturing a story, but by living it first. Real growth starts the same way every morning: prayer. seek His kingdom first. everything else follows.&rdquo;
-        </p>
-        <p className="philosophy-attr">— ken tjandra</p>
-      </section>
-
-      <div className="section-divider section-divider-light" />
 
       {/* ── PROBLEM ── */}
       <section className="section section-light">
@@ -337,7 +328,7 @@ export default function Home() {
           </h2>
           <div className="transform-grid">
             <div className="transform-col transform-before">
-              <div className="transform-label">before creatopia</div>
+              <div className="transform-label">before</div>
               <div className="transform-items">
                 {[["😮‍💨","creating from fear and comparison"],["📉","chasing metrics that don't move"],["📋","copy-paste content that sounds like everyone else"],["🧱","stuck in a loop of overthinking and not posting"],["🌫️","invisible online despite real-world success"]].map(([icon,text]) => (
                   <div className="transform-item" key={text}><span className="transform-icon">{icon}</span><span>{text}</span></div>
@@ -346,7 +337,7 @@ export default function Home() {
             </div>
             <div className="transform-arrow"><div className="arrow-circle">→</div></div>
             <div className="transform-col transform-after">
-              <div className="transform-label">after creatopia</div>
+              <div className="transform-label">after</div>
               <div className="transform-items">
                 {[["✦","creating from clarity and conviction"],["📈","attracting the right people with the right content"],["🎙️","content that sounds unmistakably like you"],["⚡","a system that makes posting feel natural, not forced"],["🌿","a growing audience that trusts you before you sell"]].map(([icon,text]) => (
                   <div className="transform-item" key={text}><span className="transform-icon">{icon}</span><span>{text}</span></div>
@@ -362,9 +353,9 @@ export default function Home() {
       {/* ── OFFERS ── */}
       <section id="offers" className="section section-white">
         <div className="section-inner">
-          <span className="eyebrow eyebrow-muted">✦ where to start</span>
-          <h2 className="section-h2 section-h2-dark">ways to work together.</h2>
-          <p className="section-lead section-lead-dark">pick the one that matches where you are right now.</p>
+          <span className="eyebrow eyebrow-muted">✦ pricing</span>
+          <h2 className="section-h2 section-h2-dark">choose your path.</h2>
+          <p className="section-lead section-lead-dark">same transformation. two ways to get there.</p>
           <div className="offers-grid">
             <div className="offer-card offer-garden">
               <span className="offer-badge badge-red">most popular</span>
@@ -405,21 +396,6 @@ export default function Home() {
               </ul>
               <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-greenhouse">apply for coaching →</a>
             </div>
-            <div className="offer-card offer-safe">
-              <span className="offer-badge badge-outline">sydney only</span>
-              <div>
-                <div className="offer-who">in-person community</div>
-                <h3 className="offer-title">S.A.F.E.<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>sydney asian founders exclusive</span></h3>
-              </div>
-              <p className="offer-tagline">a private group in sydney for asian founders to hang out, share values, and build together in person. exploring what this looks like — apply to be considered for the founding group.</p>
-              <div className="offer-divider" />
-              <ul className="offer-features">
-                {["in-person sydney hangouts","faith & values-aligned community","peer support + accountability","founding member consideration","no commitment yet — just express interest"].map(f => (
-                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
-                ))}
-              </ul>
-              <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-safe">express interest →</a>
-            </div>
           </div>
         </div>
       </section>
@@ -443,9 +419,9 @@ export default function Home() {
       {/* ── WORK ── */}
       <section className="section section-light">
         <div className="section-inner">
-          <span className="eyebrow eyebrow-muted">✦ what i&apos;ve built</span>
-          <h2 className="section-h2 section-h2-dark">the work.</h2>
-          <p className="section-lead section-lead-dark">products, communities, and tools built for creators who want to grow with purpose.</p>
+          <span className="eyebrow eyebrow-muted">✦ what i&apos;m building</span>
+          <h2 className="section-h2 section-h2-dark">current projects.</h2>
+          <p className="section-lead section-lead-dark">products and projects in the works.</p>
           <div className="work-grid">
             {projects.map(p => (
               <a key={p.name} href={p.link} target={p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
@@ -534,55 +510,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── VALUES ── */}
-      <section className="section section-white">
-        <div className="section-inner">
-          <span className="eyebrow eyebrow-muted">✦ what i stand for</span>
-          <h2 className="section-h2 section-h2-dark">core values.</h2>
-          <p className="section-lead section-lead-dark">seven things i keep coming back to — in work, in faith, in life.</p>
-          <div className="values-grid">
-            {values.map(v => (
-              <div key={v.num} className="value-card">
-                <div className="value-num">{v.num}</div>
-                <div className="value-name">{v.name}</div>
-                <div className="value-desc">{v.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── ABOUT ── */}
       <section className="section section-light">
         <div className="section-inner">
           <div className="about-grid">
             <div className="about-visual">
-              <div className="about-photo-wrap">
-                <Image
-                  src="/img/ken.jpg"
-                  alt="Ken Tjandra"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 42vw"
-                  style={{ objectFit: "cover", objectPosition: "center 10%" }}
-                />
-              </div>
-              <div className="about-tag">
-                <div className="about-tag-num">700K+</div>
-                <div className="about-tag-label">followers built</div>
+              <div className="mindmap-root">
+                <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                  {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
+                    <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
+                  ))}
+                </svg>
+                <div className="mindmap-photo">
+                  <Image
+                    src="/img/ken.jpg"
+                    alt="Ken Tjandra"
+                    fill
+                    sizes="(max-width: 768px) 80vw, 22vw"
+                    style={{ objectFit: "cover", objectPosition: "center 10%" }}
+                  />
+                </div>
+                {([
+                  { top: "6%",  left: "50%", name: "Faith" },
+                  { top: "18%", left: "84%", name: "Authenticity" },
+                  { top: "50%", left: "95%", name: "Storytelling" },
+                  { top: "84%", left: "80%", name: "Growth" },
+                  { top: "95%", left: "50%", name: "Community" },
+                  { top: "84%", left: "16%", name: "Identity" },
+                  { top: "28%", left: "10%", name: "Excellence" },
+                ]).map(pos => (
+                  <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
+                    {pos.name}
+                  </div>
+                ))}
               </div>
             </div>
             <div className="about-text">
               <span className="eyebrow eyebrow-muted">✦ who is ken?</span>
               <h2>21. indo-australian.<br /><em>building in faith.</em></h2>
               <div className="about-body">
-                <p>3 years ago i was grinding in a 3 square meter room with zero followers, zero dollars, and zero direction. <strong>then i gave my life to Jesus and everything changed.</strong></p>
-                <p>not because i got a strategy. because i got a story.</p>
-                <p>i grew 700K+ followers across platforms by sharing my raw testimony in a cinematic format — the faith journey, the business failures, the family tension, the comeback. all of it. unfiltered.</p>
-                <p>creatopia is what i wish had existed when i was starting. <strong>a room built for second-gen asian founders who have something real to say and just need to learn how to say it.</strong></p>
-              </div>
-              <div className="about-ctas">
-                <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-dark">join the community →</a>
-                <a href="https://www.youtube.com/@kentjandra" target="_blank" rel="noopener noreferrer" className="btn-outline-dark">watch on YouTube</a>
+                <p>3 years ago — zero followers, zero dollars, zero direction. then i gave my life to Jesus and everything changed. not because i got a strategy. because i got a story.</p>
+                <p>i live at the intersection of faith, culture, and content. not because it&apos;s a brand position — because it&apos;s my testimony. i grew 700K+ by sharing it all: the faith journey, the failures, the comeback.</p>
+                <p>creatopia is what i wish existed when i was starting. a room for founders who have something real to say, and just need to learn how to say it.</p>
               </div>
             </div>
           </div>

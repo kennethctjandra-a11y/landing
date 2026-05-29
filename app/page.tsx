@@ -371,6 +371,7 @@ export default function Home() {
               <div>
                 <div className="offer-who">the community</div>
                 <h3 className="offer-title">The Garden<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>creatopia</span></h3>
+                <p className="offer-subtag">turning entrepreneurs into creators</p>
               </div>
               <div className="offer-price">
                 <span className="price-amount">$107</span>

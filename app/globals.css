@@ -761,14 +761,39 @@ body {
   border: 1px solid var(--border);
 }
 
-/* ─── SCREENSHOTS ──────────────────────────────────────────── */
+/* ─── SCREENSHOTS MARQUEE ──────────────────────────────────── */
 
-.screenshots-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 3rem;
+.ss-section {
+  padding: 5rem 0 0;
+  overflow: hidden;
 }
+.ss-header {
+  padding-bottom: 2.5rem;
+}
+.ss-outer {
+  overflow: hidden;
+  width: 100%;
+}
+.ss-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: ss-loop 55s linear infinite;
+}
+.ss-track:hover { animation-play-state: paused; }
+.ss-img {
+  height: 460px;
+  width: auto;
+  border-radius: 0;
+  flex-shrink: 0;
+  display: block;
+  user-select: none;
+}
+@keyframes ss-loop {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 .screenshot-item {
   border-radius: 12px;
   overflow: hidden;

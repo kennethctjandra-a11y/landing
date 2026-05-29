@@ -458,13 +458,17 @@ export default function Home() {
       </section>
 
       {/* ── SCREENSHOTS ── */}
-      <section className="section section-black">
-        <div className="section-inner">
+      <section className="section-black ss-section">
+        <div className="section-inner ss-header">
           <span className="eyebrow eyebrow-red">✦ community wins</span>
           <h2 className="section-h2 section-h2-light">real results. real people.</h2>
-          <p className="section-lead section-lead-light">dm wins, follower milestones, and moments from the community.</p>
-          <div className="screenshots-grid">
-            {/* Add screenshot filenames to /public/screenshots/ to display them here */}
+        </div>
+        <div className="ss-outer">
+          <div className="ss-track">
+            {[1, 2, 1, 2].map((n, i) => (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img key={i} src={`/screenshots/collage-${n}.jpg`} alt="Community results" className="ss-img" />
+            ))}
           </div>
         </div>
       </section>

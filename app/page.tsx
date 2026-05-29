@@ -83,14 +83,11 @@ const faqs = [
 /* ─── PAGE ───────────────────────────────────────────────── */
 
 export default function Home() {
-  const [scrolled,        setScrolled]        = useState(false);
-  const [openFaq,         setOpenFaq]         = useState<number | null>(null);
-  const [carouselIndex,   setCarouselIndex]   = useState(0);
-  const [carouselPaused,  setCarouselPaused]  = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [openFaq,   setOpenFaq]   = useState<number | null>(null);
 
   const heroRef    = useRef<HTMLElement>(null);
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const trailContainerRef = useRef<HTMLDivElement>(null);
   const trailIndexRef     = useRef(0);
   const lastSpawnRef      = useRef({ x: -999, y: -999 });
@@ -158,20 +155,6 @@ export default function Home() {
     return () => hero.removeEventListener("mousemove", onMove);
   }, []);
 
-  /* carousel auto-rotate */
-  useEffect(() => {
-    if (!carouselPaused) {
-      intervalRef.current = setInterval(() => {
-        setCarouselIndex(p => (p + 1) % champions.length);
-      }, 3500);
-    }
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [carouselPaused]);
-
-  const carouselPrev = () => setCarouselIndex(p => (p - 1 + champions.length) % champions.length);
-  const carouselNext = () => setCarouselIndex(p => (p + 1) % champions.length);
-  const deg = 360 / champions.length; // 60
-
   return (
     <>
       {/* ── NAV ── */}
@@ -212,27 +195,61 @@ export default function Home() {
           </div>
         ))}
 
-        <div className="hero-content">
-          <div className="hero-eyebrow">
-            <span className="hero-dot" />
-            for faith-first founders &amp; creators
+        <div className="hero-main">
+          <div className="hero-photo-col">
+            <p className="mindmap-label-top">core values</p>
+            <div className="mindmap-root">
+              <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
+                  <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
+                ))}
+              </svg>
+              <div className="mindmap-photo">
+                <Image
+                  src="/img/ken.jpg"
+                  alt="Ken Tjandra"
+                  fill
+                  sizes="(max-width: 768px) 80vw, 25vw"
+                  style={{ objectFit: "cover", objectPosition: "center 10%" }}
+                />
+              </div>
+              {([
+                { top: "6%",  left: "50%", name: "Faith" },
+                { top: "18%", left: "84%", name: "Authenticity" },
+                { top: "50%", left: "95%", name: "Storytelling" },
+                { top: "84%", left: "80%", name: "Growth" },
+                { top: "95%", left: "50%", name: "Community" },
+                { top: "84%", left: "16%", name: "Identity" },
+                { top: "28%", left: "10%", name: "Excellence" },
+              ]).map(pos => (
+                <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
+                  {pos.name}
+                </div>
+              ))}
+            </div>
           </div>
-          <h1>
-            your story is your
-            <br />
-            <em>unfair advantage.</em>
-          </h1>
-          <p className="hero-sub">
-            stop overthinking. start creating. build a brand that actually sounds like you.
-          </p>
-          <div className="hero-ctas">
-            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              join creatopia — $107/mo →
-            </a>
-            <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
+          <div className="hero-text-col">
+            <div className="hero-eyebrow">
+              <span className="hero-dot" />
+              for faith-first founders &amp; creators
+            </div>
+            <h1>
+              your story is your
+              <br />
+              <em>unfair advantage.</em>
+            </h1>
+            <p className="hero-ident">ken tjandra · 21 · indo-australian · building in faith</p>
+            <p className="hero-sub">
+              stop overthinking. start creating. build a brand that actually sounds like you.
+            </p>
+            <div className="hero-ctas">
+              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                join creatopia — $107/mo →
+              </a>
+              <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
+            </div>
+            <p className="hero-tagline">real is the new viral.</p>
           </div>
-          <a href="#offers" className="hero-see-offers">see the offers ↓</a>
-          <p className="hero-tagline">real is the new viral.</p>
         </div>
 
         <div className="scroll-hint">
@@ -245,10 +262,9 @@ export default function Home() {
       <section className="stats">
         <div className="stats-inner">
           {[
-            { value: "1.9M+",   label: "combined followers" },
-            { value: "1,000+",  label: "creators helped" },
-            { value: "$16K/m",  label: "community scaled" },
-            { value: "90 days", label: "avg. to first 10K" },
+            { value: "1.9M+",      label: "combined followers" },
+            { value: "1,000+",     label: "creators helped" },
+            { value: "10–30 days", label: "avg. to first 10K" },
           ].map(s => (
             <div key={s.label}>
               <div className="stat-value">{s.value}</div>
@@ -360,34 +376,37 @@ export default function Home() {
             <div className="offer-card offer-garden">
               <span className="offer-badge badge-red">most popular</span>
               <div>
-                <div className="offer-who">the community</div>
-                <h3 className="offer-title">The Garden<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>creatopia</span></h3>
+                <div className="offer-who">group coaching</div>
+                <h3 className="offer-title">Creatopia<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>the community</span></h3>
                 <p className="offer-subtag">turning entrepreneurs into creators</p>
               </div>
               <div className="offer-price">
                 <span className="price-amount">$107</span>
                 <span className="price-period">/month</span>
               </div>
-              <p className="offer-tagline">for founders and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
+              <p className="offer-tagline">for entrepreneurs and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
-                {["full story system curriculum","weekly live group calls with ken","1,000+ member community on skool","platform playbooks (IG, TT, YT, LI)","content vault — hooks, templates, swipe files","asian creator advantage modules","peer feedback on your content","cancel anytime"].map(f => (
+                {["full story system curriculum","weekly live group calls with ken","1,000+ member community on skool","platform playbooks (IG, TT, YT)","content vault — hooks, templates, swipe files","entrepreneur identity modules","peer feedback on your content","cancel anytime"].map(f => (
                   <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
                 ))}
               </ul>
-              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">join the garden →</a>
+              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">join creatopia →</a>
             </div>
             <div className="offer-card offer-greenhouse">
-              <span className="offer-badge badge-white">limited spots</span>
+              <div className="offer-badges-row">
+                <span className="offer-badge badge-white">limited spots</span>
+                <span className="offer-badge badge-white-outline">asian-only</span>
+              </div>
               <div>
-                <div className="offer-who">1-on-1 with ken</div>
+                <div className="offer-who">1-on-1 coaching</div>
                 <h3 className="offer-title">The Greenhouse<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>private coaching</span></h3>
               </div>
               <div className="offer-price">
                 <span className="price-amount">$3,000</span>
                 <span className="price-period">/month</span>
               </div>
-              <p className="offer-tagline">for founders who are ready to go all-in. i&apos;m in your corner every day — strategy, content, feedback, accountability.</p>
+              <p className="offer-tagline">for asian founders who are ready to go all-in. i&apos;m in your corner every day — strategy, content, feedback, accountability.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
                 {["private 1-on-1 calls with ken (2x/month)","daily access via voice memo + dm","custom 90-day brand roadmap","content review on every piece you post","full creatopia community access included","direct introductions to ken's network","90-day minimum commitment"].map(f => (
@@ -409,7 +428,7 @@ export default function Home() {
           <div className="typeform-wrap">
             <iframe
               src="https://form.typeform.com/to/io6ZyWkn"
-              style={{ width: "100%", height: "600px", border: "none" }}
+              style={{ width: "100%", height: "900px", border: "none" }}
               title="Work with Ken Tjandra — Application"
             />
           </div>
@@ -438,126 +457,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CHAMPIONS CAROUSEL ── */}
-      <section className="section section-dark">
+      {/* ── SCREENSHOTS ── */}
+      <section className="section section-black">
         <div className="section-inner">
-          <span className="eyebrow eyebrow-gold">✦ the champions</span>
-          <h2 className="section-h2 section-h2-light">real numbers. real people.</h2>
-          <p className="section-lead section-lead-light">
-            these are creatopia members who showed up, told their story, and built audiences that changed their lives.
-          </p>
-
-          <div
-            className="carousel-wrap"
-            onMouseEnter={() => setCarouselPaused(true)}
-            onMouseLeave={() => setCarouselPaused(false)}
-          >
-            <div className="carousel-scene">
-              <div
-                className="carousel-track"
-                style={{ transform: `rotateY(${-carouselIndex * deg}deg)` }}
-              >
-                {champions.map((c, i) => (
-                  <div
-                    key={c.name}
-                    className={`carousel-card${i === carouselIndex ? " carousel-card-active" : ""}`}
-                    style={{ transform: `rotateY(${i * deg}deg) translateZ(300px)` }}
-                  >
-                    <div className="champ-top">
-                      <div className="champ-avatar" style={{ background: c.avatarBg, color: c.avatarColor }}>{c.initials}</div>
-                      <div>
-                        <div className="champ-name">{c.name}</div>
-                        <a href={c.igUrl} target="_blank" rel="noopener noreferrer" className="champ-handle">{c.handle}</a>
-                      </div>
-                    </div>
-                    <div className="champ-divider" />
-                    <div className="champ-stats">
-                      <div className="champ-stat">
-                        <span className="champ-platform">📷 Instagram</span>
-                        <span className="champ-num">{c.ig}</span>
-                      </div>
-                      {c.tt !== "—" && (
-                        <div className="champ-stat">
-                          <span className="champ-platform">🎵 TikTok</span>
-                          <span className="champ-num">{c.tt}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="champ-total">
-                      <span className="champ-total-label">✦ total reach</span>
-                      <span className="champ-total-num">{c.total}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="carousel-controls">
-              <button className="carousel-btn" onClick={carouselPrev} aria-label="Previous">←</button>
-              <div className="carousel-dots">
-                {champions.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`carousel-dot${i === carouselIndex ? " active" : ""}`}
-                    onClick={() => setCarouselIndex(i)}
-                    aria-label={`Go to ${champions[i].name}`}
-                  />
-                ))}
-              </div>
-              <button className="carousel-btn" onClick={carouselNext} aria-label="Next">→</button>
-            </div>
+          <span className="eyebrow eyebrow-red">✦ community wins</span>
+          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
+          <p className="section-lead section-lead-light">dm wins, follower milestones, and moments from the community.</p>
+          <div className="screenshots-grid">
+            {/* Add screenshot filenames to /public/screenshots/ to display them here */}
           </div>
         </div>
       </section>
 
-
-      {/* ── ABOUT ── */}
-      <section className="section section-light">
-        <div className="section-inner">
-          <div className="about-grid">
-            <div className="about-visual">
-              <div className="mindmap-root">
-                <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                  {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
-                    <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
-                  ))}
-                </svg>
-                <div className="mindmap-photo">
-                  <Image
-                    src="/img/ken.jpg"
-                    alt="Ken Tjandra"
-                    fill
-                    sizes="(max-width: 768px) 80vw, 22vw"
-                    style={{ objectFit: "cover", objectPosition: "center 10%" }}
-                  />
-                </div>
-                {([
-                  { top: "6%",  left: "50%", name: "Faith" },
-                  { top: "18%", left: "84%", name: "Authenticity" },
-                  { top: "50%", left: "95%", name: "Storytelling" },
-                  { top: "84%", left: "80%", name: "Growth" },
-                  { top: "95%", left: "50%", name: "Community" },
-                  { top: "84%", left: "16%", name: "Identity" },
-                  { top: "28%", left: "10%", name: "Excellence" },
-                ]).map(pos => (
-                  <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
-                    {pos.name}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="about-text">
-              <span className="eyebrow eyebrow-muted">✦ who is ken?</span>
-              <h2>21. indo-australian.<br /><em>building in faith.</em></h2>
-              <div className="about-body">
-                <p>3 years ago — zero followers, zero dollars, zero direction. then i gave my life to Jesus and everything changed. not because i got a strategy. because i got a story.</p>
-                <p>i live at the intersection of faith, culture, and content. not because it&apos;s a brand position — because it&apos;s my testimony. i grew 700K+ by sharing it all: the faith journey, the failures, the comeback.</p>
-                <p>creatopia is what i wish existed when i was starting. a room for founders who have something real to say, and just need to learn how to say it.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <div className="section-divider section-divider-white" />
 

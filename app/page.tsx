@@ -58,7 +58,7 @@ const trailSrcs = [
 
 const screenshots: string[] = [
   "/img/biz-1.png",
-  "/img/biz-2.jpg",
+  "/img/biz-2.png",
   "/img/biz-3.png",
   "/img/biz-4.png",
   "/img/biz-5.png",

@@ -65,7 +65,6 @@ const screenshots: string[] = [
   "/img/biz-6.png",
   "/img/biz-7.png",
   "/img/biz-8.png",
-  "/img/profile-1.png",
   "/img/profile-2.png",
   "/img/profile-3.png",
   "/img/profile-4.png",

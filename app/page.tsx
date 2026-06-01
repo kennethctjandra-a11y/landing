@@ -102,9 +102,9 @@ const screenshots: string[] = [
 ];
 
 const projects = [
-  { tag: "presets · tools",       name: "Powergrade",    desc: "My one-click cinematic colour grade and tools built for storytellers. Live and exclusively available now.",                                     status: "live",  link: "https://kentjandra.gumroad.com/l/colourgrade",  cta: "explore →" },
-  { tag: "in-person · sydney",    name: "S.A.F.E.",        desc: "Sydney Asian Founders Exclusive — a private in-person group for asian founders to hangout, share values, and grow.",             status: "beta testing",  link: "https://www.instagram.com/kentjandraa",  cta: "dm if interested →" },
-  { tag: "traveling · digital nomad", name: "Asia Solo Trip",  desc: "Currently on journeying across Singapore, China, and Indonesia – searching for what's next.",                            status: "next up",  cta: "flying soon" },
+  { tag: "presets · tools",       name: "Cinematic Grade",    desc: "My one-click DaVinci colour grade – built for storytellers. Live and exclusively available now.",                                     status: "live",  link: "https://kentjandra.gumroad.com/l/colourgrade",  cta: "explore →" },
+  { tag: "in-person · sydney",    name: "S.A.F.E.",        desc: "Sydney Asian Founders Exclusive – a private in-person group for asian founders to hangout, share values, and grow.",             status: "live beta",  link: "https://www.instagram.com/kentjandraa",  cta: "dm if interested →" },
+  { tag: "traveling · digital nomad", name: "Asia Solo Trip",  desc: "Currently on journeying across Singapore, China, and Indonesia – searching for what's next.",                            status: "next up",  cta: "flying soon ✈︎" },
 ];
 
 const values = [

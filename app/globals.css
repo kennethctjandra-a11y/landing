@@ -774,9 +774,9 @@ body {
   align-items: center;
 }
 /* Three rows — alternating directions, different speeds, varied heights */
-.ss-rt-0 { animation: ss-loop   42s linear infinite; }
-.ss-rt-1 { animation: ss-loop-r 33s linear infinite; }
-.ss-rt-2 { animation: ss-loop   52s linear infinite; }
+.ss-rt-0 { animation: ss-loop   80s linear infinite; }
+.ss-rt-1 { animation: ss-loop-r 65s linear infinite; }
+.ss-rt-2 { animation: ss-loop  100s linear infinite; }
 .ss-rt-0 .ss-item { height: 200px; }
 .ss-rt-1 .ss-item { height: 255px; }
 .ss-rt-2 .ss-item { height: 175px; }

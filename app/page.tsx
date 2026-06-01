@@ -423,7 +423,7 @@ export default function Home() {
               <p className="offer-tagline">for entrepreneurs and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
-                {["full story system curriculum","weekly live group calls with ken","1,000+ member community on skool","platform playbooks (IG, TT, YT)","content vault — hooks, templates, swipe files","entrepreneur identity modules","peer feedback on your content","cancel anytime"].map(f => (
+                {["full story system curriculum","weekly live group calls with ken","community accountability on skool","platform playbooks (IG, TT, YT)","content vault — hooks, templates, swipe files","entrepreneur identity modules","peer feedback on your content","cancel anytime"].map(f => (
                   <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
                 ))}
               </ul>

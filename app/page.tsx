@@ -310,9 +310,9 @@ export default function Home() {
           </h2>
           <div className="problem-grid">
             {[
-              { num: "01", title: "copy-paste hooks won't build your brand.",        body: "you've tried the tactics, the trending audio, the viral first-sentences – but nothing sticks. stories without identity are just noise." },
-              { num: "02", title: "one viral video can't change your life.",           body: "going viral once doesn't build an audience — it builds a moment. you need a story people come back to, not a clip they forget by tomorrow." },
-              { num: "03", title: "overthinking is the enemy.",                        body: "your notes app is full. but every time you're about to post, fear & perfectionism creeps in. that's not a consistency issue, it's an identity issue." },
+              { num: "01", title: "copy-paste hooks don't build brands.",             body: "you've tried the tactics, the trending audio, the viral first-sentences – but nothing sticks. stories without identity are just noise." },
+              { num: "02", title: "one viral video won't change your life.",           body: "going viral once doesn't build an audience — it builds a moment. you need a story people come back to, not a clip they forget by tomorrow." },
+              { num: "03", title: "overthinking is the real enemy.",                   body: "your notes app is full. but every time you're about to post, fear & perfectionism creeps in. that's not a consistency issue, it's an identity issue." },
             ].map(p => (
               <div className="problem-card" key={p.num}>
                 <div className="problem-num">{p.num}</div>

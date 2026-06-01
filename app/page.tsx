@@ -394,20 +394,6 @@ export default function Home() {
           <h2 className="section-h2 section-h2-dark">choose your path.</h2>
           <p className="section-lead section-lead-dark">same transformation. two ways to get there.</p>
 
-          <div className="price-toggle">
-            <span className={`toggle-label${!isAnnual ? " toggle-active" : ""}`}>monthly</span>
-            <button
-              className={`toggle-switch${isAnnual ? " toggle-on" : ""}`}
-              onClick={() => setIsAnnual(v => !v)}
-              aria-label="Toggle billing period"
-            >
-              <span className="toggle-thumb" />
-            </button>
-            <span className={`toggle-label${isAnnual ? " toggle-active" : ""}`}>
-              annual <span className="toggle-save">save 50%</span>
-            </span>
-          </div>
-
           <div className="offers-grid">
             <div className="offer-card offer-garden">
               <span className="offer-badge badge-red">most popular</span>
@@ -416,11 +402,23 @@ export default function Home() {
                 <h3 className="offer-title">Group Coaching<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>Community Program</span></h3>
               </div>
               <div>
+                <div className="price-toggle price-toggle-card">
+                  <span className={`toggle-label${!isAnnual ? " toggle-active" : ""}`}>monthly</span>
+                  <button
+                    className={`toggle-switch${isAnnual ? " toggle-on" : ""}`}
+                    onClick={() => setIsAnnual(v => !v)}
+                    aria-label="Toggle billing period"
+                  >
+                    <span className="toggle-thumb" />
+                  </button>
+                  <span className={`toggle-label${isAnnual ? " toggle-active" : ""}`}>
+                    annual <span className="toggle-save">save 50%</span>
+                  </span>
+                </div>
                 <div className="offer-price">
                   <span className="price-amount">{isAnnual ? "$53" : "$107"}</span>
-                  <span className="price-period">/month</span>
+                  <span className="price-period">/month{isAnnual && <span className="price-annual-bracket"> ($640/yr)</span>}</span>
                 </div>
-                {isAnnual && <p className="price-annual-note">billed $640/year</p>}
               </div>
               <p className="offer-tagline">for entrepreneurs and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
               <div className="offer-divider" />

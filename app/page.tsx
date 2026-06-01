@@ -296,12 +296,12 @@ export default function Home() {
         </div>
         {screenshots.length > 0 ? (
           <div className="ss-rows">
-            {([0, 1] as const).map(ri => {
-              const row = screenshots.filter((_, i) => i % 2 === ri);
+            {([0, 1, 2] as const).map(ri => {
+              const row = screenshots.filter((_, i) => i % 3 === ri);
               if (!row.length) return null;
               return (
                 <div key={ri} className="ss-row-wrap">
-                  <div className={`ss-row-track${ri === 1 ? " ss-row-track-r" : ""}`}>
+                  <div className={`ss-row-track ss-rt-${ri}`}>
                     {[...row, ...row].map((src, i) => (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img key={i} src={src} alt="Student win" className="ss-item" />

@@ -765,25 +765,30 @@ body {
 
 .ss-section { padding: 5rem 0 3.5rem; overflow: hidden; }
 .ss-header  { padding-bottom: 2.5rem; }
-.ss-rows    { display: flex; flex-direction: column; gap: 1rem; }
+.ss-rows    { display: flex; flex-direction: column; gap: 1.25rem; }
 .ss-row-wrap { overflow: hidden; width: 100%; }
 .ss-row-track {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   width: max-content;
-  animation: ss-loop 32s linear infinite;
+  align-items: center;
 }
-.ss-row-track-r { animation: ss-loop-r 26s linear infinite; }
-.ss-row-track:hover,
-.ss-row-track-r:hover { animation-play-state: paused; }
+/* Three rows — alternating directions, different speeds, varied heights */
+.ss-rt-0 { animation: ss-loop   42s linear infinite; }
+.ss-rt-1 { animation: ss-loop-r 33s linear infinite; }
+.ss-rt-2 { animation: ss-loop   52s linear infinite; }
+.ss-rt-0 .ss-item { height: 200px; }
+.ss-rt-1 .ss-item { height: 255px; }
+.ss-rt-2 .ss-item { height: 175px; }
+.ss-row-track:hover { animation-play-state: paused; }
 .ss-item {
-  height: 260px;
   width: auto;
+  max-width: 480px;
   border-radius: 10px;
   flex-shrink: 0;
   display: block;
-  object-fit: cover;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  object-fit: contain;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.55);
 }
 .ss-placeholder {
   text-align: center;

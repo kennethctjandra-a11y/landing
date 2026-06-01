@@ -733,6 +733,61 @@ body {
 .cta-garden:hover { background: var(--red-hover); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(200,82,68,0.28); }
 .cta-greenhouse { background: var(--white); color: var(--red); }
 .cta-greenhouse:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+.price-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.toggle-label {
+  font-size: 0.9rem;
+  color: var(--muted-dark);
+  font-weight: 400;
+  transition: color 0.2s;
+}
+.toggle-label.toggle-active { color: var(--text); font-weight: 600; }
+.toggle-switch {
+  position: relative;
+  width: 52px;
+  height: 30px;
+  background: #d0ccc8;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.toggle-switch.toggle-on { background: var(--red); }
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.25s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+.toggle-on .toggle-thumb { transform: translateX(22px); }
+.toggle-save {
+  font-size: 0.7rem;
+  background: var(--red);
+  color: white;
+  padding: 0.1em 0.45em;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+.price-annual-note {
+  font-size: 0.78rem;
+  color: var(--muted-dark);
+  margin-top: 0.15rem;
+}
 .offer-who { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 .offer-garden     .offer-who { color: var(--muted); }
 .offer-greenhouse .offer-who { color: rgba(255,255,255,0.35); }

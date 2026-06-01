@@ -130,6 +130,7 @@ const faqs = [
 export default function Home() {
   const [scrolled,  setScrolled]  = useState(false);
   const [openFaq,   setOpenFaq]   = useState<number | null>(null);
+  const [isAnnual,  setIsAnnual]  = useState(true);
 
   const heroRef    = useRef<HTMLElement>(null);
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
@@ -288,10 +289,7 @@ export default function Home() {
               stop overthinking. start creating. build a brand that actually sounds like you.
             </p>
             <div className="hero-ctas">
-              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                join creatopia — $107/mo →
-              </a>
-              <a href="#offers" className="btn-secondary">apply for 1-1 coaching</a>
+              <a href="#offers" className="btn-primary">choose your plan →</a>
             </div>
             <p className="hero-tagline">real is the new viral.</p>
           </div>
@@ -395,17 +393,34 @@ export default function Home() {
           <span className="eyebrow eyebrow-muted">✦ pricing</span>
           <h2 className="section-h2 section-h2-dark">choose your path.</h2>
           <p className="section-lead section-lead-dark">same transformation. two ways to get there.</p>
+
+          <div className="price-toggle">
+            <span className={`toggle-label${!isAnnual ? " toggle-active" : ""}`}>monthly</span>
+            <button
+              className={`toggle-switch${isAnnual ? " toggle-on" : ""}`}
+              onClick={() => setIsAnnual(v => !v)}
+              aria-label="Toggle billing period"
+            >
+              <span className="toggle-thumb" />
+            </button>
+            <span className={`toggle-label${isAnnual ? " toggle-active" : ""}`}>
+              annual <span className="toggle-save">save 50%</span>
+            </span>
+          </div>
+
           <div className="offers-grid">
             <div className="offer-card offer-garden">
               <span className="offer-badge badge-red">most popular</span>
               <div>
                 <div className="offer-who">Creatopia</div>
                 <h3 className="offer-title">Group Coaching<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>Community Program</span></h3>
-                <p className="offer-subtag">turning entrepreneurs into creators</p>
               </div>
-              <div className="offer-price">
-                <span className="price-amount">$107</span>
-                <span className="price-period">/month</span>
+              <div>
+                <div className="offer-price">
+                  <span className="price-amount">{isAnnual ? "$53" : "$107"}</span>
+                  <span className="price-period">/month</span>
+                </div>
+                {isAnnual && <p className="price-annual-note">billed $640/year</p>}
               </div>
               <p className="offer-tagline">for entrepreneurs and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
               <div className="offer-divider" />

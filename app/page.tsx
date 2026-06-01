@@ -65,6 +65,7 @@ const screenshots: string[] = [
   "/img/biz-6.png",
   "/img/biz-7.png",
   "/img/biz-8.png",
+  "/img/profile-1.png",
   "/img/profile-2.png",
   "/img/profile-3.png",
   "/img/profile-4.png",
@@ -120,7 +121,7 @@ const faqs = [
   { q: "do i need to be christian?",             a: "no. the community is built on faith-first values, but we welcome anyone who resonates with authentic, values-driven content creation. you'll see faith referenced in the culture here because it's part of ken's story — but it's never a requirement." },
   { q: "what if i'm just starting out?",         a: "this is actually the best time to join. starting with the right framework means you don't spend years unlearning bad habits. some of our fastest-growing members came in with zero followers." },
   { q: "can i cancel anytime?",                  a: "yes — creatopia is month-to-month with no lock-ins. you can cancel directly from skool with one click, no questions asked." },
-  { q: "what makes this different from courses?",a: "most courses teach tactics. creatopia teaches you how to find and tell your story — which no algorithm can kill and no trend can replace. it's built specifically for second-gen asian and christian founders, not a generic creator audience." },
+  { q: "what makes this different from courses?",a: "most courses teach you to copy-and-paste viral hooks. creatopia teaches you how to find and tell your story — which no algorithm can kill and no trend can replace. it's built for you to scale your personal brand, long-term." },
   { q: "how much time do i need each week?",     a: "3–5 hours minimum. the members seeing the biggest results are creating consistently, showing up to the weekly live calls, and getting peer feedback. part-time engagement still works — it just takes longer." },
 ];
 

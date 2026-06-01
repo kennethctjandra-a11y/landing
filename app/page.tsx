@@ -399,8 +399,8 @@ export default function Home() {
             <div className="offer-card offer-garden">
               <span className="offer-badge badge-red">most popular</span>
               <div>
-                <div className="offer-who">group coaching</div>
-                <h3 className="offer-title">Creatopia<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>the community</span></h3>
+                <div className="offer-who">Creatopia</div>
+                <h3 className="offer-title">Group Coaching<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>Community Program</span></h3>
                 <p className="offer-subtag">turning entrepreneurs into creators</p>
               </div>
               <div className="offer-price">
@@ -422,8 +422,8 @@ export default function Home() {
                 <span className="offer-badge badge-white-outline">asian-only</span>
               </div>
               <div>
-                <div className="offer-who">1-on-1 coaching</div>
-                <h3 className="offer-title">The Greenhouse<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>private coaching</span></h3>
+                <div className="offer-who">Greenhouse</div>
+                <h3 className="offer-title">1-on-1 Coaching<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>Private Scaling</span></h3>
               </div>
               <div className="offer-price">
                 <span className="price-amount">$3,000</span>
@@ -432,12 +432,31 @@ export default function Home() {
               <p className="offer-tagline">for asian founders who are ready to go all-in. i&apos;m in your corner every day — strategy, content, feedback, accountability.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
-                {["private 1-on-1 calls with ken (2x/month)","daily access via voice memo + dm","custom 90-day brand roadmap","content review on every piece you post","full creatopia community access included","direct introductions to ken's network","90-day minimum commitment"].map(f => (
+                {["private 1-on-1 calls with ken (x1/week)","daily access via voice memo + dm","custom 90-day brand roadmap","content review on every piece you post","full creatopia community access included","direct introductions to ken's network","90-day minimum commitment"].map(f => (
                   <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
                 ))}
               </ul>
-              <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-greenhouse">apply for coaching →</a>
+              <a href="#coaching-form" className="offer-cta cta-greenhouse">apply for coaching →</a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="section section-white">
+        <div className="section-inner-sm">
+          <span className="eyebrow eyebrow-muted">✦ questions</span>
+          <h2 className="section-h2 section-h2-dark">before you join.</h2>
+          <div className="faq-list">
+            {faqs.map((faq, i) => (
+              <div className="faq-item" key={i}>
+                <button className="faq-btn" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}>
+                  {faq.q}
+                  <span className="faq-icon">+</span>
+                </button>
+                <div className={`faq-body${openFaq === i ? " open" : ""}`}>{faq.a}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -480,27 +499,6 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-divider section-divider-white" />
-
-      {/* ── FAQ ── */}
-      <section className="section section-white">
-        <div className="section-inner-sm">
-          <span className="eyebrow eyebrow-muted">✦ questions</span>
-          <h2 className="section-h2 section-h2-dark">before you join.</h2>
-          <div className="faq-list">
-            {faqs.map((faq, i) => (
-              <div className="faq-item" key={i}>
-                <button className="faq-btn" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}>
-                  {faq.q}
-                  <span className="faq-icon">+</span>
-                </button>
-                <div className={`faq-body${openFaq === i ? " open" : ""}`}>{faq.a}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── FINAL CTA ── */}
       <section className="final-cta">
         <div className="final-cta-inner">
@@ -521,7 +519,7 @@ export default function Home() {
           <a href="https://www.tiktok.com/@kentjandraa"    target="_blank" rel="noopener noreferrer">tiktok</a>
           <a href="https://www.youtube.com/@kentjandra"    target="_blank" rel="noopener noreferrer">youtube</a>
           <a href={SKOOL}                                  target="_blank" rel="noopener noreferrer">skool community</a>
-          <a href="https://www.kentjandra.com/coaching"    target="_blank" rel="noopener noreferrer">coaching</a>
+          <a href="https://form.typeform.com/to/io6ZyWkn"   target="_blank" rel="noopener noreferrer">coaching</a>
         </div>
         <p className="footer-copy">© {new Date().getFullYear()} ken tjandra. all rights reserved.</p>
         <p className="footer-faith">built in faith. rooted in story.</p>

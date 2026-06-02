@@ -551,6 +551,7 @@ export default function Home() {
           <a href="https://www.youtube.com/@kentjandra"    target="_blank" rel="noopener noreferrer">youtube</a>
           <a href={SKOOL}                                  target="_blank" rel="noopener noreferrer">skool community</a>
           <a href="https://form.typeform.com/to/io6ZyWkn"   target="_blank" rel="noopener noreferrer">coaching</a>
+          <a href="https://docs.google.com/document/d/1pXNcOx7kqadX1OX2gwMfh9EDX2F3Cz1FEMukHBY3u5s/edit?usp=drive_link" target="_blank" rel="noopener noreferrer">policies</a>
         </div>
         <p className="footer-copy">© {new Date().getFullYear()} ken tjandra. all rights reserved.</p>
         <p className="footer-faith">built in faith. rooted in story.</p>

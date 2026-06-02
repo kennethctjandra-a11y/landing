@@ -516,7 +516,7 @@ export default function Home() {
           <p className="section-lead section-lead-dark">products and projects in the works.</p>
           <div className="work-grid">
             {projects.map(p => (
-              <a key={p.name} href={p.link} target={p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
+              <a key={p.name} href={p.link ?? undefined} target={!p.link || p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
                 <div className="work-card-tag">{p.tag}</div>
                 <div className="work-card-name">{p.name}</div>
                 <div className="work-card-desc">{p.desc}</div>

@@ -101,10 +101,37 @@ const screenshots: string[] = [
   "/img/views-11.png",
 ];
 
+const problems = [
+  {
+    num: "01",
+    frontTitle: "copy-paste hooks don't build brands.",
+    frontBody: "you've tried the tactics, the trending audio, the viral first-sentences – but nothing sticks. stories without identity are just noise.",
+    backTitle: "your story is the strategy.",
+    backBody: "creatopia gives you a system to find your story and turn it into content that sounds unmistakably like you — no templates, no trends required.",
+  },
+  {
+    num: "02",
+    frontTitle: "one viral video won't change your life.",
+    frontBody: "going viral once doesn't build an audience — it builds a moment. you need a story people come back to, not a clip they forget by tomorrow.",
+    backTitle: "build a brand, not a moment.",
+    backBody: "ken teaches you how to create content that compounds — every post builds trust and authority, not just views.",
+  },
+  {
+    num: "03",
+    frontTitle: "overthinking is the real enemy.",
+    frontBody: "your notes app is full. but every time you're about to post, fear & perfectionism creeps in. that's not a consistency issue, it's an identity issue.",
+    backTitle: "clarity kills overthinking.",
+    backBody: "when you know who you are and what you stand for, posting becomes natural. that's exactly what we build inside creatopia.",
+  },
+];
+
 const projects = [
-  { tag: "presets · tools",       name: "Cinematic Grade",    desc: "My one-click DaVinci colour grade – built for storytellers. Live and exclusively available now.",                                     status: "live",  link: "https://kentjandra.gumroad.com/l/colourgrade",  cta: "explore →" },
-  { tag: "in-person · sydney",    name: "S.A.F.E.",        desc: "Sydney Asian Founders Exclusive – a private in-person group for asian founders to hangout, share values, and grow.",             status: "live beta",  link: "https://www.instagram.com/kentjandraa",  cta: "dm if interested →" },
-  { tag: "traveling · digital nomad", name: "Asia Solo Trip",  desc: "Currently on journeying across Singapore, China, and Indonesia – searching for what's next.",                            status: "next up",  cta: "flying soon ✈︎" },
+  { tag: "fashion · collab", name: "The Blessed T-shirt", desc: "a limited-run collab with owlam — a christian clothing brand built by friends. limited stock only.", status: "dropping fri june 5", link: "https://www.owlamapparel.com/", cta: "shop now →" },
+  { tag: "traveling · digital nomad", name: "Asia Solo Trip", desc: "currently journeying across Singapore, China, and Indonesia — searching for what's next.", status: "next up", link: undefined as unknown as string, cta: "flying soon ✈︎" },
+  { tag: "in-person · sydney", name: "S.A.F.E.", desc: "Sydney Asian Founders Exclusive – a private in-person group for asian founders to hangout, share values, and grow.", status: "live beta", link: "https://www.instagram.com/kentjandraa", cta: "dm if interested →" },
+  { tag: "content series", name: "The Garden", desc: "\"the garden\" explores the intersection of faith, identity, creativity, & entrepreneurship. raw, uncut, out on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdFwq-VHsThEw2U1k7t_H03s&si=cwLUyOkOqOhWGfAS", cta: "watch now →" },
+  { tag: "presets · tools", name: "Cinematic Grade", desc: "my one-click DaVinci colour grade – built for storytellers. live and exclusively available now.", status: "live", link: "https://kentjandra.gumroad.com/l/colourgrade", cta: "explore →" },
+  { tag: "content series", name: "What's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. about refusing to be put in any single box.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
 ];
 
 const values = [
@@ -131,6 +158,8 @@ export default function Home() {
   const [scrolled,  setScrolled]  = useState(false);
   const [openFaq,   setOpenFaq]   = useState<number | null>(null);
   const [isAnnual,  setIsAnnual]  = useState(true);
+  const [photoFlipped, setPhotoFlipped] = useState(false);
+  const [flippedCard,  setFlippedCard]  = useState<number | null>(null);
 
   const heroRef    = useRef<HTMLElement>(null);
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
@@ -244,47 +273,58 @@ export default function Home() {
         <div className="hero-main">
           <div className="hero-photo-col">
             <p className="mindmap-label-top">core values</p>
-            <div className="mindmap-root">
-              <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
-                  <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
-                ))}
-              </svg>
-              <div className="mindmap-photo">
-                <Image
-                  src="/img/ken.jpg"
-                  alt="Ken Tjandra"
-                  fill
-                  sizes="(max-width: 768px) 80vw, 25vw"
-                  style={{ objectFit: "cover", objectPosition: "center 10%" }}
-                />
-              </div>
-              {([
-                { top: "6%",  left: "50%", name: "Faith" },
-                { top: "18%", left: "84%", name: "Authenticity" },
-                { top: "50%", left: "95%", name: "Storytelling" },
-                { top: "84%", left: "80%", name: "Growth" },
-                { top: "95%", left: "50%", name: "Community" },
-                { top: "84%", left: "16%", name: "Identity" },
-                { top: "28%", left: "10%", name: "Excellence" },
-              ]).map(pos => (
-                <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
-                  {pos.name}
+              <div className="mindmap-root">
+                <div className="mindmap-orbit-layer">
+                  <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                    {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
+                      <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
+                    ))}
+                  </svg>
+                  {([
+                    { top: "6%",  left: "50%", name: "Faith" },
+                    { top: "18%", left: "84%", name: "Authenticity" },
+                    { top: "50%", left: "95%", name: "Storytelling" },
+                    { top: "84%", left: "80%", name: "Growth" },
+                    { top: "95%", left: "50%", name: "Community" },
+                    { top: "84%", left: "16%", name: "Identity" },
+                    { top: "28%", left: "10%", name: "Excellence" },
+                  ]).map(pos => (
+                    <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
+                      <span className="mindmap-node-inner">{pos.name}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+                <div
+                  className={`mindmap-photo${photoFlipped ? " photo-flipped" : ""}`}
+                  onClick={() => setPhotoFlipped(v => !v)}
+                  role="button"
+                  aria-label="Click to learn about Ken"
+                >
+                  <div className="photo-face photo-front">
+                    <Image
+                      src="/img/ken.jpg"
+                      alt="Ken Tjandra"
+                      fill
+                      sizes="(max-width: 768px) 80vw, 25vw"
+                      style={{ objectFit: "cover", objectPosition: "center 10%" }}
+                    />
+                  </div>
+                  <div className="photo-face photo-back">
+                    <p>21. indo-australian. building at the intersection of faith, creativity, &amp; entrepreneurship.</p>
+                  </div>
+                </div>
+              </div>
           </div>
           <div className="hero-text-col">
             <div className="hero-eyebrow">
               <span className="hero-dot" />
-              for faith-first founders &amp; creators
+              for bold founders &amp; creators
             </div>
             <h1>
               your story is your
               <br />
               <em>unfair advantage.</em>
             </h1>
-            <p className="hero-ident">ken tjandra · 21 · indo-australian · building in faith</p>
             <p className="hero-sub">
               stop overthinking. start creating. build a brand that actually sounds like you.
             </p>
@@ -309,15 +349,24 @@ export default function Home() {
             you&apos;re not the problem.<br />the approach is.
           </h2>
           <div className="problem-grid">
-            {[
-              { num: "01", title: "copy-paste hooks don't build brands.",             body: "you've tried the tactics, the trending audio, the viral first-sentences – but nothing sticks. stories without identity are just noise." },
-              { num: "02", title: "one viral video won't change your life.",           body: "going viral once doesn't build an audience — it builds a moment. you need a story people come back to, not a clip they forget by tomorrow." },
-              { num: "03", title: "overthinking is the real enemy.",                   body: "your notes app is full. but every time you're about to post, fear & perfectionism creeps in. that's not a consistency issue, it's an identity issue." },
-            ].map(p => (
-              <div className="problem-card" key={p.num}>
-                <div className="problem-num">{p.num}</div>
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
+            {problems.map((p, i) => (
+              <div
+                className={`flip-card${flippedCard === i ? " flipped" : ""}`}
+                key={p.num}
+                onClick={() => setFlippedCard(flippedCard === i ? null : i)}
+              >
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <div className="problem-num">{p.num}</div>
+                    <h3>{p.frontTitle}</h3>
+                    <p>{p.frontBody}</p>
+                  </div>
+                  <div className="flip-card-back">
+                    <div className="back-label">✦ the fix</div>
+                    <h3>{p.backTitle}</h3>
+                    <p>{p.backBody}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -355,37 +404,6 @@ export default function Home() {
           </div>
         )}
       </section>
-
-      {/* ── TRANSFORMATION ── */}
-      <section className="section section-light">
-        <div className="section-inner">
-          <span className="eyebrow eyebrow-muted">✦ the shift</span>
-          <h2 className="section-h2 section-h2-dark">
-            from creating out of fear<br />to creating from freedom.
-          </h2>
-          <div className="transform-grid">
-            <div className="transform-col transform-before">
-              <div className="transform-label">before</div>
-              <div className="transform-items">
-                {[["😮‍💨","creating from fear and comparison"],["📉","chasing metrics that don't move"],["📋","copy-paste content that sounds like everyone else"],["🧱","stuck in a loop of overthinking and not posting"],["🌫️","invisible online despite real-world success"]].map(([icon,text]) => (
-                  <div className="transform-item" key={text}><span className="transform-icon">{icon}</span><span>{text}</span></div>
-                ))}
-              </div>
-            </div>
-            <div className="transform-arrow"><div className="arrow-circle">→</div></div>
-            <div className="transform-col transform-after">
-              <div className="transform-label">after</div>
-              <div className="transform-items">
-                {[["✦","creating from clarity and conviction"],["📈","attracting the right people with the right content"],["🎙️","content that sounds unmistakably like you"],["⚡","a system that makes posting feel natural, not forced"],["🌿","a growing audience that trusts you before you sell"]].map(([icon,text]) => (
-                  <div className="transform-item" key={text}><span className="transform-icon">{icon}</span><span>{text}</span></div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider section-divider-white" />
 
       {/* ── OFFERS ── */}
       <section id="offers" className="section section-white">
@@ -440,12 +458,12 @@ export default function Home() {
               </div>
               <div className="offer-price">
                 <span className="price-amount">$3,000</span>
-                <span className="price-period">/month</span>
+                <span className="price-period">/month<span className="price-annual-bracket"> (x3 months)</span></span>
               </div>
-              <p className="offer-tagline">for asian founders who are ready to go all-in. i&apos;m in your corner every day — strategy, content, feedback, accountability.</p>
+              <p className="offer-tagline">for invisible business owners making $10k/month+ who are ready to go all-in on their personal brand. i&apos;m in your corner every day.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
-                {["private 1-on-1 calls with ken (x1/week)","daily access via voice memo + dm","custom 90-day brand roadmap","content review on every piece you post","full creatopia community access included","direct introductions to ken's network","90-day minimum commitment"].map(f => (
+                {["private 1-on-1 calls with ken (x1/week)","daily access via voice memo + dm","custom 90-day brand roadmap","content review on every piece you post","full creatopia community access included","direct introductions to ken's network","90-day commitment, period."].map(f => (
                   <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
                 ))}
               </ul>
@@ -494,7 +512,7 @@ export default function Home() {
       <section className="section section-light">
         <div className="section-inner">
           <span className="eyebrow eyebrow-muted">✦ what i&apos;m building</span>
-          <h2 className="section-h2 section-h2-dark">current projects.</h2>
+          <h2 className="section-h2 section-h2-dark">my projects.</h2>
           <p className="section-lead section-lead-dark">products and projects in the works.</p>
           <div className="work-grid">
             {projects.map(p => (

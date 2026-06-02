@@ -105,33 +105,33 @@ const problems = [
   {
     num: "01",
     frontTitle: "copy-paste hooks don't build brands.",
-    frontBody: "you've tried the tactics, the trending audio, the viral first-sentences – but nothing sticks. stories without identity are just noise.",
-    backTitle: "your story is the strategy.",
-    backBody: "creatopia gives you a system to find your story and turn it into content that sounds unmistakably like you — no templates, no trends required.",
+    frontBody: "you've tried the tactics, the trending audio, the first-liners – but nothing sticks. a story without identity is just noise.",
+    backTitle: "your testimony is the strategy.",
+    backBody: "I'll give you a personalised system to turn your story into premium, high-performing content that converts – no templates or trends required.",
   },
   {
     num: "02",
     frontTitle: "one viral video won't change your life.",
-    frontBody: "going viral once doesn't build an audience — it builds a moment. you need a story people come back to, not a clip they forget by tomorrow.",
+    frontBody: "going viral once doesn't build trust – it builds a moment. you need content people come back to, not a clip they forget by tomorrow.",
     backTitle: "build a brand, not a moment.",
-    backBody: "ken teaches you how to create content that compounds — every post builds trust and authority, not just views.",
+    backBody: "I'll teach you how to create short & long-form videos that compound throughout time – every post builds trust & authority, not just views.",
   },
   {
     num: "03",
-    frontTitle: "overthinking is the real enemy.",
-    frontBody: "your notes app is full. but every time you're about to post, fear & perfectionism creeps in. that's not a consistency issue, it's an identity issue.",
+    frontTitle: "overthinking is the enemy.",
+    frontBody: "your notes app is full. but every time you're about to post, fear & perfectionism creeps in. that's not a consistency issue, it's an internal issue.",
     backTitle: "clarity kills overthinking.",
-    backBody: "when you know who you are and what you stand for, posting becomes natural. that's exactly what we build inside creatopia.",
+    backBody: "when you know who you are & what you stand for, posting becomes natural. that's exactly what we've done with 1,000+ creators.",
   },
 ];
 
 const projects = [
-  { tag: "fashion · collab", name: "The Blessed T-shirt", desc: "a limited-run collab with owlam — a christian clothing brand built by friends. limited stock only.", status: "dropping fri june 5", link: "https://www.owlamapparel.com/", cta: "shop now →" },
+  { tag: "fashion · collab", name: "The Blessed T-shirt", desc: "an exclusive collab with Owlam – a Christian clothing brand built by my close friends. limited stock only.", status: "dropping fri june 5", link: "https://www.owlamapparel.com/", cta: "shop now →" },
   { tag: "traveling · digital nomad", name: "Asia Solo Trip", desc: "currently journeying across Singapore, China, and Indonesia — searching for what's next.", status: "next up", link: undefined as unknown as string, cta: "flying soon ✈︎" },
   { tag: "in-person · sydney", name: "S.A.F.E.", desc: "Sydney Asian Founders Exclusive – a private in-person group for asian founders to hangout, share values, and grow.", status: "live beta", link: "https://www.instagram.com/kentjandraa", cta: "dm if interested →" },
   { tag: "content series", name: "The Garden", desc: "\"the garden\" explores the intersection of faith, identity, creativity, & entrepreneurship. raw, uncut, out on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdFwq-VHsThEw2U1k7t_H03s&si=cwLUyOkOqOhWGfAS", cta: "watch now →" },
   { tag: "presets · tools", name: "Cinematic Grade", desc: "my one-click DaVinci colour grade – built for storytellers. live and exclusively available now.", status: "live", link: "https://kentjandra.gumroad.com/l/colourgrade", cta: "explore →" },
-  { tag: "content series", name: "What's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. about refusing to be put in any single box.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
+  { tag: "content series", name: "what's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. watch on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
 ];
 
 const values = [
@@ -310,7 +310,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="photo-face photo-back">
-                    <p>21. indo-australian. building at the intersection of faith, creativity, &amp; entrepreneurship.</p>
+                    <p>21. indo-australian. saved by Grace. building culture, community &amp; content – with Christ at the centre.</p>
                   </div>
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function Home() {
           <div className="hero-text-col">
             <div className="hero-eyebrow">
               <span className="hero-dot" />
-              for bold founders &amp; creators
+              for faith-driven founders &amp; creators
             </div>
             <h1>
               your story is your
@@ -408,9 +408,9 @@ export default function Home() {
       {/* ── OFFERS ── */}
       <section id="offers" className="section section-white">
         <div className="section-inner">
-          <span className="eyebrow eyebrow-muted">✦ pricing</span>
+          <span className="eyebrow eyebrow-muted">✦ plans & pricing</span>
           <h2 className="section-h2 section-h2-dark">choose your path.</h2>
-          <p className="section-lead section-lead-dark">same transformation. two ways to get there.</p>
+          <p className="section-lead section-lead-dark">pick an offer that suits your needs.</p>
 
           <div className="offers-grid">
             <div className="offer-card offer-garden" style={{ position: "relative" }}>
@@ -477,7 +477,7 @@ export default function Home() {
       <section className="section section-white">
         <div className="section-inner-sm">
           <span className="eyebrow eyebrow-muted">✦ questions</span>
-          <h2 className="section-h2 section-h2-dark">before you join.</h2>
+          <h2 className="section-h2 section-h2-dark">before you join...</h2>
           <div className="faq-list">
             {faqs.map((faq, i) => (
               <div className="faq-item" key={i}>

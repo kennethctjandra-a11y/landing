@@ -52,7 +52,7 @@ const trailSrcs = [
   "1.jpg","2.jpg","3.jpeg","4.JPG","5.jpeg","6.jpeg","7.jpeg","8.jpeg","9.jpg","10.jpg",
   "11.JPG","12.jpeg","13.jpg","14.jpg","15.jpg","16.jpeg","17.jpeg","18.jpg","19.jpg","20.jpg",
   "21.JPG","22.jpg","23.jpeg","24.jpeg","25.jpeg","26.jpeg","27.jpeg","28.jpg","29.jpg","30.JPG",
-  "31.jpg","32.jpg","33.JPG","34.jpeg","36.jpg","37.jpeg","38.jpg","39.jpeg","40.jpg",
+  "31.jpg","32.jpg","33.JPG","34.jpeg","35.jpg","36.jpeg","37.jpg","38.jpeg","39.jpg",
 ].map(f => `/trail-2/${f}`);
 
 const screenshots: string[] = [

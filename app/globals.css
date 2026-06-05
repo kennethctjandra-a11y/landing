@@ -731,7 +731,6 @@ body {
   width: 280px;
   max-width: 75vw;
   border-radius: 16px;
-  aspect-ratio: 9 / 16;
   object-fit: cover;
   background: #1a1a1a;
   display: block;
@@ -1709,6 +1708,7 @@ body {
   .carousel-card { width: 220px; height: 290px; padding: 1.5rem; }
   .testi-carousel { gap: 0.75rem; flex-direction: column; align-items: center; }
   .testi-card-side { display: none; }
+  .testi-card-active .testi-counter { display: none; }
   .testi-mobile-nav { display: flex; align-items: center; gap: 1.5rem; justify-content: center; margin-top: 0.5rem; }
   .about-projects-layout { grid-template-columns: 1fr; }
   .mindmap-root-sm { max-width: 220px; }

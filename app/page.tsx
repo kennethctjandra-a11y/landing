@@ -366,6 +366,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── STUDENT WINS ── */}
+      <section className="section-black ss-section">
+        <div className="section-inner ss-header">
+          <span className="eyebrow eyebrow-red">✦ student wins</span>
+          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
+        </div>
+        {screenshots.length > 0 ? (
+          <div className="ss-rows">
+            {([0, 1, 2] as const).map(ri => {
+              const row = screenshots.filter((_, i) => i % 3 === ri);
+              if (!row.length) return null;
+              return (
+                <div key={ri} className="ss-row-wrap">
+                  <div className={`ss-row-track ss-rt-${ri}`}>
+                    {[...row, ...row].map((src, i) => (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img key={i} src={src} alt="Student win" className="ss-item" />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="ss-placeholder">
+            <p>screenshots coming soon.</p>
+          </div>
+        )}
+      </section>
+
       {/* ── PROBLEM ── */}
       <section className="section section-light">
         <div className="section-inner">
@@ -396,36 +426,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* ── STUDENT WINS ── */}
-      <section className="section-black ss-section">
-        <div className="section-inner ss-header">
-          <span className="eyebrow eyebrow-red">✦ student wins</span>
-          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
-        </div>
-        {screenshots.length > 0 ? (
-          <div className="ss-rows">
-            {([0, 1, 2] as const).map(ri => {
-              const row = screenshots.filter((_, i) => i % 3 === ri);
-              if (!row.length) return null;
-              return (
-                <div key={ri} className="ss-row-wrap">
-                  <div className={`ss-row-track ss-rt-${ri}`}>
-                    {[...row, ...row].map((src, i) => (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img key={i} src={src} alt="Student win" className="ss-item" />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="ss-placeholder">
-            <p>screenshots coming soon.</p>
-          </div>
-        )}
       </section>
 
       {/* ── TESTIMONIALS ── */}
@@ -553,24 +553,6 @@ export default function Home() {
                 ))}
               </ul>
               <a href="#coaching-form" className="offer-cta cta-greenhouse">apply for coaching →</a>
-            </div>
-            <div className="offer-card offer-safe">
-              <span className="offer-badge badge-outline">sydney only</span>
-              <div>
-                <div className="offer-who">in-person community</div>
-                <h3 className="offer-title">S.A.F.E.<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>sydney asian founders exclusive</span></h3>
-              </div>
-              <div className="offer-price">
-                <span className="price-amount" style={{ color: "var(--dark)" }}>free</span>
-              </div>
-              <p className="offer-tagline">a private group in sydney for asian founders to hang out, share values, and build together in person.</p>
-              <div className="offer-divider" />
-              <ul className="offer-features">
-                {["in-person sydney hangouts","faith & values-aligned","peer support","founding member consideration","no commitment — just express interest"].map(f => (
-                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
-                ))}
-              </ul>
-              <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-safe">express interest →</a>
             </div>
           </div>
         </div>

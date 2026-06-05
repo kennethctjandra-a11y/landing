@@ -184,7 +184,6 @@ export default function Home() {
   const trailContainerRef = useRef<HTMLDivElement>(null);
   const trailIndexRef     = useRef(0);
   const lastSpawnRef      = useRef({ x: -999, y: -999 });
-  const projTrackRef = useRef<HTMLDivElement>(null);
 
   /* scroll → nav */
   useEffect(() => {
@@ -252,14 +251,6 @@ export default function Home() {
   const prevIdx = (testIdx - 1 + testimonialVideos.length) % testimonialVideos.length;
   const nextIdx = (testIdx + 1) % testimonialVideos.length;
 
-  const scrollProjBy = (dir: -1 | 1) => {
-    const track = projTrackRef.current;
-    if (!track) return;
-    const card = track.children[0] as HTMLElement;
-    const cardWidth = card ? card.offsetWidth + 20 : 280;
-    track.scrollBy({ left: dir * cardWidth, behavior: "smooth" });
-  };
-
   return (
     <>
       {/* ── NAV ── */}
@@ -317,17 +308,6 @@ export default function Home() {
             <a href="#offers" className="btn-primary">choose your plan →</a>
           </div>
           <p className="hero-tagline">real is the new viral.</p>
-        </div>
-
-        <div className="hero-video-showcase">
-          <video
-            src="/testimonials/1.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="hero-video-showcase-el"
-          />
         </div>
 
         <div className="scroll-hint">
@@ -413,7 +393,9 @@ export default function Home() {
               <video
                 key={`prev-${prevIdx}`}
                 src={`/testimonials/${testimonialVideos[prevIdx]}`}
+                autoPlay
                 muted
+                loop
                 playsInline
                 className="testi-video"
               />
@@ -423,7 +405,9 @@ export default function Home() {
               <video
                 key={testIdx}
                 src={`/testimonials/${testimonialVideos[testIdx]}`}
-                controls
+                autoPlay
+                muted
+                loop
                 playsInline
                 className="testi-video"
               />
@@ -439,7 +423,9 @@ export default function Home() {
               <video
                 key={`next-${nextIdx}`}
                 src={`/testimonials/${testimonialVideos[nextIdx]}`}
+                autoPlay
                 muted
+                loop
                 playsInline
                 className="testi-video"
               />
@@ -575,7 +561,7 @@ export default function Home() {
         <div className="section-inner">
           <div className="about-projects-layout">
             <div className="about-mini-col">
-              <span className="eyebrow eyebrow-muted">✦ core values</span>
+              <span className="eyebrow eyebrow-muted">✦ who am i?</span>
               <p className="mindmap-label-top">core values</p>
               <div className="mindmap-root mindmap-root-sm">
                 <div className="mindmap-orbit-layer">
@@ -612,36 +598,35 @@ export default function Home() {
                       sizes="(max-width: 768px) 80vw, 300px"
                       style={{ objectFit: "cover", objectPosition: "center 10%" }}
                     />
-                    <div className="photo-about-label">about me</div>
                   </div>
                   <div className="photo-face photo-back">
                     <p>21. indo-australian. saved by Grace. building culture, community &amp; content – with Christ at the centre.</p>
                   </div>
                 </div>
               </div>
+              <button
+                className="who-am-i-btn"
+                onClick={() => setPhotoFlipped(v => !v)}
+              >
+                {photoFlipped ? "← close" : "who am i? →"}
+              </button>
             </div>
             <div className="projects-col">
               <span className="eyebrow eyebrow-muted">✦ what i&apos;m building</span>
               <h2 className="section-h2 section-h2-dark">my projects.</h2>
               <p className="section-lead section-lead-dark" style={{ fontSize: "0.875rem" }}>products and projects in the works.</p>
-              <div className="proj-carousel">
-                <div className="proj-scroll-wrap" ref={projTrackRef}>
-                  {projects.map(p => (
-                    <a key={p.name} href={p.link ?? undefined} target={!p.link || p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
-                      <div className="work-card-tag">{p.tag}</div>
-                      <div className="work-card-name">{p.name}</div>
-                      <div className="work-card-desc">{p.desc}</div>
-                      <div className="work-card-footer">
-                        <span className={`work-status${p.status === "live" ? " work-status-live" : ""}`}>{p.status}</span>
-                        <span className="work-cta">{p.cta}</span>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-                <div className="proj-carousel-btns">
-                  <button className="proj-btn" onClick={() => scrollProjBy(-1)} aria-label="Previous projects">‹</button>
-                  <button className="proj-btn" onClick={() => scrollProjBy(1)} aria-label="Next projects">›</button>
-                </div>
+              <div className="work-grid work-grid-compact">
+                {projects.map(p => (
+                  <a key={p.name} href={p.link ?? undefined} target={!p.link || p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
+                    <div className="work-card-tag">{p.tag}</div>
+                    <div className="work-card-name">{p.name}</div>
+                    <div className="work-card-desc">{p.desc}</div>
+                    <div className="work-card-footer">
+                      <span className={`work-status${p.status === "live" ? " work-status-live" : ""}`}>{p.status}</span>
+                      <span className="work-cta">{p.cta}</span>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
           </div>

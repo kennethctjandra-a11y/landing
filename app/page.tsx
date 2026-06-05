@@ -288,35 +288,23 @@ export default function Home() {
           </div>
         ))}
 
-        <div className="hero-main">
-          <div className="hero-video-col">
-            <video
-              src="/testimonials/1.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="hero-video-el"
-            />
+        <div className="hero-content">
+          <div className="hero-eyebrow">
+            <span className="hero-dot" />
+            for faith-first founders &amp; creators
           </div>
-          <div className="hero-text-col">
-            <div className="hero-eyebrow">
-              <span className="hero-dot" />
-              for faith-driven founders &amp; creators
-            </div>
-            <h1>
-              your story is your
-              <br />
-              <em>unfair advantage.</em>
-            </h1>
-            <p className="hero-sub">
-              stop overthinking. start creating. build a brand that actually sounds like you.
-            </p>
-            <div className="hero-ctas">
-              <a href="#offers" className="btn-primary">choose your plan →</a>
-            </div>
-            <p className="hero-tagline">real is the new viral.</p>
+          <h1>
+            your story is your
+            <br />
+            <em>unfair advantage.</em>
+          </h1>
+          <p className="hero-sub">
+            stop overthinking. start creating. build a brand that actually sounds like you.
+          </p>
+          <div className="hero-ctas">
+            <a href="#offers" className="btn-primary">choose your plan →</a>
           </div>
+          <p className="hero-tagline">real is the new viral.</p>
         </div>
 
         <div className="scroll-hint">
@@ -451,7 +439,7 @@ export default function Home() {
                   <span className="price-period">/month{isAnnual && <span className="price-annual-bracket"> ($640/yr)</span>}</span>
                 </div>
               </div>
-              <p className="offer-tagline">for entrepreneurs and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
+              <p className="offer-tagline">for founders and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
                 {["full story system curriculum","weekly live group calls with ken","community accountability on skool","platform playbooks (IG, TT, YT)","content vault — hooks, templates, swipe files","entrepreneur identity modules","peer feedback on your content","cancel anytime"].map(f => (
@@ -481,6 +469,24 @@ export default function Home() {
                 ))}
               </ul>
               <a href="#coaching-form" className="offer-cta cta-greenhouse">apply for coaching →</a>
+            </div>
+            <div className="offer-card offer-safe">
+              <span className="offer-badge badge-outline">sydney only</span>
+              <div>
+                <div className="offer-who">in-person community</div>
+                <h3 className="offer-title">S.A.F.E.<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>sydney asian founders exclusive</span></h3>
+              </div>
+              <div className="offer-price">
+                <span className="price-amount" style={{ color: "var(--dark)" }}>free</span>
+              </div>
+              <p className="offer-tagline">a private group in sydney for asian founders to hang out, share values, and build together in person.</p>
+              <div className="offer-divider" />
+              <ul className="offer-features">
+                {["in-person sydney hangouts","faith & values-aligned","peer support","founding member consideration","no commitment — just express interest"].map(f => (
+                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
+                ))}
+              </ul>
+              <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="offer-cta cta-safe">express interest →</a>
             </div>
           </div>
         </div>

@@ -178,12 +178,14 @@ export default function Home() {
   const [photoFlipped, setPhotoFlipped] = useState(false);
   const [flippedCard,  setFlippedCard]  = useState<number | null>(null);
   const [testIdx, setTestIdx] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
 
   const heroRef    = useRef<HTMLElement>(null);
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
   const trailContainerRef = useRef<HTMLDivElement>(null);
   const trailIndexRef     = useRef(0);
   const lastSpawnRef      = useRef({ x: -999, y: -999 });
+  const centerVideoRef    = useRef<HTMLVideoElement>(null);
 
   /* scroll → nav */
   useEffect(() => {
@@ -248,6 +250,20 @@ export default function Home() {
     return () => hero.removeEventListener("mousemove", onMove);
   }, []);
 
+  useEffect(() => {
+    const v = centerVideoRef.current;
+    if (!v) return;
+    v.load();
+    v.play().catch(() => {});
+  }, [testIdx]);
+
+  const toggleMute = () => {
+    const v = centerVideoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setIsMuted(v.muted);
+  };
+
   const prevIdx = (testIdx - 1 + testimonialVideos.length) % testimonialVideos.length;
   const nextIdx = (testIdx + 1) % testimonialVideos.length;
 
@@ -291,59 +307,63 @@ export default function Home() {
           </div>
         ))}
 
-        <div className="hero-content">
-          <div className="hero-eyebrow">
-            <span className="hero-dot" />
-            for faith-first founders &amp; creators
+        <div className="hero-main">
+          <div className="hero-photo-col">
+            <p className="mindmap-label-top">core values</p>
+            <div className="mindmap-root">
+              <div className="mindmap-orbit-layer">
+                <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                  {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
+                    <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
+                  ))}
+                </svg>
+                {([
+                  { top: "6%",  left: "50%", name: "Faith" },
+                  { top: "18%", left: "84%", name: "Authenticity" },
+                  { top: "50%", left: "95%", name: "Storytelling" },
+                  { top: "84%", left: "80%", name: "Growth" },
+                  { top: "95%", left: "50%", name: "Community" },
+                  { top: "84%", left: "16%", name: "Identity" },
+                  { top: "28%", left: "10%", name: "Excellence" },
+                ]).map(pos => (
+                  <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
+                    <span className="mindmap-node-inner">{pos.name}</span>
+                  </div>
+                ))}
+              </div>
+              <div
+                className={`mindmap-photo${photoFlipped ? " photo-flipped" : ""}`}
+                onClick={() => setPhotoFlipped(v => !v)}
+                role="button"
+                aria-label="Click to learn about Ken"
+              >
+                <div className="photo-face photo-front">
+                  <Image src="/img/ken.jpg" alt="Ken Tjandra" fill sizes="(max-width: 768px) 80vw, 25vw" style={{ objectFit: "cover", objectPosition: "center 10%" }} />
+                </div>
+                <div className="photo-face photo-back">
+                  <p>21. indo-australian. saved by Grace. building culture, community &amp; content – with Christ at the centre.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <h1>
-            your story is your
-            <br />
-            <em>unfair advantage.</em>
-          </h1>
-          <p className="hero-sub">
-            stop overthinking. start creating. build a brand that actually sounds like you.
-          </p>
-          <div className="hero-ctas">
-            <a href="#offers" className="btn-primary">choose your plan →</a>
+          <div className="hero-text-col">
+            <div className="hero-eyebrow">
+              <span className="hero-dot" />
+              for faith-first founders &amp; creators
+            </div>
+            <h1>your story is your<br /><em>unfair advantage.</em></h1>
+            <p className="hero-sub">stop overthinking. start creating. build a brand that actually sounds like you.</p>
+            <div className="hero-ctas">
+              <a href="#offers" className="btn-primary">choose your plan →</a>
+            </div>
+            <p className="hero-tagline">real is the new viral.</p>
           </div>
-          <p className="hero-tagline">real is the new viral.</p>
         </div>
 
         <div className="scroll-hint">
           <span>scroll</span>
           <div className="scroll-line" />
         </div>
-      </section>
-
-      {/* ── STUDENT WINS ── */}
-      <section className="section-black ss-section">
-        <div className="section-inner ss-header">
-          <span className="eyebrow eyebrow-red">✦ student wins</span>
-          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
-        </div>
-        {screenshots.length > 0 ? (
-          <div className="ss-rows">
-            {([0, 1, 2] as const).map(ri => {
-              const row = screenshots.filter((_, i) => i % 3 === ri);
-              if (!row.length) return null;
-              return (
-                <div key={ri} className="ss-row-wrap">
-                  <div className={`ss-row-track ss-rt-${ri}`}>
-                    {[...row, ...row].map((src, i) => (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img key={i} src={src} alt="Student win" className="ss-item" />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="ss-placeholder">
-            <p>screenshots coming soon.</p>
-          </div>
-        )}
       </section>
 
       {/* ── PROBLEM ── */}
@@ -378,6 +398,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── STUDENT WINS ── */}
+      <section className="section-black ss-section">
+        <div className="section-inner ss-header">
+          <span className="eyebrow eyebrow-red">✦ student wins</span>
+          <h2 className="section-h2 section-h2-light">real results. real people.</h2>
+        </div>
+        {screenshots.length > 0 ? (
+          <div className="ss-rows">
+            {([0, 1, 2] as const).map(ri => {
+              const row = screenshots.filter((_, i) => i % 3 === ri);
+              if (!row.length) return null;
+              return (
+                <div key={ri} className="ss-row-wrap">
+                  <div className={`ss-row-track ss-rt-${ri}`}>
+                    {[...row, ...row].map((src, i) => (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img key={i} src={src} alt="Student win" className="ss-item" />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="ss-placeholder">
+            <p>screenshots coming soon.</p>
+          </div>
+        )}
+      </section>
+
       {/* ── TESTIMONIALS ── */}
       <section className="section section-black">
         <div className="section-inner">
@@ -402,15 +452,20 @@ export default function Home() {
               <p className="testi-name">{testimonialVideos[prevIdx].replace(" testimonial.mp4", "")}</p>
             </div>
             <div className="testi-card testi-card-active">
-              <video
-                key={testIdx}
-                src={`/testimonials/${testimonialVideos[testIdx]}`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="testi-video"
-              />
+              <div className="testi-video-wrap">
+                <video
+                  ref={centerVideoRef}
+                  src={`/testimonials/${testimonialVideos[testIdx]}`}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="testi-video"
+                />
+                <button className="testi-mute-btn" onClick={toggleMute}>
+                  {isMuted ? "🔇 unmute" : "🔊 mute"}
+                </button>
+              </div>
               <p className="testi-name">{testimonialVideos[testIdx].replace(" testimonial.mp4", "")}</p>
               <p className="testi-counter">{testIdx + 1} / {testimonialVideos.length}</p>
             </div>
@@ -556,79 +611,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ABOUT + PROJECTS ── */}
+      {/* ── WORK ── */}
       <section className="section section-light">
         <div className="section-inner">
-          <div className="about-projects-layout">
-            <div className="about-mini-col">
-              <span className="eyebrow eyebrow-muted">✦ who am i?</span>
-              <p className="mindmap-label-top">core values</p>
-              <div className="mindmap-root mindmap-root-sm">
-                <div className="mindmap-orbit-layer">
-                  <svg className="mindmap-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                    {([[50,6],[84,18],[95,50],[80,84],[50,95],[16,84],[10,28]] as [number,number][]).map(([x,y],i) => (
-                      <line key={i} x1="50" y1="50" x2={x} y2={y} stroke="#d8cfc4" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
-                    ))}
-                  </svg>
-                  {([
-                    { top: "6%",  left: "50%", name: "Faith" },
-                    { top: "18%", left: "84%", name: "Authenticity" },
-                    { top: "50%", left: "95%", name: "Storytelling" },
-                    { top: "84%", left: "80%", name: "Growth" },
-                    { top: "95%", left: "50%", name: "Community" },
-                    { top: "84%", left: "16%", name: "Identity" },
-                    { top: "28%", left: "10%", name: "Excellence" },
-                  ]).map(pos => (
-                    <div key={pos.name} className="mindmap-node" style={{ top: pos.top, left: pos.left }}>
-                      <span className="mindmap-node-inner">{pos.name}</span>
-                    </div>
-                  ))}
+          <span className="eyebrow eyebrow-muted">✦ what i&apos;m building</span>
+          <h2 className="section-h2 section-h2-dark">my projects.</h2>
+          <p className="section-lead section-lead-dark">products and projects in the works.</p>
+          <div className="work-grid">
+            {projects.map(p => (
+              <a key={p.name} href={p.link ?? undefined} target={!p.link || p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
+                <div className="work-card-tag">{p.tag}</div>
+                <div className="work-card-name">{p.name}</div>
+                <div className="work-card-desc">{p.desc}</div>
+                <div className="work-card-footer">
+                  <span className={`work-status${p.status === "live" ? " work-status-live" : ""}`}>{p.status}</span>
+                  <span className="work-cta">{p.cta}</span>
                 </div>
-                <div
-                  className={`mindmap-photo${photoFlipped ? " photo-flipped" : ""}`}
-                  onClick={() => setPhotoFlipped(v => !v)}
-                  role="button"
-                  aria-label="Click to learn about Ken"
-                >
-                  <div className="photo-face photo-front">
-                    <Image
-                      src="/img/ken.jpg"
-                      alt="Ken Tjandra"
-                      fill
-                      sizes="(max-width: 768px) 80vw, 300px"
-                      style={{ objectFit: "cover", objectPosition: "center 10%" }}
-                    />
-                  </div>
-                  <div className="photo-face photo-back">
-                    <p>21. indo-australian. saved by Grace. building culture, community &amp; content – with Christ at the centre.</p>
-                  </div>
-                </div>
-              </div>
-              <button
-                className="who-am-i-btn"
-                onClick={() => setPhotoFlipped(v => !v)}
-              >
-                {photoFlipped ? "← close" : "who am i? →"}
-              </button>
-            </div>
-            <div className="projects-col">
-              <span className="eyebrow eyebrow-muted">✦ what i&apos;m building</span>
-              <h2 className="section-h2 section-h2-dark">my projects.</h2>
-              <p className="section-lead section-lead-dark" style={{ fontSize: "0.875rem" }}>products and projects in the works.</p>
-              <div className="work-grid work-grid-compact">
-                {projects.map(p => (
-                  <a key={p.name} href={p.link ?? undefined} target={!p.link || p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">
-                    <div className="work-card-tag">{p.tag}</div>
-                    <div className="work-card-name">{p.name}</div>
-                    <div className="work-card-desc">{p.desc}</div>
-                    <div className="work-card-footer">
-                      <span className={`work-status${p.status === "live" ? " work-status-live" : ""}`}>{p.status}</span>
-                      <span className="work-cta">{p.cta}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>

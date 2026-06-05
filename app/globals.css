@@ -776,6 +776,25 @@ body {
   white-space: nowrap;
 }
 .testi-mute-btn:hover { background: rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.4); }
+.testi-mobile-nav {
+  display: none;
+}
+.testi-nav-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: var(--sans);
+}
+.testi-nav-btn:hover { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+.testi-mobile-counter { letter-spacing: 0.12em; }
 
 /* ─── OFFERS ──────────────────────────────────────────────── */
 
@@ -1688,7 +1707,9 @@ body {
   .carousel-scene { height: 320px; perspective: 800px; }
   .carousel-track { width: 220px; height: 290px; }
   .carousel-card { width: 220px; height: 290px; padding: 1.5rem; }
-  .testi-carousel { gap: 0.75rem; } .testi-card-side { display: none; }
+  .testi-carousel { gap: 0.75rem; flex-direction: column; align-items: center; }
+  .testi-card-side { display: none; }
+  .testi-mobile-nav { display: flex; align-items: center; gap: 1.5rem; justify-content: center; margin-top: 0.5rem; }
   .about-projects-layout { grid-template-columns: 1fr; }
   .mindmap-root-sm { max-width: 220px; }
   .work-grid-compact { grid-template-columns: 1fr; }

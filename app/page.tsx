@@ -487,6 +487,11 @@ export default function Home() {
               <p className="testi-name">{testimonialVideos[nextIdx].replace(" testimonial.mp4", "")}</p>
             </div>
           </div>
+          <div className="testi-mobile-nav">
+            <button className="testi-nav-btn" onClick={() => setTestIdx(prevIdx)} aria-label="Previous testimonial">←</button>
+            <span className="testi-counter testi-mobile-counter">{testIdx + 1} / {testimonialVideos.length}</span>
+            <button className="testi-nav-btn" onClick={() => setTestIdx(nextIdx)} aria-label="Next testimonial">→</button>
+          </div>
         </div>
       </section>
 

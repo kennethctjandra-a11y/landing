@@ -441,12 +441,13 @@ export default function Home() {
               aria-label="Previous testimonial"
             >
               <video
-                key={`prev-${prevIdx}`}
+                key="testi-prev"
                 src={`/testimonials/${testimonialVideos[prevIdx]}`}
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload="auto"
                 className="testi-video"
               />
               <p className="testi-name">{testimonialVideos[prevIdx].replace(" testimonial.mp4", "")}</p>
@@ -460,6 +461,7 @@ export default function Home() {
                   muted
                   loop
                   playsInline
+                  preload="auto"
                   className="testi-video"
                 />
                 <button className="testi-mute-btn" onClick={toggleMute}>
@@ -476,16 +478,23 @@ export default function Home() {
               aria-label="Next testimonial"
             >
               <video
-                key={`next-${nextIdx}`}
+                key="testi-next"
                 src={`/testimonials/${testimonialVideos[nextIdx]}`}
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload="auto"
                 className="testi-video"
               />
               <p className="testi-name">{testimonialVideos[nextIdx].replace(" testimonial.mp4", "")}</p>
             </div>
+          </div>
+          {/* preload all testimonial videos so switching is instant */}
+          <div aria-hidden="true" style={{ position: 'fixed', width: 0, height: 0, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}>
+            {testimonialVideos.map((vid, i) => (
+              <video key={i} src={`/testimonials/${vid}`} preload="auto" muted playsInline />
+            ))}
           </div>
           <div className="testi-mobile-nav">
             <button className="testi-nav-btn" onClick={() => setTestIdx(prevIdx)} aria-label="Previous testimonial">←</button>

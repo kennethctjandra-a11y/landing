@@ -174,15 +174,12 @@ export default function Home() {
   const [isAnnual,  setIsAnnual]  = useState(true);
   const [photoFlipped, setPhotoFlipped] = useState(false);
   const [flippedCard,  setFlippedCard]  = useState<number | null>(null);
-  const [testIdx, setTestIdx] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
 
   const heroRef    = useRef<HTMLElement>(null);
   const floatRefs  = useRef<(HTMLDivElement | null)[]>([]);
   const trailContainerRef = useRef<HTMLDivElement>(null);
   const trailIndexRef     = useRef(0);
   const lastSpawnRef      = useRef({ x: -999, y: -999 });
-  const centerVideoRef    = useRef<HTMLVideoElement>(null);
 
   /* scroll → nav */
   useEffect(() => {
@@ -247,22 +244,6 @@ export default function Home() {
     return () => hero.removeEventListener("mousemove", onMove);
   }, []);
 
-  useEffect(() => {
-    const v = centerVideoRef.current;
-    if (!v) return;
-    v.load();
-    v.play().catch(() => {});
-  }, [testIdx]);
-
-  const toggleMute = () => {
-    const v = centerVideoRef.current;
-    if (!v) return;
-    v.muted = !v.muted;
-    setIsMuted(v.muted);
-  };
-
-  const prevIdx = (testIdx - 1 + testimonialVideos.length) % testimonialVideos.length;
-  const nextIdx = (testIdx + 1) % testimonialVideos.length;
 
   return (
     <>
@@ -425,81 +406,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section className="section section-black">
-        <div className="section-inner">
-          <span className="eyebrow eyebrow-red">✦ hear it from them</span>
-          <h2 className="section-h2 section-h2-light">what they&apos;re saying.</h2>
-          <div className="testi-carousel">
-            <div
-              className="testi-card testi-card-side"
-              onClick={() => setTestIdx(prevIdx)}
-              role="button"
-              aria-label="Previous testimonial"
-            >
-              <video
-                key="testi-prev"
-                src={`/testimonials/${testimonialVideos[prevIdx]}`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="testi-video"
-              />
-              <p className="testi-name">{testimonialVideos[prevIdx].replace(" testimonial.mp4", "")}</p>
-            </div>
-            <div className="testi-card testi-card-active">
-              <div className="testi-video-wrap">
-                <video
-                  ref={centerVideoRef}
-                  src={`/testimonials/${testimonialVideos[testIdx]}`}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  className="testi-video"
-                />
-                <button className="testi-mute-btn" onClick={toggleMute}>
-                  {isMuted ? "🔇 unmute" : "🔊 mute"}
-                </button>
-              </div>
-              <p className="testi-name">{testimonialVideos[testIdx].replace(" testimonial.mp4", "")}</p>
-              <p className="testi-counter">{testIdx + 1} / {testimonialVideos.length}</p>
-            </div>
-            <div
-              className="testi-card testi-card-side"
-              onClick={() => setTestIdx(nextIdx)}
-              role="button"
-              aria-label="Next testimonial"
-            >
-              <video
-                key="testi-next"
-                src={`/testimonials/${testimonialVideos[nextIdx]}`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="testi-video"
-              />
-              <p className="testi-name">{testimonialVideos[nextIdx].replace(" testimonial.mp4", "")}</p>
-            </div>
-          </div>
-          {/* preload all testimonial videos so switching is instant */}
-          <div aria-hidden="true" style={{ position: 'fixed', width: 0, height: 0, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}>
-            {testimonialVideos.map((vid, i) => (
-              <video key={i} src={`/testimonials/${vid}`} preload="auto" muted playsInline />
-            ))}
-          </div>
-          <div className="testi-mobile-nav">
-            <button className="testi-nav-btn" onClick={() => setTestIdx(prevIdx)} aria-label="Previous testimonial">←</button>
-            <span className="testi-counter testi-mobile-counter">{testIdx + 1} / {testimonialVideos.length}</span>
-            <button className="testi-nav-btn" onClick={() => setTestIdx(nextIdx)} aria-label="Next testimonial">→</button>
-          </div>
-        </div>
-      </section>
 
       {/* ── OFFERS ── */}
       <section id="offers" className="section section-white">

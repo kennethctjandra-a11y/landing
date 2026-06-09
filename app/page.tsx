@@ -550,6 +550,7 @@ export default function Home() {
         <div className="footer-links">
           <a href="https://www.instagram.com/kentjandraa"  target="_blank" rel="noopener noreferrer">instagram</a>
           <a href="https://www.tiktok.com/@kentjandraa"    target="_blank" rel="noopener noreferrer">tiktok</a>
+          <a href="https://www.linkedin.com/in/kentjandra"  target="_blank" rel="noopener noreferrer">linkedin</a>
           <a href="https://www.youtube.com/@kentjandra"    target="_blank" rel="noopener noreferrer">youtube</a>
           <a href={SKOOL}                                  target="_blank" rel="noopener noreferrer">skool community</a>
           <a href="https://form.typeform.com/to/io6ZyWkn"   target="_blank" rel="noopener noreferrer">coaching</a>

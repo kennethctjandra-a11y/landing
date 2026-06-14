@@ -516,7 +516,7 @@ body {
 .flip-card-front::after {
   content: 'tap to flip ↩';
   position: absolute;
-  bottom: 1.25rem;
+  top: 1.25rem;
   right: 1.5rem;
   font-size: 0.6rem;
   letter-spacing: 0.1em;

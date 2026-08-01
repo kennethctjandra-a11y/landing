@@ -5,7 +5,25 @@ import Image from "next/image";
 
 /* ─── DATA ───────────────────────────────────────────────── */
 
-const SKOOL = "https://www.skool.com/creatopia/about";
+const APPLY = "https://form.typeform.com/to/io6ZyWkn";
+
+const originIncludes = [
+  "90-min onboarding strategy call (niche, ICP, goals, content direction)",
+  "weekly group coaching calls with ken — x2/week, 60 mins (content feedback, script review, accountability)",
+  "Origin Story™ community — group chats, wins, Q&A, announcements, 1-1 support",
+  "full course video modules (branding, scripting, filming, monetising)",
+  "CinemaKit — ken's filming SOPs, LUTs, and DaVinci colour grading guides",
+  "Dream Avatar AI tool — build your ideal client profile using ken's exact framework",
+  "Quillmate — AI-assisted scripting built around your voice and story",
+  "all coaching call recordings — accessible anytime",
+  "notion templates, font library, colour palettes, filming guides",
+];
+
+const originPrices = [
+  { label: "pre-launch", amount: "$8,500", note: "pay in full" },
+  { label: "standard", amount: "$9,500", note: "pay in full" },
+  { label: "payment plan", amount: "$4,500 × 2", note: "split over 2" },
+];
 
 const floatingElements = [
   { el: "🧧", x: 12, y: 18, size: 2.8, depth: 0.3,  anim: "floatA", delay: 0,   opacity: 0.42 },
@@ -140,9 +158,7 @@ const problems = [
 ];
 
 const projects = [
-  { tag: "fashion · collab", name: "The Blessed T-shirt", desc: "an exclusive collab with Owlam – a Christian clothing brand built by my close friends. limited stock only.", status: "dropping fri june 5", link: "https://www.owlamapparel.com/", cta: "shop now →" },
-  { tag: "traveling · digital nomad", name: "Asia Solo Trip", desc: "currently journeying across Singapore, China, and Indonesia — searching for what's next.", status: "next up", link: undefined as unknown as string, cta: "flying soon ✈︎" },
-  { tag: "in-person · sydney", name: "S.A.F.E.", desc: "Sydney Asian Founders Exclusive – a private in-person group for asian founders to hangout, share values, and grow.", status: "live beta", link: "https://www.instagram.com/kentjandraa", cta: "dm if interested →" },
+  { tag: "ai tools · free", name: "Dream Avatar", desc: "my ICP-building tool – used inside Origin Story™ to help business owners identify exactly who they're talking to before posting a single thing.", status: "live", link: "https://buildavatar.app", cta: "try it free →" },
   { tag: "content series", name: "The Garden", desc: "\"the garden\" explores the intersection of faith, identity, creativity, & entrepreneurship. raw, uncut, out on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdFwq-VHsThEw2U1k7t_H03s&si=cwLUyOkOqOhWGfAS", cta: "watch now →" },
   { tag: "presets · tools", name: "Cinematic Grade", desc: "my one-click DaVinci colour grade – built for storytellers. live and exclusively available now.", status: "live", link: "https://kentjandra.gumroad.com/l/colourgrade", cta: "explore →" },
   { tag: "content series", name: "what's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. watch on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
@@ -159,11 +175,11 @@ const values = [
 ];
 
 const faqs = [
-  { q: "do i need to be christian?",             a: "no. the community is built on faith-first values, but we welcome anyone who resonates with authentic, values-driven content creation. you'll see faith referenced in the culture here because it's part of ken's story — but it's never a requirement." },
-  { q: "what if i'm just starting out?",         a: "this is actually the best time to join. starting with the right framework means you don't spend years unlearning bad habits. some of our fastest-growing members came in with zero followers." },
-  { q: "can i cancel anytime?",                  a: "yes — creatopia is month-to-month with no lock-ins. you can cancel directly from skool with one click, no questions asked." },
-  { q: "what makes this different from courses?",a: "most courses teach you to copy-and-paste viral hooks. creatopia teaches you how to find and tell your story — which no algorithm can kill and no trend can replace. it's built for you to scale your personal brand, long-term." },
-  { q: "how much time do i need each week?",     a: "3–5 hours minimum. the members seeing the biggest results are creating consistently, showing up to the weekly live calls, and getting peer feedback. part-time engagement still works — it just takes longer." },
+  { q: "what if i'm just starting out?",         a: "Origin Story is built for business owners who are already earning but invisible online. If you're just starting out, reach out directly and Ken will point you in the right direction." },
+  { q: "what makes this different from courses?",a: "most courses teach you to copy-and-paste viral hooks. Origin Story teaches you how to find and tell your story — which no algorithm can kill and no trend can replace. it's built for you to scale your personal brand, long-term." },
+  { q: "is this only group coaching?",           a: "Origin Story is a group coaching program with direct access to Ken — weekly calls, community, and personal feedback on your content. It's not a solo course you watch alone." },
+  { q: "how much time do i need each week?",     a: "2-3 hours per day. Members seeing the biggest results show up to weekly calls, post consistently, and apply the frameworks. This isn't passive learning — it's a system you build with Ken." },
+  { q: "what's the guarantee?",                  a: "If you complete all 6 months — attend every call, apply every framework, post every week — and don't see meaningful growth in your brand and inbound leads, Ken works with you for another 90 days at no cost." },
 ];
 
 /* ─── PAGE ───────────────────────────────────────────────── */
@@ -171,7 +187,6 @@ const faqs = [
 export default function Home() {
   const [scrolled,  setScrolled]  = useState(false);
   const [openFaq,   setOpenFaq]   = useState<number | null>(null);
-  const [isAnnual,  setIsAnnual]  = useState(true);
   const [photoFlipped, setPhotoFlipped] = useState(false);
   const [flippedCard,  setFlippedCard]  = useState<number | null>(null);
 
@@ -253,7 +268,7 @@ export default function Home() {
         <a href="mailto:support@kentjandra.com" className="nav-email">support@kentjandra.com</a>
         <div className="nav-actions">
           <a href="#offers" className="btn-ghost">the offers</a>
-          <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-red">join creatopia →</a>
+          <a href={APPLY} target="_blank" rel="noopener noreferrer" className="btn-red">apply now →</a>
         </div>
       </nav>
 
@@ -327,12 +342,12 @@ export default function Home() {
           <div className="hero-text-col">
             <div className="hero-eyebrow">
               <span className="hero-dot" />
-              for faith-first founders &amp; creators
+              origin story™
             </div>
             <h1>your story is your<br /><em>unfair advantage.</em></h1>
-            <p className="hero-sub">stop overthinking. start creating. build a brand that actually sounds like you.</p>
+            <p className="hero-sub">for business owners who are done being invisible online.</p>
             <div className="hero-ctas">
-              <a href="#offers" className="btn-primary">choose your plan →</a>
+              <a href={APPLY} target="_blank" rel="noopener noreferrer" className="btn-primary">apply for Origin Story™ →</a>
             </div>
             <p className="hero-tagline">real is the new viral.</p>
           </div>
@@ -410,66 +425,47 @@ export default function Home() {
       {/* ── OFFERS ── */}
       <section id="offers" className="section section-white">
         <div className="section-inner">
-          <span className="eyebrow eyebrow-muted">✦ plans & pricing</span>
+          <span className="eyebrow eyebrow-muted">✦ the offer</span>
           <h2 className="section-h2 section-h2-dark">choose your path.</h2>
-          <p className="section-lead section-lead-dark">pick an offer that suits your needs.</p>
+          <p className="section-lead section-lead-dark">one program. built to make you unignorable.</p>
 
-          <div className="offers-grid">
-            <div className="offer-card offer-garden" style={{ position: "relative" }}>
-              <div className="price-toggle price-toggle-corner">
-                <span className={`toggle-label${!isAnnual ? " toggle-active" : ""}`}>mo</span>
-                <button
-                  className={`toggle-switch${isAnnual ? " toggle-on" : ""}`}
-                  onClick={() => setIsAnnual(v => !v)}
-                  aria-label="Toggle billing period"
-                >
-                  <span className="toggle-thumb" />
-                </button>
-                <span className={`toggle-label${isAnnual ? " toggle-active" : ""}`}>
-                  yr <span className="toggle-save">-50%</span>
-                </span>
-              </div>
-              <span className="offer-badge badge-red">most popular</span>
+          <div className="offers-grid offers-grid-single">
+            <div className="offer-card offer-origin">
+              <span className="offer-badge badge-red">now enrolling — pre-launch pricing</span>
               <div>
-                <div className="offer-who">Creatopia</div>
-                <h3 className="offer-title">Group Coaching<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>Community Program</span></h3>
+                <div className="offer-who">Origin Story™</div>
+                <h3 className="offer-title">6-Month Personal Brand<br />Coaching Program</h3>
               </div>
-              <div>
-                <div className="offer-price">
-                  <span className="price-amount">{isAnnual ? "$53" : "$107"}</span>
-                  <span className="price-period">/month{isAnnual && <span className="price-annual-bracket"> ($640/yr)</span>}</span>
+
+              <div className="origin-prices">
+                {originPrices.map(p => (
+                  <div className="origin-price-row" key={p.label}>
+                    <span className="origin-price-label">{p.label}</span>
+                    <span className="origin-price-amount">{p.amount}</span>
+                    <span className="origin-price-note">{p.note}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p className="offer-tagline">for business owners who are already earning but invisible online. you know your content doesn&apos;t reflect how good you actually are.</p>
+              <div className="offer-divider" />
+              <ul className="offer-features">
+                {originIncludes.map(f => (
+                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
+                ))}
+              </ul>
+              <div className="offer-divider" />
+              <div className="origin-meta">
+                <div className="origin-meta-item">
+                  <span className="origin-meta-label">duration</span>
+                  <span className="origin-meta-value">6 months</span>
+                </div>
+                <div className="origin-meta-item">
+                  <span className="origin-meta-label">spots</span>
+                  <span className="origin-meta-value">limited — reviewed personally by ken</span>
                 </div>
               </div>
-              <p className="offer-tagline">for founders and creators who are done overthinking and ready to build a brand that actually sounds like them.</p>
-              <div className="offer-divider" />
-              <ul className="offer-features">
-                {["full story system curriculum","weekly live group calls with ken","community accountability on skool","platform playbooks (IG, TT, YT)","content vault — hooks, templates, swipe files","entrepreneur identity modules","peer feedback on your content","cancel anytime"].map(f => (
-                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
-                ))}
-              </ul>
-              <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">join creatopia →</a>
-            </div>
-            <div className="offer-card offer-greenhouse">
-              <div className="offer-badges-row">
-                <span className="offer-badge badge-white">limited spots</span>
-                <span className="offer-badge badge-white-outline">asian-only</span>
-              </div>
-              <div>
-                <div className="offer-who">Greenhouse</div>
-                <h3 className="offer-title">1-on-1 Coaching<br /><span style={{ opacity: 0.45, fontSize: "1.1rem" }}>Private Scaling</span></h3>
-              </div>
-              <div className="offer-price">
-                <span className="price-amount">$3,000</span>
-                <span className="price-period">/month<span className="price-annual-bracket"> (x3 months)</span></span>
-              </div>
-              <p className="offer-tagline">for invisible business owners making $10k/month+ who are ready to go all-in on their personal brand. i&apos;m in your corner every day.</p>
-              <div className="offer-divider" />
-              <ul className="offer-features">
-                {["private 1-on-1 calls with ken (x1/week)","daily access via voice memo + dm","custom 90-day brand roadmap","content review on every piece you post","full creatopia community access included","direct introductions to ken's network","90-day commitment, period."].map(f => (
-                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
-                ))}
-              </ul>
-              <a href="#coaching-form" className="offer-cta cta-greenhouse">apply for coaching →</a>
+              <a href={APPLY} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">apply now →</a>
             </div>
           </div>
         </div>
@@ -538,8 +534,7 @@ export default function Home() {
           <span className="eyebrow eyebrow-light">✦ ready?</span>
           <h2>come as you are.<br /><em>leave as who you&apos;re meant to be.</em></h2>
           <div className="final-cta-btns">
-            <a href={SKOOL} target="_blank" rel="noopener noreferrer" className="btn-primary-light">join creatopia — $107/mo →</a>
-            <a href="https://form.typeform.com/to/io6ZyWkn" target="_blank" rel="noopener noreferrer" className="btn-secondary-light">apply for 1-1 coaching →</a>
+            <a href={APPLY} target="_blank" rel="noopener noreferrer" className="btn-primary-light">apply for Origin Story™ →</a>
           </div>
         </div>
       </section>
@@ -552,8 +547,7 @@ export default function Home() {
           <a href="https://www.tiktok.com/@kentjandraa"    target="_blank" rel="noopener noreferrer">tiktok</a>
           <a href="https://www.linkedin.com/in/kentjandra"  target="_blank" rel="noopener noreferrer">linkedin</a>
           <a href="https://www.youtube.com/@kentjandra"    target="_blank" rel="noopener noreferrer">youtube</a>
-          <a href={SKOOL}                                  target="_blank" rel="noopener noreferrer">skool community</a>
-          <a href="https://form.typeform.com/to/io6ZyWkn"   target="_blank" rel="noopener noreferrer">coaching</a>
+          <a href={APPLY}                                  target="_blank" rel="noopener noreferrer">origin story™</a>
           <a href="https://docs.google.com/document/d/1pXNcOx7kqadX1OX2gwMfh9EDX2F3Cz1FEMukHBY3u5s/edit?usp=drive_link" target="_blank" rel="noopener noreferrer">policies</a>
         </div>
         <p className="footer-copy">© {new Date().getFullYear()} ken tjandra. all rights reserved.</p>

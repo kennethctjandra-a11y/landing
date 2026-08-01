@@ -325,7 +325,7 @@ export default function Home() {
                 aria-label="Click to learn about Ken"
               >
                 <div className="photo-face photo-front">
-                  <Image src="/img/ken.jpg" alt="Ken Tjandra" fill sizes="(max-width: 768px) 80vw, 25vw" style={{ objectFit: "cover", objectPosition: "center 10%" }} />
+                  <Image src="/img/ken.jpg" alt="Ken Tjandra" fill sizes="(max-width: 768px) 80vw, 25vw" style={{ objectFit: "cover", objectPosition: "center" }} />
                 </div>
                 <div className="photo-face photo-back">
                   <p>21. indo-australian. saved by Grace. building culture, community &amp; content – with Christ at the centre.</p>

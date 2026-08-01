@@ -94,12 +94,12 @@ const screenshots: string[] = [
   "/img/profile-1.png",
   "/img/profile-2.png",
   "/img/profile-3.png",
-  "/img/profile-4.png",
+  "/img/profile-4.jpg",
   "/img/profile-5.png",
   "/img/profile-6.png",
   "/img/profile-7.png",
   "/img/profile-8.png",
-  "/img/profile-9.png",
+  "/img/profile-9.jpg",
   "/img/skool-1.png",
   "/img/skool-2.png",
   "/img/skool-3.png",
@@ -125,6 +125,7 @@ const screenshots: string[] = [
   "/img/views-9.png",
   "/img/views-10.png",
   "/img/views-11.png",
+  "/img/views-12.jpg",
 ];
 
 const problems = [

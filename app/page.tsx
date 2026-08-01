@@ -19,12 +19,6 @@ const originIncludes = [
   "notion templates, font library, colour palettes, filming guides",
 ];
 
-const originPrices = [
-  { label: "pre-launch", amount: "$8,500", note: "pay in full" },
-  { label: "standard", amount: "$9,500", note: "pay in full" },
-  { label: "payment plan", amount: "$4,500 × 2", note: "split over 2" },
-];
-
 const floatingElements = [
   { el: "🧧", x: 12, y: 18, size: 2.8, depth: 0.3,  anim: "floatA", delay: 0,   opacity: 0.42 },
   { el: "✝️", x: 78, y: 12, size: 3.2, depth: 0.5,  anim: "floatB", delay: 1.5, opacity: 0.32 },
@@ -158,9 +152,8 @@ const problems = [
 ];
 
 const projects = [
-  { tag: "ai tools · free", name: "Dream Avatar", desc: "my ICP-building tool – used inside Origin Story™ to help business owners identify exactly who they're talking to before posting a single thing.", status: "live", link: "https://buildavatar.app", cta: "try it free →" },
+  { tag: "ai tools · free", name: "Avatar", desc: "my ICP-building tool – used inside Origin Story™ to help business owners identify exactly who they're talking to before posting a single thing.", status: "live", link: "https://buildavatar.vercel.app/", cta: "try it free →" },
   { tag: "content series", name: "The Garden", desc: "\"the garden\" explores the intersection of faith, identity, creativity, & entrepreneurship. raw, uncut, out on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdFwq-VHsThEw2U1k7t_H03s&si=cwLUyOkOqOhWGfAS", cta: "watch now →" },
-  { tag: "presets · tools", name: "Cinematic Grade", desc: "my one-click DaVinci colour grade – built for storytellers. live and exclusively available now.", status: "live", link: "https://kentjandra.gumroad.com/l/colourgrade", cta: "explore →" },
   { tag: "content series", name: "what's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. watch on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
 ];
 
@@ -347,7 +340,7 @@ export default function Home() {
             <h1>your story is your<br /><em>unfair advantage.</em></h1>
             <p className="hero-sub">for business owners who are done being invisible online.</p>
             <div className="hero-ctas">
-              <a href={APPLY} target="_blank" rel="noopener noreferrer" className="btn-primary">apply for Origin Story™ →</a>
+              <a href="#coaching-form" className="btn-primary">apply for 1-1 coaching →</a>
             </div>
             <p className="hero-tagline">real is the new viral.</p>
           </div>
@@ -426,25 +419,20 @@ export default function Home() {
       <section id="offers" className="section section-white">
         <div className="section-inner">
           <span className="eyebrow eyebrow-muted">✦ the offer</span>
-          <h2 className="section-h2 section-h2-dark">choose your path.</h2>
-          <p className="section-lead section-lead-dark">one program. built to make you unignorable.</p>
+          <h2 className="section-h2 section-h2-dark">Origin Story™</h2>
+          <p className="section-lead section-lead-dark">i help you grow your personal brand by reflecting on who you truly are. more reflection, more clarity, more growth.</p>
+
+          <div className="origin-usp">
+            <p>personal branding is about perception and desire. when you realise that, you start building from the right foundation — a secure, purposeful, aligned identity.</p>
+            <p><strong>identity is given, not earned.</strong> aligning with yours is the one thing standing between you and the brand you&apos;re meant to build.</p>
+          </div>
 
           <div className="offers-grid offers-grid-single">
             <div className="offer-card offer-origin">
-              <span className="offer-badge badge-red">now enrolling — pre-launch pricing</span>
+              <span className="offer-badge badge-red">now enrolling</span>
               <div>
                 <div className="offer-who">Origin Story™</div>
                 <h3 className="offer-title">6-Month Personal Brand<br />Coaching Program</h3>
-              </div>
-
-              <div className="origin-prices">
-                {originPrices.map(p => (
-                  <div className="origin-price-row" key={p.label}>
-                    <span className="origin-price-label">{p.label}</span>
-                    <span className="origin-price-amount">{p.amount}</span>
-                    <span className="origin-price-note">{p.note}</span>
-                  </div>
-                ))}
               </div>
 
               <p className="offer-tagline">for business owners who are already earning but invisible online. you know your content doesn&apos;t reflect how good you actually are.</p>
@@ -465,7 +453,7 @@ export default function Home() {
                   <span className="origin-meta-value">limited — reviewed personally by ken</span>
                 </div>
               </div>
-              <a href={APPLY} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">apply now →</a>
+              <a href="#coaching-form" className="offer-cta cta-garden">apply now →</a>
             </div>
           </div>
         </div>

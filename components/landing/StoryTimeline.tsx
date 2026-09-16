@@ -6,16 +6,97 @@ import { storyTimeline } from "@/lib/story-timeline";
 import styles from "./StoryTimeline.module.css";
 
 /**
- * "my story" — a horizontal timeline reel of Ken's canon events.
+ * "my canon events" — a floating horizontal photo collage.
  *
- * Motion mirrors the site's student-wins marquee: a slow, eased auto-scroll
- * that drifts past → present, eases to a stop at the present, glides back, and
- * loops. It pauses on hover and touch, supports mouse-drag / mobile-swipe, and
- * goes fully static under prefers-reduced-motion. All motion runs on a single
- * axis (the viewport's scrollLeft) so auto-scroll and manual input never fight.
+ * Photos (mostly landscape, some square) float at staggered heights and are
+ * threaded together by a curvy line that reads left (past) → right (present).
+ * The line fills terracotta the further you scroll to the right. It auto-drifts
+ * slowly, eases to a stop and glides back, pauses on hover/touch, supports
+ * mouse-drag / swipe / side arrows / keyboard, and is static under
+ * prefers-reduced-motion. All motion runs on one axis (viewport scrollLeft).
  */
+
+// per-photo visual layout: width (px), aspect ratio, vertical float offset (px)
+const LAYOUT = [
+  { w: 300, ar: "3 / 2", dy: 12 },
+  { w: 210, ar: "1 / 1", dy: 78 },
+  { w: 290, ar: "4 / 3", dy: 30 },
+  { w: 220, ar: "1 / 1", dy: 96 },
+  { w: 330, ar: "3 / 2", dy: 4 },
+  { w: 300, ar: "3 / 2", dy: 60 },
+];
+
+// Catmull-Rom → cubic bezier: a smooth curve through the given points
+function buildPath(pts: { x: number; y: number }[]): string {
+  if (pts.length < 2) return "";
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] || p2;
+    const c1x = p1.x + (p2.x - p0.x) / 6;
+    const c1y = p1.y + (p2.y - p0.y) / 6;
+    const c2x = p2.x - (p3.x - p1.x) / 6;
+    const c2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+  }
+  return d;
+}
+
 export default function StoryTimeline() {
   const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const baseRef = useRef<SVGPathElement>(null);
+  const progRef = useRef<SVGPathElement>(null);
+  const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lenRef = useRef(0);
+  const ctlRef = useRef<{ pause: () => void; resumeSoon: (ms: number) => void } | null>(null);
+
+  // draw / redraw the curvy line through the photo centres
+  const layoutLine = () => {
+    const track = trackRef.current;
+    const svg = svgRef.current;
+    const base = baseRef.current;
+    const prog = progRef.current;
+    if (!track || !svg || !base || !prog) return;
+
+    const tr = track.getBoundingClientRect();
+    const pts = photoRefs.current
+      .filter(Boolean)
+      .map((el) => {
+        const r = (el as HTMLDivElement).getBoundingClientRect();
+        return { x: r.left - tr.left + r.width / 2, y: r.top - tr.top + r.height / 2 };
+      });
+    if (pts.length < 2) return;
+
+    const d = buildPath(pts);
+    const w = track.scrollWidth;
+    const h = track.offsetHeight;
+    svg.setAttribute("width", String(w));
+    svg.setAttribute("height", String(h));
+    svg.style.width = `${w}px`;
+    svg.style.height = `${h}px`;
+    base.setAttribute("d", d);
+    prog.setAttribute("d", d);
+
+    const len = prog.getTotalLength();
+    lenRef.current = len;
+    prog.style.strokeDasharray = `${len}`;
+    updateProgress();
+  };
+
+  // colour the line terracotta in proportion to how far right we've scrolled
+  const updateProgress = () => {
+    const vp = viewportRef.current;
+    const prog = progRef.current;
+    const len = lenRef.current;
+    if (!vp || !prog || !len) return;
+    const max = vp.scrollWidth - vp.clientWidth;
+    const p = max > 0 ? Math.min(Math.max(vp.scrollLeft / max, 0), 1) : 0;
+    prog.style.strokeDashoffset = `${len * (1 - p)}`;
+  };
 
   useEffect(() => {
     const vp = viewportRef.current;
@@ -25,14 +106,14 @@ export default function StoryTimeline() {
 
     let raf = 0;
     let last = 0;
-    let dir = 1; // 1 = toward the present (right), -1 = back toward the past
-    let interacting = false; // hover / touch / recent drag
-    let dragging = false; // active mouse drag
+    let dir = 1;
+    let interacting = false;
+    let dragging = false;
     let startX = 0;
     let startLeft = 0;
     let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const SPEED = 22; // px/sec — the site's slow, marquee-like pace
+    const SPEED = 20; // px/sec — slow, marquee-like
 
     const pause = () => {
       interacting = true;
@@ -47,8 +128,8 @@ export default function StoryTimeline() {
         interacting = false;
       }, ms);
     };
+    ctlRef.current = { pause, resumeSoon };
 
-    // ── auto ping-pong (never armed under reduced motion) ──
     const tick = (now: number) => {
       if (!last) last = now;
       const dt = Math.min((now - last) / 1000, 0.05);
@@ -56,23 +137,19 @@ export default function StoryTimeline() {
       const max = vp.scrollWidth - vp.clientWidth;
       if (!interacting && !dragging && max > 1) {
         const t = Math.min(Math.max(vp.scrollLeft / max, 0), 1);
-        // ease-in-out velocity: slow at both ends, full through the middle,
-        // with a small floor so it always reaches the ends and flips.
         const ease = 0.12 + 0.88 * Math.sin(Math.PI * t);
         vp.scrollLeft += dir * SPEED * ease * dt;
         if (vp.scrollLeft >= max - 0.5) dir = -1;
         else if (vp.scrollLeft <= 0.5) dir = 1;
+        updateProgress();
       }
       raf = requestAnimationFrame(tick);
     };
 
-    // ── hover (mouse) ──
     const onEnter = () => pause();
     const onLeave = () => {
       if (!dragging) resumeSoon(400);
     };
-
-    // ── pointer: mouse-drag to scroll; touch pauses and uses native scroll ──
     const onPointerDown = (e: PointerEvent) => {
       pause();
       if (e.pointerType === "mouse") {
@@ -98,15 +175,14 @@ export default function StoryTimeline() {
       }
       resumeSoon(2000);
     };
-
-    // ── keyboard ──
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
       e.preventDefault();
       pause();
-      vp.scrollBy({ left: e.key === "ArrowRight" ? 260 : -260, behavior: "smooth" });
+      vp.scrollBy({ left: e.key === "ArrowRight" ? 300 : -300, behavior: "smooth" });
       resumeSoon(2500);
     };
+    const onScroll = () => updateProgress();
 
     vp.addEventListener("mouseenter", onEnter);
     vp.addEventListener("mouseleave", onLeave);
@@ -115,12 +191,25 @@ export default function StoryTimeline() {
     window.addEventListener("pointerup", endInteraction);
     window.addEventListener("pointercancel", endInteraction);
     vp.addEventListener("keydown", onKey);
+    vp.addEventListener("scroll", onScroll, { passive: true });
+
+    // draw the line now and whenever the layout changes
+    layoutLine();
+    const ro = new ResizeObserver(() => layoutLine());
+    ro.observe(vp);
+    if (trackRef.current) ro.observe(trackRef.current);
+    const onResize = () => layoutLine();
+    window.addEventListener("resize", onResize);
+    const t1 = setTimeout(layoutLine, 120); // after fonts/layout settle
 
     if (!reduce) raf = requestAnimationFrame(tick);
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
       if (resumeTimer) clearTimeout(resumeTimer);
+      clearTimeout(t1);
+      ro.disconnect();
+      window.removeEventListener("resize", onResize);
       vp.removeEventListener("mouseenter", onEnter);
       vp.removeEventListener("mouseleave", onLeave);
       vp.removeEventListener("pointerdown", onPointerDown);
@@ -128,46 +217,87 @@ export default function StoryTimeline() {
       window.removeEventListener("pointerup", endInteraction);
       window.removeEventListener("pointercancel", endInteraction);
       vp.removeEventListener("keydown", onKey);
+      vp.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  const nudge = (px: number) => {
+    const vp = viewportRef.current;
+    if (!vp) return;
+    ctlRef.current?.pause();
+    vp.scrollBy({ left: px, behavior: "smooth" });
+    ctlRef.current?.resumeSoon(2500);
+  };
 
   return (
     <section className={styles.story} aria-labelledby="story-heading">
       <div className={styles.header}>
         <span className={styles.eyebrow}>✦ my story</span>
         <h2 id="story-heading" className={styles.heading}>
-          the story <em>so far.</em>
+          my canon events<em>…</em>
         </h2>
-        <p className={styles.lead}>jakarta to now — the honest version.</p>
       </div>
 
-      <div
-        className={styles.viewport}
-        ref={viewportRef}
-        tabIndex={0}
-        role="region"
-        aria-label="Ken's story timeline — scroll or drag to move through it"
-      >
-        <div className={styles.track}>
-          <div className={styles.line} aria-hidden="true" />
-          {storyTimeline.map((e, i) => (
-            <article className={styles.card} key={i}>
-              <div className={styles.media}>
-                <Image
-                  src={e.src}
-                  alt={e.alt}
-                  fill
-                  sizes="(max-width: 480px) 60vw, 240px"
-                  className={styles.img}
-                />
-                <span className={styles.year}>{e.year}</span>
-              </div>
-              <span className={styles.node} aria-hidden="true" />
-              <h3 className={styles.title}>{e.title}</h3>
-              <p className={styles.caption}>{e.caption}</p>
-            </article>
-          ))}
+      <div className={styles.reelWrap}>
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowLeft}`}
+          aria-label="Scroll back in time"
+          onClick={() => nudge(-320)}
+        >
+          ←
+        </button>
+
+        <div
+          className={styles.viewport}
+          ref={viewportRef}
+          tabIndex={0}
+          role="region"
+          aria-label="Ken's canon events"
+        >
+          <div className={styles.track} ref={trackRef}>
+            <svg className={styles.timeline} ref={svgRef} aria-hidden="true" preserveAspectRatio="none">
+              <path ref={baseRef} className={styles.lineBase} fill="none" />
+              <path ref={progRef} className={styles.lineProgress} fill="none" />
+            </svg>
+
+            {storyTimeline.map((e, i) => {
+              const l = LAYOUT[i % LAYOUT.length];
+              return (
+                <figure className={styles.item} key={i} style={{ width: l.w, marginTop: l.dy }}>
+                  <div
+                    className={styles.photo}
+                    style={{ aspectRatio: l.ar }}
+                    ref={(el) => {
+                      photoRefs.current[i] = el;
+                    }}
+                  >
+                    <Image
+                      src={e.src}
+                      alt={e.alt}
+                      fill
+                      sizes="(max-width: 480px) 70vw, 330px"
+                      className={styles.img}
+                    />
+                  </div>
+                  <figcaption className={styles.cap}>
+                    <span className={styles.year}>{e.year}</span>
+                    <span className={styles.title}>{e.title}</span>
+                  </figcaption>
+                </figure>
+              );
+            })}
+          </div>
         </div>
+
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowRight}`}
+          aria-label="Scroll forward in time"
+          onClick={() => nudge(320)}
+        >
+          →
+        </button>
       </div>
     </section>
   );

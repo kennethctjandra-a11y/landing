@@ -19,11 +19,11 @@ import styles from "./StoryTimeline.module.css";
 // per-photo visual layout: height factor (× --ph), aspect ratio, float offset (px)
 const LAYOUT = [
   { f: 1.0, ar: "3 / 2", dy: 6 },
-  { f: 0.86, ar: "1 / 1", dy: 24 },
+  { f: 0.86, ar: "1 / 1", dy: 40 },
   { f: 1.1, ar: "4 / 3", dy: 0 },
-  { f: 0.92, ar: "1 / 1", dy: 26 },
+  { f: 0.92, ar: "1 / 1", dy: 34 },
   { f: 1.12, ar: "3 / 2", dy: 10 },
-  { f: 0.98, ar: "3 / 2", dy: 18 },
+  { f: 0.98, ar: "3 / 2", dy: 26 },
 ];
 
 // Catmull-Rom → cubic bezier: a smooth curve through the given points

@@ -3,7 +3,7 @@
    it holds that share on desktop and mobile. Uses global tokens. */
 
 .story {
-  --ph: clamp(80px, 10vh, 128px); /* base photo height — scales with viewport */
+  --ph: clamp(76px, 9.5vh, 122px); /* base photo height — scales with viewport */
   position: relative;
   background: var(--off-white);
   padding-block: 1.4rem 1.4rem;
@@ -181,7 +181,7 @@
 
 @media (max-width: 480px) {
   .story {
-    --ph: clamp(76px, 11vh, 120px);
+    --ph: clamp(70px, 10vh, 112px);
     padding-block: 1.2rem;
   }
   .track {

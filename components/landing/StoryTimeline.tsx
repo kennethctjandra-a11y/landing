@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { storyTimeline } from "@/lib/story-timeline";
 import styles from "./StoryTimeline.module.css";
@@ -8,12 +8,13 @@ import styles from "./StoryTimeline.module.css";
 /**
  * "my canon events" — a floating horizontal photo collage.
  *
- * Photos (mostly landscape, some square) float at staggered heights and are
- * threaded together by a curvy line that reads left (past) → right (present).
- * The line fills terracotta the further you scroll to the right. It auto-drifts
- * slowly, eases to a stop and glides back, pauses on hover/touch, supports
- * mouse-drag / swipe / side arrows / keyboard, and is static under
- * prefers-reduced-motion. All motion runs on one axis (viewport scrollLeft).
+ * Photos float at staggered heights, threaded by a curvy line that reads left
+ * (past) → right (present) and fills terracotta the further you scroll right.
+ * Tapping a photo flips it (like the hero portrait) to a burgundy back with a
+ * short summary. It auto-drifts slowly, eases to a stop and glides back, pauses
+ * on hover/touch and while any card is open, supports mouse-drag / swipe / side
+ * arrows / keyboard, and is static under prefers-reduced-motion. All motion runs
+ * on one axis (viewport scrollLeft).
  */
 
 // per-photo visual layout: height factor (× --ph), aspect ratio, float offset (px)
@@ -22,16 +23,18 @@ const LAYOUT = [
   { f: 0.86, ar: "1 / 1", dy: 46 },
   { f: 1.08, ar: "4 / 3", dy: 0 },
   { f: 0.9, ar: "1 / 1", dy: 40 },
+  { f: 0.95, ar: "1 / 1", dy: 30 },
+  { f: 1.0, ar: "3 / 2", dy: 12 },
+  { f: 0.88, ar: "1 / 1", dy: 46 },
+  { f: 1.06, ar: "4 / 3", dy: 4 },
+  { f: 0.9, ar: "1 / 1", dy: 42 },
   { f: 1.0, ar: "3 / 2", dy: 14 },
-  { f: 0.88, ar: "1 / 1", dy: 48 },
-  { f: 1.1, ar: "4 / 3", dy: 4 },
-  { f: 0.92, ar: "1 / 1", dy: 42 },
-  { f: 1.02, ar: "3 / 2", dy: 12 },
-  { f: 0.87, ar: "1 / 1", dy: 46 },
+  { f: 0.87, ar: "1 / 1", dy: 44 },
   { f: 1.08, ar: "4 / 3", dy: 0 },
-  { f: 0.9, ar: "1 / 1", dy: 38 },
+  { f: 0.92, ar: "1 / 1", dy: 38 },
   { f: 1.0, ar: "3 / 2", dy: 16 },
-  { f: 0.95, ar: "3 / 2", dy: 32 },
+  { f: 0.9, ar: "1 / 1", dy: 40 },
+  { f: 1.02, ar: "3 / 2", dy: 10 },
 ];
 
 // Catmull-Rom → cubic bezier: a smooth curve through the given points
@@ -58,11 +61,23 @@ export default function StoryTimeline() {
   const svgRef = useRef<SVGSVGElement>(null);
   const baseRef = useRef<SVGPathElement>(null);
   const progRef = useRef<SVGPathElement>(null);
-  const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const photoRefs = useRef<(HTMLElement | null)[]>([]);
   const lenRef = useRef(0);
   const ctlRef = useRef<{ pause: () => void; resumeSoon: (ms: number) => void } | null>(null);
+  const movedRef = useRef(false); // true if the last pointer gesture was a drag
 
-  // draw / redraw the curvy line through the photo centres
+  const [flipped, setFlipped] = useState<Set<number>>(new Set());
+
+  const toggleFlip = (i: number) => {
+    setFlipped((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  };
+
+  // draw / redraw the curvy line, attaching to each photo's left & right edge
   const layoutLine = () => {
     const track = trackRef.current;
     const svg = svgRef.current;
@@ -74,13 +89,12 @@ export default function StoryTimeline() {
     const rects = photoRefs.current
       .filter(Boolean)
       .map((el) => {
-        const r = (el as HTMLDivElement).getBoundingClientRect();
+        const r = (el as HTMLElement).getBoundingClientRect();
         const y = r.top - tr.top + r.height / 2;
         return { lx: r.left - tr.left, rx: r.right - tr.left, y };
       });
     if (rects.length < 2) return;
 
-    // attach to each photo's left & right edge, and wave through the gaps
     const AMP = 22;
     const seq: { x: number; y: number }[] = [];
     for (let i = 0; i < rects.length; i++) {
@@ -174,21 +188,19 @@ export default function StoryTimeline() {
     };
     const onPointerDown = (e: PointerEvent) => {
       pause();
+      movedRef.current = false;
       if (e.pointerType === "mouse") {
         dragging = true;
         startX = e.clientX;
         startLeft = vp.scrollLeft;
         vp.classList.add(styles.grabbing);
-        try {
-          vp.setPointerCapture(e.pointerId);
-        } catch {
-          /* no-op */
-        }
       }
     };
     const onPointerMove = (e: PointerEvent) => {
       if (!dragging) return;
-      vp.scrollLeft = startLeft - (e.clientX - startX);
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) movedRef.current = true;
+      vp.scrollLeft = startLeft - dx;
     };
     const endInteraction = () => {
       if (dragging) {
@@ -215,7 +227,6 @@ export default function StoryTimeline() {
     vp.addEventListener("keydown", onKey);
     vp.addEventListener("scroll", onScroll, { passive: true });
 
-    // draw the line now and whenever the layout changes
     layoutLine();
     const ro = new ResizeObserver(() => layoutLine());
     ro.observe(vp);
@@ -242,6 +253,12 @@ export default function StoryTimeline() {
       vp.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  // hold the auto-scroll while a card is open to read
+  useEffect(() => {
+    if (flipped.size > 0) ctlRef.current?.pause();
+    else ctlRef.current?.resumeSoon(1200);
+  }, [flipped]);
 
   const nudge = (px: number) => {
     const vp = viewportRef.current;
@@ -285,23 +302,41 @@ export default function StoryTimeline() {
 
             {storyTimeline.map((e, i) => {
               const l = LAYOUT[i % LAYOUT.length];
+              const isFlipped = flipped.has(i);
               return (
                 <figure className={styles.item} key={i} style={{ marginTop: l.dy }}>
-                  <div
-                    className={styles.photo}
+                  <button
+                    type="button"
+                    className={`${styles.photo}${isFlipped ? ` ${styles.flipped}` : ""}`}
                     style={{ height: `calc(var(--ph) * ${l.f})`, aspectRatio: l.ar }}
+                    aria-label={`${e.year} — ${e.title.replace(/\n/g, " ")}. Tap to read more.`}
+                    aria-expanded={isFlipped}
+                    onClick={() => {
+                      if (movedRef.current) {
+                        movedRef.current = false;
+                        return; // that gesture was a drag, not a tap
+                      }
+                      toggleFlip(i);
+                    }}
                     ref={(el) => {
                       photoRefs.current[i] = el;
                     }}
                   >
-                    <Image
-                      src={e.src}
-                      alt={e.alt}
-                      fill
-                      sizes="(max-width: 480px) 45vw, 220px"
-                      className={styles.img}
-                    />
-                  </div>
+                    <span className={styles.flipInner}>
+                      <span className={`${styles.face} ${styles.front}`}>
+                        <Image
+                          src={e.src}
+                          alt={e.alt}
+                          fill
+                          sizes="(max-width: 480px) 45vw, 220px"
+                          className={styles.img}
+                        />
+                      </span>
+                      <span className={`${styles.face} ${styles.back}`}>
+                        <span className={styles.summary}>{e.summary}</span>
+                      </span>
+                    </span>
+                  </button>
                   <figcaption className={styles.cap}>
                     <span className={styles.year}>{e.year}</span>
                     <span className={styles.title}>{e.title}</span>

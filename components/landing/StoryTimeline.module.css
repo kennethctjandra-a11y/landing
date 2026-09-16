@@ -3,10 +3,10 @@
    it holds that share on desktop and mobile. Uses global tokens. */
 
 .story {
-  --ph: clamp(76px, 9.5vh, 122px); /* base photo height — scales with viewport */
+  --ph: clamp(104px, 14vh, 176px); /* base photo height — scales with viewport */
   position: relative;
   background: var(--off-white);
-  padding-block: 1.4rem 1.4rem;
+  padding-block: 1.75rem 1.75rem;
   overflow: hidden;
 }
 
@@ -121,22 +121,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.05rem;
+  gap: 0.1rem;
   text-align: center;
-  max-width: 22ch;
+  max-width: 24ch;
 }
 .year {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--gold);
 }
 .title {
   font-family: var(--serif);
   font-size: 0.9rem;
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.2;
   color: var(--text);
+  white-space: pre-line; /* honour the \n line breaks in the data */
 }
 
 /* ── side arrows ── */
@@ -181,8 +182,8 @@
 
 @media (max-width: 480px) {
   .story {
-    --ph: clamp(70px, 10vh, 112px);
-    padding-block: 1.2rem;
+    --ph: clamp(96px, 15vh, 150px);
+    padding-block: 1.4rem;
   }
   .track {
     gap: 1.6rem;

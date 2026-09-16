@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import StoryTimeline from "@/components/landing/StoryTimeline";
 
 /* ─── DATA ───────────────────────────────────────────────── */
 
@@ -352,6 +353,9 @@ export default function Home() {
           <div className="scroll-line" />
         </div>
       </section>
+
+      {/* ── MY STORY ── */}
+      <StoryTimeline />
 
       {/* ── STUDENT WINS ── */}
       <section className="section-black ss-section">

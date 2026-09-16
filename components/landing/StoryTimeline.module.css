@@ -1,0 +1,187 @@
+/* ─── MY STORY — horizontal timeline reel ─────────────────────────────
+   Uses the global design tokens from app/globals.css (--red, --gold,
+   --serif, --off-white, …). Motion is driven from the component; this file
+   only styles the rest state + the connector line. */
+
+.story {
+  --media-w: 240px;
+  --media-h: 300px;
+  --gap: 1.15rem;
+  position: relative;
+  background: var(--off-white);
+  padding-block: 5.5rem;
+  overflow: hidden;
+}
+
+.header {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.heading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.heading em {
+  font-style: italic;
+  color: var(--red);
+}
+.lead {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--muted-dark);
+  line-height: 1.6;
+}
+
+/* ── scroll viewport (the single motion axis) ── */
+.viewport {
+  margin-top: 2.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+.viewport:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -4px;
+}
+.grabbing {
+  cursor: grabbing;
+}
+
+.track {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  width: max-content;
+  /* align the first/last card with the centered header on wide screens */
+  padding-inline: max(1.5rem, calc((100% - 1040px) / 2));
+  padding-block: 0.25rem 0.5rem;
+}
+
+/* the thin connector line running past (left) → present (right) */
+.line {
+  position: absolute;
+  left: max(1.5rem, calc((100% - 1040px) / 2));
+  right: max(1.5rem, calc((100% - 1040px) / 2));
+  top: calc(var(--media-h) + var(--gap));
+  height: 0;
+  border-top: 1px dashed var(--gold);
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--media-w);
+  display: flex;
+  flex-direction: column;
+}
+
+.media {
+  position: relative;
+  width: 100%;
+  height: var(--media-h);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--border-light);
+  box-shadow: 0 12px 34px rgba(17, 10, 12, 0.12);
+  z-index: 1;
+}
+.img {
+  object-fit: cover;
+  /* let pointerdown fall through to the viewport for drag; block native drag */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.year {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: rgba(254, 252, 249, 0.85);
+  padding: 0.12rem 0.6rem;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* node dot sitting on the connector line, one per photo */
+.node {
+  position: absolute;
+  top: calc(var(--media-h) + var(--gap));
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--off-white);
+}
+/* emphasise the present (right-most) node */
+.card:last-child .node {
+  width: 13px;
+  height: 13px;
+  background: var(--red);
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+  margin-top: 2.2rem;
+}
+.caption {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--muted-dark);
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 480px) {
+  .story {
+    --media-w: 200px;
+    --media-h: 250px;
+  }
+  .story {
+    padding-block: 4rem;
+  }
+  .track {
+    gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    scroll-behavior: auto;
+  }
+}

@@ -16,14 +16,14 @@ import styles from "./StoryTimeline.module.css";
  * prefers-reduced-motion. All motion runs on one axis (viewport scrollLeft).
  */
 
-// per-photo visual layout: width (px), aspect ratio, vertical float offset (px)
+// per-photo visual layout: height factor (× --ph), aspect ratio, float offset (px)
 const LAYOUT = [
-  { w: 300, ar: "3 / 2", dy: 12 },
-  { w: 210, ar: "1 / 1", dy: 78 },
-  { w: 290, ar: "4 / 3", dy: 30 },
-  { w: 220, ar: "1 / 1", dy: 96 },
-  { w: 330, ar: "3 / 2", dy: 4 },
-  { w: 300, ar: "3 / 2", dy: 60 },
+  { f: 1.0, ar: "3 / 2", dy: 6 },
+  { f: 0.86, ar: "1 / 1", dy: 24 },
+  { f: 1.1, ar: "4 / 3", dy: 0 },
+  { f: 0.92, ar: "1 / 1", dy: 26 },
+  { f: 1.12, ar: "3 / 2", dy: 10 },
+  { f: 0.98, ar: "3 / 2", dy: 18 },
 ];
 
 // Catmull-Rom → cubic bezier: a smooth curve through the given points
@@ -63,15 +63,29 @@ export default function StoryTimeline() {
     if (!track || !svg || !base || !prog) return;
 
     const tr = track.getBoundingClientRect();
-    const pts = photoRefs.current
+    const rects = photoRefs.current
       .filter(Boolean)
       .map((el) => {
         const r = (el as HTMLDivElement).getBoundingClientRect();
-        return { x: r.left - tr.left + r.width / 2, y: r.top - tr.top + r.height / 2 };
+        const y = r.top - tr.top + r.height / 2;
+        return { lx: r.left - tr.left, rx: r.right - tr.left, y };
       });
-    if (pts.length < 2) return;
+    if (rects.length < 2) return;
 
-    const d = buildPath(pts);
+    // attach to each photo's left & right edge, and wave through the gaps
+    const AMP = 22;
+    const seq: { x: number; y: number }[] = [];
+    for (let i = 0; i < rects.length; i++) {
+      seq.push({ x: rects[i].lx, y: rects[i].y });
+      seq.push({ x: rects[i].rx, y: rects[i].y });
+      if (i < rects.length - 1) {
+        const midX = (rects[i].rx + rects[i + 1].lx) / 2;
+        const midY = (rects[i].y + rects[i + 1].y) / 2 + AMP * (i % 2 === 0 ? -1 : 1);
+        seq.push({ x: midX, y: midY });
+      }
+    }
+
+    const d = buildPath(seq);
     const w = track.scrollWidth;
     const h = track.offsetHeight;
     svg.setAttribute("width", String(w));
@@ -264,10 +278,10 @@ export default function StoryTimeline() {
             {storyTimeline.map((e, i) => {
               const l = LAYOUT[i % LAYOUT.length];
               return (
-                <figure className={styles.item} key={i} style={{ width: l.w, marginTop: l.dy }}>
+                <figure className={styles.item} key={i} style={{ marginTop: l.dy }}>
                   <div
                     className={styles.photo}
-                    style={{ aspectRatio: l.ar }}
+                    style={{ height: `calc(var(--ph) * ${l.f})`, aspectRatio: l.ar }}
                     ref={(el) => {
                       photoRefs.current[i] = el;
                     }}
@@ -276,7 +290,7 @@ export default function StoryTimeline() {
                       src={e.src}
                       alt={e.alt}
                       fill
-                      sizes="(max-width: 480px) 70vw, 330px"
+                      sizes="(max-width: 480px) 45vw, 220px"
                       className={styles.img}
                     />
                   </div>

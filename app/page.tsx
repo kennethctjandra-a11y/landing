@@ -10,12 +10,13 @@ const APPLY = "https://tidycal.com/team/osteam/1-1";
 
 const originIncludes = [
   "8-phase video curriculum — branding, ideation, scripting, filming, editing, posting & monetising",
-  "x3 weekly group coaching calls with ken (60 mins) — profile audits, content feedback, script reviews",
+  "x3 weekly group coaching calls with ken (60 mins) — profile audits, content feedback, script reviews & algorithm study",
   "Origin Story™ Discord community — wins, Q&A, video feedback, accountability & entrepreneur network",
   "1-1 milestone calls with ken (phases 3, 6 & 8) + direct 1-1 support via Discord",
   "ken's exact filming & editing workflow — iPhone/Sony, CapCut/DaVinci",
-  "ICP / avatar builder, scripting assistant & a personalised profile audit",
-  "notion templates, font library, colour palettes, filming guides, LUTs & powergrades",
+  "ICP / avatar builder, scripting assistant & a personalised profile audit for authority positioning",
+  "font selection library, colour palettes, filming guides, one-click colour-grades (LUT/powergrade) & editing SOPs",
+  "coaching on the metrics that matter — watch time & retention, inbound DMs/week, convo-to-booked-call ratio, show-up & close rates, cash collected",
   "coaching call library — watch past clients go viral, plus weekly recordings",
 ];
 
@@ -153,10 +154,10 @@ const problems = [
 ];
 
 const projects = [
+  { tag: "content series", name: "Origin Story™", desc: "the journey of building personal brands for busy & invisible creators & entrepreneurs. powered by Jesus and storytelling.", status: "content series", link: "https://www.youtube.com/playlist?list=PLWIIEwlYOB5k", cta: "watch now →" },
+  { tag: "documentary series", name: "Raw Faith (Season 2)", desc: "a vulnerable documentary of my life, walking by faith and sharing the real side of following Jesus.", status: "content series", link: "https://www.youtube.com/playlist?list=PLf7Yv0gLsxuI", cta: "watch now →" },
   { tag: "content series", name: "The Garden", desc: "\"the garden\" explores the intersection of faith, identity, creativity, & entrepreneurship. raw, uncut, out on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdFwq-VHsThEw2U1k7t_H03s&si=cwLUyOkOqOhWGfAS", cta: "watch now →" },
   { tag: "content series", name: "what's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. watch on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
-  { tag: "documentary series", name: "Raw Faith (Season 2)", desc: "a vulnerable documentary of my life, walking by faith and sharing the real side of following Jesus.", status: "content series", link: "https://www.youtube.com/playlist?list=PLf7Yv0gLsxuI", cta: "watch now →" },
-  { tag: "content series", name: "Origin Story™", desc: "the journey of building personal brands for busy & invisible creators & entrepreneurs. powered by Jesus and storytelling.", status: "content series", link: "https://www.youtube.com/playlist?list=PLWIIEwlYOB5k", cta: "watch now →" },
 ];
 
 const values = [
@@ -170,11 +171,11 @@ const values = [
 ];
 
 const faqs = [
-  { q: "what actually is origin story™?",        a: "a 6-month personal brand program that helps founders, coaches & creators multiply their organic reach (2x–10x) with premium content and standout branding. it's the exact system we've used to generate 300M+ views and 3M+ followers for our clients — an 8-phase curriculum, a discord community, weekly group coaching, 1-1 milestone calls with ken, and every tool and template we use." },
-  { q: "am i the right person for this?",         a: "it's built for creators, coaches, service-businesses & founders who've tried posting but got stuck in 1–3k view jail, don't yet know how to stand out, and know their story can impact the world. beyond that, we look for people who take action and initiative, bring no excuses, lead with humility over ego, and are kingdom-minded — building to edify others and spread the Gospel." },
-  { q: "what makes this different from courses?", a: "it's not a solo course you watch alone. you get an 8-phase curriculum plus a discord community, x3 group coaching calls a week with ken, 1-1 milestone calls, direct feedback on your content, and every tool we use — an ICP/avatar builder, a scripting assistant, filming SOPs, LUTs and powergrades. we teach you to tell your story, not copy-paste hooks that die with the trend." },
-  { q: "how much time do i need each week?",      a: "roughly 3–5 hours across the video modules, plus x3 weekly group coaching calls (60 mins each). the members who see the biggest results show up to the calls, post consistently, and actually apply the frameworks — it's a system you build with us, not passive learning." },
-  { q: "how much does it cost?",                  a: "we typically charge 4-figures for our services. book a free discovery call and we'll walk you through everything and see if it's the right fit before anything else." },
+  { q: "what actually is origin story™?",        a: "a 6-month personal brand program that helps faith-based founders, coaches & creators 2x–10x their organic reach with premium content and standout branding.\nit's the exact system we've used to generate 300M+ views and 3M+ followers for our clients.\ninside you get an 8-phase curriculum, a discord community, x3 weekly group coaching calls, 1-1 milestone calls with ken, and every tool and template we use.\nthink testimony over hype — your story is evidence of what God has done, and we help you steward it into authority positioning and high-quality lead flow." },
+  { q: "am i the right person for this?",         a: "it's built for faith-based creators, coaches, service-businesses & founders who've tried posting but got stuck in 1–3k view jail.\nyou don't yet know how to stand out, but you know your story can impact the world.\nwe look for people who take action, bring no excuses, and lead with humility over ego.\nmost of all: you see visibility as a calling — kingdom-minded, wanting to be salt and light online and build something bigger than yourself." },
+  { q: "what makes this different from courses?", a: "it's not a solo course you watch alone.\nyou get an 8-phase curriculum plus a discord community, x3 group coaching calls a week with ken, 1-1 milestone calls, and direct feedback on your content.\nyou also get every tool we use — an ICP/avatar builder, a scripting assistant, filming SOPs, one-click colour-grades and powergrades.\nwe teach integrity-led content and authority positioning — telling your testimony, not copy-pasting hooks that die with the trend." },
+  { q: "how much time do i need each week?",      a: "roughly 3–5 hours across the video modules, plus x3 weekly group coaching calls (60 mins each).\nthe members who see the biggest results show up to the calls, post consistently, and apply the frameworks.\nour systems are built to save you hours per week on content — it's stewardship, not busywork.\nfaithful in the small things: we help you grow whether you're starting from a low-follower audience or scaling a large one." },
+  { q: "how much does it cost?",                  a: "we typically charge 4-figures for our services.\nbook a free discovery call and we'll walk you through everything and see if it's the right fit before anything else.\nthink of it as an investment in multiplication — scaling reach and income so you can give and build more." },
 ];
 
 /* ─── PAGE ───────────────────────────────────────────────── */
@@ -340,7 +341,7 @@ export default function Home() {
               origin story™
             </div>
             <h1>your story is your<br /><em>unfair advantage.</em></h1>
-            <p className="hero-sub">for business owners who are done being invisible online.</p>
+            <p className="hero-sub">for faith-based creators &amp; entrepreneurs looking to scale their personal brand.</p>
             <div className="hero-ctas">
               <a href="#coaching-form" className="btn-primary">apply for 1-1 coaching →</a>
             </div>
@@ -428,9 +429,9 @@ export default function Home() {
           <p className="section-lead section-lead-dark">grow your personal brand by reflecting on who you truly are &amp; who you truly serve.</p>
 
           <div className="origin-usp">
-            <p><strong>Origin Story™ is a 6-month personal brand program built to multiply (2x–10x) your social media organic reach.</strong></p>
-            <p>a content ecosystem — building your garden full of butterflies. we&apos;ve accumulated 300M+ views &amp; 3M+ followers for our clients. we position your brand as the protagonist of a book, movie, or series — because story is key. through edification, encouragement, authenticity, vulnerability, and unforgettable wisdom.</p>
-            <p>we dial-in your avatar, brand-positioning &amp; unique-story-proposition for you to implement into your short-form content. our collective mission is to serve &amp; scale social media the way Christ calls us to serve.</p>
+            <p><strong>Origin Story™ is a 6-month personal brand program built to 2x–10x your organic reach — turning content marketing into high-quality lead flow.</strong></p>
+            <p>a content ecosystem — building your garden full of butterflies. we&apos;ve accumulated 300M+ views &amp; 3M+ followers for our clients. we position your brand as the protagonist of a book, movie, or series — because story is key. through edification, encouragement, authenticity, and vulnerability, we turn viewers into a nurtured audience that trusts you.</p>
+            <p>we dial-in your avatar, brand-positioning &amp; unique-story-proposition, then steward it into authority positioning that compounds. your story is your testimony — evidence of what God has done — and visibility becomes kingdom impact: reach that serves something bigger than you. our collective mission is to serve &amp; scale social media the way Christ calls us to serve.</p>
           </div>
 
           <div className="offers-grid offers-grid-single">
@@ -441,7 +442,7 @@ export default function Home() {
                 <h3 className="offer-title">6-Month Personal Brand<br />Coaching Program</h3>
               </div>
 
-              <p className="offer-tagline">for business owners who are already earning but invisible online. you know your content doesn&apos;t reflect how good you actually are.</p>
+              <p className="offer-tagline">for faith-based business owners, coaches, founders, &amp; creators who are invisible online.</p>
               <div className="offer-divider" />
               <ul className="offer-features">
                 {originIncludes.map(f => (
@@ -506,7 +507,7 @@ export default function Home() {
         <div className="section-inner">
           <span className="eyebrow eyebrow-muted">✦ what i&apos;m building</span>
           <h2 className="section-h2 section-h2-dark">my projects.</h2>
-          <p className="section-lead section-lead-dark">products and projects in the works.</p>
+          <p className="section-lead section-lead-dark">here is what i&apos;ve been building in 2026 behind the scenes.</p>
           <div className="work-grid">
             {projects.map(p => (
               <a key={p.name} href={p.link ?? undefined} target={!p.link || p.link === "#" ? undefined : "_blank"} rel="noopener noreferrer" className="work-card">

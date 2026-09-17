@@ -1473,6 +1473,7 @@ body {
   font-size: 0.875rem;
   color: var(--muted-dark);
   line-height: 1.75;
+  white-space: pre-line; /* honour the \n line breaks in the answers */
   display: none;
 }
 .faq-body.open { display: block; }

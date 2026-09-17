@@ -139,6 +139,7 @@ export default function StoryTimeline() {
     if (!vp) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
     let raf = 0;
     let last = 0;
@@ -147,9 +148,12 @@ export default function StoryTimeline() {
     let dragging = false;
     let startX = 0;
     let startLeft = 0;
+    let cursorFrac: number | null = null; // cursor x within the reel, 0..1 (null = not hovering)
     let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const SPEED = 20; // px/sec — slow, marquee-like
+    const SPEED = 20; // px/sec — slow baseline drift
+    const STEER = 380; // px/sec — max cursor-edge scrub speed
+    const ZONE = 0.15; // left/right 15% of the reel steers
 
     const pause = () => {
       interacting = true;
@@ -172,9 +176,20 @@ export default function StoryTimeline() {
       last = now;
       const max = vp.scrollWidth - vp.clientWidth;
       if (!interacting && !dragging && max > 1) {
-        const t = Math.min(Math.max(vp.scrollLeft / max, 0), 1);
-        const ease = 0.12 + 0.88 * Math.sin(Math.PI * t);
-        vp.scrollLeft += dir * SPEED * ease * dt;
+        let vel: number;
+        if (cursorFrac !== null && cursorFrac < ZONE) {
+          // cursor in the far-left zone → scrub toward the past (deeper = faster)
+          vel = -STEER * ((ZONE - cursorFrac) / ZONE);
+        } else if (cursorFrac !== null && cursorFrac > 1 - ZONE) {
+          // cursor in the far-right zone → scrub toward the present
+          vel = STEER * ((cursorFrac - (1 - ZONE)) / ZONE);
+        } else {
+          // baseline: slow eased drift, ping-ponging at the ends
+          const t = Math.min(Math.max(vp.scrollLeft / max, 0), 1);
+          const ease = 0.12 + 0.88 * Math.sin(Math.PI * t);
+          vel = dir * SPEED * ease;
+        }
+        vp.scrollLeft += vel * dt;
         if (vp.scrollLeft >= max - 0.5) dir = -1;
         else if (vp.scrollLeft <= 0.5) dir = 1;
         updateProgress();
@@ -182,9 +197,12 @@ export default function StoryTimeline() {
       raf = requestAnimationFrame(tick);
     };
 
-    const onEnter = () => pause();
+    const onCursorMove = (e: MouseEvent) => {
+      const r = vp.getBoundingClientRect();
+      cursorFrac = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+    };
     const onLeave = () => {
-      if (!dragging) resumeSoon(400);
+      cursorFrac = null; // back to the gentle baseline drift
     };
     const onPointerDown = (e: PointerEvent) => {
       pause();
@@ -218,7 +236,7 @@ export default function StoryTimeline() {
     };
     const onScroll = () => updateProgress();
 
-    vp.addEventListener("mouseenter", onEnter);
+    vp.addEventListener("mousemove", onCursorMove);
     vp.addEventListener("mouseleave", onLeave);
     vp.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("pointermove", onPointerMove);
@@ -235,7 +253,7 @@ export default function StoryTimeline() {
     window.addEventListener("resize", onResize);
     const t1 = setTimeout(layoutLine, 120); // after fonts/layout settle
 
-    if (!reduce) raf = requestAnimationFrame(tick);
+    if (!reduce && !coarse) raf = requestAnimationFrame(tick);
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
@@ -243,7 +261,7 @@ export default function StoryTimeline() {
       clearTimeout(t1);
       ro.disconnect();
       window.removeEventListener("resize", onResize);
-      vp.removeEventListener("mouseenter", onEnter);
+      vp.removeEventListener("mousemove", onCursorMove);
       vp.removeEventListener("mouseleave", onLeave);
       vp.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
@@ -304,7 +322,11 @@ export default function StoryTimeline() {
               const l = LAYOUT[i % LAYOUT.length];
               const isFlipped = flipped.has(i);
               return (
-                <figure className={styles.item} key={i} style={{ marginTop: l.dy }}>
+                <figure
+                  className={`${styles.item}${isFlipped ? ` ${styles.itemFlipped}` : ""}`}
+                  key={i}
+                  style={{ marginTop: l.dy }}
+                >
                   <button
                     type="button"
                     className={`${styles.photo}${isFlipped ? ` ${styles.flipped}` : ""}`}

@@ -69,12 +69,8 @@ export default function StoryTimeline() {
   const [flipped, setFlipped] = useState<Set<number>>(new Set());
 
   const toggleFlip = (i: number) => {
-    setFlipped((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      return next;
-    });
+    // single-open: opening a card closes any other; clicking the open one closes it
+    setFlipped((prev) => (prev.has(i) ? new Set() : new Set([i])));
   };
 
   // draw / redraw the curvy line, attaching to each photo's left & right edge

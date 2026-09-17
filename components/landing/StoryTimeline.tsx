@@ -11,10 +11,10 @@ import styles from "./StoryTimeline.module.css";
  * Photos float at staggered heights, threaded by a curvy line that reads left
  * (past) → right (present) and fills terracotta the further you scroll right.
  * Tapping a photo flips it (like the hero portrait) to a burgundy back with a
- * short summary. It auto-drifts slowly, eases to a stop and glides back, pauses
- * on hover/touch and while any card is open, supports mouse-drag / swipe / side
- * arrows / keyboard, and is static under prefers-reduced-motion. All motion runs
- * on one axis (viewport scrollLeft).
+ * short summary. On desktop it auto-drifts and steers to cursor-edge hovers
+ * (far-left → past, far-right → present), pausing while a card is open; on touch
+ * it is swipe-only. Supports mouse-drag and keyboard, and is static under
+ * prefers-reduced-motion. All motion runs on one axis (viewport scrollLeft).
  */
 
 // per-photo visual layout: height factor (× --ph), aspect ratio, float offset (px)
@@ -278,14 +278,6 @@ export default function StoryTimeline() {
     else ctlRef.current?.resumeSoon(1200);
   }, [flipped]);
 
-  const nudge = (px: number) => {
-    const vp = viewportRef.current;
-    if (!vp) return;
-    ctlRef.current?.pause();
-    vp.scrollBy({ left: px, behavior: "smooth" });
-    ctlRef.current?.resumeSoon(2500);
-  };
-
   return (
     <section className={styles.story} aria-labelledby="story-heading">
       <div className={styles.header}>
@@ -296,15 +288,6 @@ export default function StoryTimeline() {
       </div>
 
       <div className={styles.reelWrap}>
-        <button
-          type="button"
-          className={`${styles.arrow} ${styles.arrowLeft}`}
-          aria-label="Scroll back in time"
-          onClick={() => nudge(-320)}
-        >
-          ←
-        </button>
-
         <div
           className={styles.viewport}
           ref={viewportRef}
@@ -368,15 +351,6 @@ export default function StoryTimeline() {
             })}
           </div>
         </div>
-
-        <button
-          type="button"
-          className={`${styles.arrow} ${styles.arrowRight}`}
-          aria-label="Scroll forward in time"
-          onClick={() => nudge(320)}
-        >
-          →
-        </button>
       </div>
     </section>
   );

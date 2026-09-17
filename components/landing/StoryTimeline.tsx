@@ -19,22 +19,22 @@ import styles from "./StoryTimeline.module.css";
 
 // per-photo visual layout: height factor (× --ph), aspect ratio, float offset (px)
 const LAYOUT = [
-  { f: 1.0, ar: "3 / 2", dy: 8 },
-  { f: 0.86, ar: "1 / 1", dy: 46 },
-  { f: 1.08, ar: "4 / 3", dy: 0 },
-  { f: 0.9, ar: "1 / 1", dy: 40 },
-  { f: 0.95, ar: "1 / 1", dy: 30 },
-  { f: 1.0, ar: "3 / 2", dy: 12 },
-  { f: 0.88, ar: "1 / 1", dy: 46 },
-  { f: 1.06, ar: "4 / 3", dy: 4 },
-  { f: 0.9, ar: "1 / 1", dy: 42 },
-  { f: 1.0, ar: "3 / 2", dy: 14 },
-  { f: 0.87, ar: "1 / 1", dy: 44 },
-  { f: 1.08, ar: "4 / 3", dy: 0 },
-  { f: 0.92, ar: "1 / 1", dy: 38 },
-  { f: 1.0, ar: "3 / 2", dy: 16 },
-  { f: 0.9, ar: "1 / 1", dy: 40 },
-  { f: 1.02, ar: "3 / 2", dy: 10 },
+  { f: 1.0, ar: "3 / 2", dy: 8 },   // 1 · landscape
+  { f: 0.86, ar: "1 / 1", dy: 46 }, // 2 · square
+  { f: 1.08, ar: "4 / 3", dy: 0 },  // 3 · landscape
+  { f: 0.9, ar: "1 / 1", dy: 40 },  // 4 · square
+  { f: 0.95, ar: "1 / 1", dy: 30 }, // 5 · square
+  { f: 1.0, ar: "3 / 2", dy: 12 },  // 6 · landscape
+  { f: 0.88, ar: "1 / 1", dy: 46 }, // 7 · square
+  { f: 1.06, ar: "4 / 3", dy: 4 },  // 8 · landscape
+  { f: 0.9, ar: "1 / 1", dy: 42 },  // 9 · square
+  { f: 1.0, ar: "3 / 4", dy: 14 },  // 10 · portrait (photo is portrait)
+  { f: 0.87, ar: "1 / 1", dy: 44 }, // 11 · square
+  { f: 1.08, ar: "3 / 4", dy: 0 },  // 12 · portrait (photo is portrait)
+  { f: 0.92, ar: "1 / 1", dy: 38 }, // 13 · square
+  { f: 1.0, ar: "3 / 4", dy: 16 },  // 14 · portrait (photo is portrait)
+  { f: 0.9, ar: "1 / 1", dy: 40 },  // 15 · square
+  { f: 1.02, ar: "3 / 4", dy: 10 }, // 16 · portrait (photo is portrait)
 ];
 
 // Catmull-Rom → cubic bezier: a smooth curve through the given points
@@ -67,6 +67,9 @@ export default function StoryTimeline() {
   const movedRef = useRef(false); // true if the last pointer gesture was a drag
 
   const [flipped, setFlipped] = useState<Set<number>>(new Set());
+  // each photo's true aspect ratio (w/h), measured on load, so cards match the
+  // uploaded crop instead of being forced into a slot shape
+  const [ratios, setRatios] = useState<Record<number, number>>({});
 
   const toggleFlip = (i: number) => {
     // single-open: opening a card closes any other; clicking the open one closes it
@@ -280,6 +283,13 @@ export default function StoryTimeline() {
     else ctlRef.current?.resumeSoon(1200);
   }, [flipped]);
 
+  // photo widths change as true aspect ratios settle — redraw the line
+  useEffect(() => {
+    const id = requestAnimationFrame(() => layoutLine());
+    return () => cancelAnimationFrame(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ratios]);
+
   return (
     <section className={styles.story} aria-labelledby="story-heading">
       <div className={styles.header}>
@@ -315,7 +325,7 @@ export default function StoryTimeline() {
                   <button
                     type="button"
                     className={`${styles.photo}${isFlipped ? ` ${styles.flipped}` : ""}`}
-                    style={{ height: `calc(var(--ph) * ${l.f})`, aspectRatio: l.ar }}
+                    style={{ height: `calc(var(--ph) * ${l.f})`, aspectRatio: ratios[i] ?? l.ar }}
                     aria-label={`${e.year} — ${e.title.replace(/\n/g, " ")}. Tap to read more.`}
                     aria-expanded={isFlipped}
                     onClick={() => {
@@ -337,6 +347,13 @@ export default function StoryTimeline() {
                           fill
                           sizes="(max-width: 480px) 45vw, 220px"
                           className={styles.img}
+                          onLoad={(ev) => {
+                            const t = ev.currentTarget;
+                            if (t.naturalWidth && t.naturalHeight) {
+                              const r = t.naturalWidth / t.naturalHeight;
+                              setRatios((prev) => (prev[i] === r ? prev : { ...prev, [i]: r }));
+                            }
+                          }}
                         />
                       </span>
                       <span className={`${styles.face} ${styles.back}`}>

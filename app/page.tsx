@@ -435,7 +435,7 @@ export default function Home() {
           <h2 className="section-h2 section-h2-dark">Origin Story™</h2>
 
           <div className="origin-usp origin-usp-split">
-            <p>grow by reflecting on who you truly are &amp; who you truly serve. your story is your testimony — evidence of what God has done — so we make you the protagonist worth following.</p>
+            <p>grow by reflecting on who you truly are &amp; who you truly serve. your story is your testimony — evidence of what God has done — so we build trust with your audience.</p>
             <p>a content ecosystem — a garden full of butterflies. 300M+ views &amp; 3M+ followers built for our clients. visibility becomes kingdom impact: reach that serves something bigger than you.</p>
           </div>
 

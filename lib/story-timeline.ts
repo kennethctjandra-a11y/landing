@@ -102,7 +102,7 @@ export const storyTimeline: StoryEvent[] = [
     year: "2022",
     title: "built a JDM\nclothing brand",
     summary:
-      "co-founded mizushi — a jdm car page that became a clothing brand. it grew from a few hundred to 200,000+ followers in a year, with real-life car meets that drew crowds, hype, and chaos.",
+      "co-founded Mazushi — a jdm car page that became a clothing brand. it grew from a few hundred to 200,000+ followers in a year, with real-life car meets that drew crowds, hype, and chaos.",
     src: "/story/11.jpg",
     alt: "Built a JDM clothing brand",
   },
@@ -110,7 +110,7 @@ export const storyTimeline: StoryEvent[] = [
     year: "2023",
     title: "started uni,\nleft my business",
     summary:
-      "started uni and switched from engineering to business after a late-night talk about purpose. when the mizushi partnership soured, he walked away — his first business exit.",
+      "started uni and switched from engineering to business after a late-night talk about purpose. when the Mazushi partnership soured, he walked away — his first business exit.",
     src: "/story/12.jpg",
     alt: "Started university, left the business",
   },

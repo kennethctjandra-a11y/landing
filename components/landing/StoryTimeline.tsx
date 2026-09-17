@@ -91,8 +91,14 @@ export default function StoryTimeline() {
       });
     if (rects.length < 2) return;
 
+    const w = track.scrollWidth;
+    const h = track.offsetHeight;
+    const last = rects.length - 1;
+
     const AMP = 22;
     const seq: { x: number; y: number }[] = [];
+    // lead-in from near the left screen edge (through the track's side padding)
+    seq.push({ x: 8, y: rects[0].y });
     for (let i = 0; i < rects.length; i++) {
       seq.push({ x: rects[i].lx, y: rects[i].y });
       seq.push({ x: rects[i].rx, y: rects[i].y });
@@ -102,10 +108,10 @@ export default function StoryTimeline() {
         seq.push({ x: midX, y: midY });
       }
     }
+    // lead-out to near the right screen edge
+    seq.push({ x: w - 8, y: rects[last].y });
 
     const d = buildPath(seq);
-    const w = track.scrollWidth;
-    const h = track.offsetHeight;
     svg.setAttribute("width", String(w));
     svg.setAttribute("height", String(h));
     svg.style.width = `${w}px`;
@@ -147,7 +153,7 @@ export default function StoryTimeline() {
     let cursorFrac: number | null = null; // cursor x within the reel, 0..1 (null = not hovering)
     let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const SPEED = 20; // px/sec — slow baseline drift
+    const SPEED = 50; // px/sec — baseline drift
     const STEER = 380; // px/sec — max cursor-edge scrub speed
     const ZONE = 0.15; // left/right 15% of the reel steers
 

@@ -67,9 +67,9 @@
   align-items: flex-start;
   gap: 2.25rem;
   width: max-content;
-  /* first photo flush-left so the reel fills the screen; vertical headroom so a
-     flipped (enlarged) card isn't clipped by the viewport */
-  padding-inline: 1rem;
+  /* side space (~14vw) so the connecting line leads in/out from both screen
+     edges; vertical headroom so a flipped (enlarged) card isn't clipped */
+  padding-inline: 14vw;
   padding-block: 2.25rem;
 }
 
@@ -211,7 +211,7 @@
   }
   .track {
     gap: 1.6rem;
-    padding-inline: 1rem;
+    padding-inline: 14vw;
     padding-block: 2.4rem;
   }
 }

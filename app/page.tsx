@@ -6,18 +6,17 @@ import StoryTimeline from "@/components/landing/StoryTimeline";
 
 /* ─── DATA ───────────────────────────────────────────────── */
 
-const APPLY = "https://form.typeform.com/to/io6ZyWkn";
+const APPLY = "https://tidycal.com/team/osteam/1-1";
 
 const originIncludes = [
-  "90-min onboarding strategy call (niche, ICP, goals, content direction)",
-  "weekly group coaching calls with ken — x2/week, 60 mins (content feedback, script review, accountability)",
-  "Origin Story™ community — group chats, wins, Q&A, announcements, 1-1 support",
-  "full course video modules (branding, scripting, filming, monetising)",
-  "CinemaKit — ken's filming SOPs, LUTs, and DaVinci colour grading guides",
-  "Dream Avatar AI tool — build your ideal client profile using ken's exact framework",
-  "Quillmate — AI-assisted scripting built around your voice and story",
-  "all coaching call recordings — accessible anytime",
-  "notion templates, font library, colour palettes, filming guides",
+  "8-phase video curriculum — branding, ideation, scripting, filming, editing, posting & monetising",
+  "x3 weekly group coaching calls with ken (60 mins) — profile audits, content feedback, script reviews",
+  "Origin Story™ Discord community — wins, Q&A, video feedback, accountability & entrepreneur network",
+  "1-1 milestone calls with ken (phases 3, 6 & 8) + direct 1-1 support via Discord",
+  "ken's exact filming & editing workflow — iPhone/Sony, CapCut/DaVinci",
+  "ICP / avatar builder, scripting assistant & a personalised profile audit",
+  "notion templates, font library, colour palettes, filming guides, LUTs & powergrades",
+  "coaching call library — watch past clients go viral, plus weekly recordings",
 ];
 
 const floatingElements = [
@@ -154,9 +153,10 @@ const problems = [
 ];
 
 const projects = [
-  { tag: "ai tools · free", name: "Avatar", desc: "my ICP-building tool – used inside Origin Story™ to help business owners identify exactly who they're talking to before posting a single thing.", status: "live", link: "https://buildavatar.vercel.app/", cta: "try it free →" },
   { tag: "content series", name: "The Garden", desc: "\"the garden\" explores the intersection of faith, identity, creativity, & entrepreneurship. raw, uncut, out on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdFwq-VHsThEw2U1k7t_H03s&si=cwLUyOkOqOhWGfAS", cta: "watch now →" },
   { tag: "content series", name: "what's in the Box?", desc: "\"what's in the box?\" is a series about you, me, and everyone else. watch on all platforms.", status: "content series", link: "https://youtube.com/playlist?list=PLMVybBYH5sdHSWCAYXDQATVaAh3EoE02D&si=71YJ_rs-vGvFMOhQ", cta: "find out ❒" },
+  { tag: "documentary series", name: "Raw Faith (Season 2)", desc: "a vulnerable documentary of my life, walking by faith and sharing the real side of following Jesus.", status: "content series", link: "https://www.youtube.com/playlist?list=PLf7Yv0gLsxuI", cta: "watch now →" },
+  { tag: "content series", name: "Origin Story™", desc: "the journey of building personal brands for busy & invisible creators & entrepreneurs. powered by Jesus and storytelling.", status: "content series", link: "https://www.youtube.com/playlist?list=PLWIIEwlYOB5k", cta: "watch now →" },
 ];
 
 const values = [
@@ -170,11 +170,11 @@ const values = [
 ];
 
 const faqs = [
-  { q: "what if i'm just starting out?",         a: "Origin Story is built for business owners who are already earning but invisible online. If you're just starting out, reach out directly and Ken will point you in the right direction." },
-  { q: "what makes this different from courses?",a: "most courses teach you to copy-and-paste viral hooks. Origin Story teaches you how to find and tell your story — which no algorithm can kill and no trend can replace. it's built for you to scale your personal brand, long-term." },
-  { q: "is this only group coaching?",           a: "Origin Story is a group coaching program with direct access to Ken — weekly calls, community, and personal feedback on your content. It's not a solo course you watch alone." },
-  { q: "how much time do i need each week?",     a: "2-3 hours per day. Members seeing the biggest results show up to weekly calls, post consistently, and apply the frameworks. This isn't passive learning — it's a system you build with Ken." },
-  { q: "what's the guarantee?",                  a: "If you complete all 6 months — attend every call, apply every framework, post every week — and don't see meaningful growth in your brand and inbound leads, Ken works with you for another 90 days at no cost." },
+  { q: "what actually is origin story™?",        a: "a 6-month personal brand program that helps founders, coaches & creators multiply their organic reach (2x–10x) with premium content and standout branding. it's the exact system we've used to generate 300M+ views and 3M+ followers for our clients — an 8-phase curriculum, a discord community, weekly group coaching, 1-1 milestone calls with ken, and every tool and template we use." },
+  { q: "am i the right person for this?",         a: "it's built for creators, coaches, service-businesses & founders who've tried posting but got stuck in 1–3k view jail, don't yet know how to stand out, and know their story can impact the world. beyond that, we look for people who take action and initiative, bring no excuses, lead with humility over ego, and are kingdom-minded — building to edify others and spread the Gospel." },
+  { q: "what makes this different from courses?", a: "it's not a solo course you watch alone. you get an 8-phase curriculum plus a discord community, x3 group coaching calls a week with ken, 1-1 milestone calls, direct feedback on your content, and every tool we use — an ICP/avatar builder, a scripting assistant, filming SOPs, LUTs and powergrades. we teach you to tell your story, not copy-paste hooks that die with the trend." },
+  { q: "how much time do i need each week?",      a: "roughly 3–5 hours across the video modules, plus x3 weekly group coaching calls (60 mins each). the members who see the biggest results show up to the calls, post consistently, and actually apply the frameworks — it's a system you build with us, not passive learning." },
+  { q: "how much does it cost?",                  a: "we typically charge 4-figures for our services. book a free discovery call and we'll walk you through everything and see if it's the right fit before anything else." },
 ];
 
 /* ─── PAGE ───────────────────────────────────────────────── */
@@ -425,11 +425,12 @@ export default function Home() {
         <div className="section-inner">
           <span className="eyebrow eyebrow-muted">✦ the offer</span>
           <h2 className="section-h2 section-h2-dark">Origin Story™</h2>
-          <p className="section-lead section-lead-dark">i help you grow your personal brand by reflecting on who you truly are. more reflection, more clarity, more growth.</p>
+          <p className="section-lead section-lead-dark">grow your personal brand by reflecting on who you truly are &amp; who you truly serve.</p>
 
           <div className="origin-usp">
-            <p>personal branding is about perception and desire. when you realise that, you start building from the right foundation — a secure, purposeful, aligned identity.</p>
-            <p><strong>identity is given, not earned.</strong> aligning with yours is the one thing standing between you and the brand you&apos;re meant to build.</p>
+            <p><strong>Origin Story™ is a 6-month personal brand program built to multiply (2x–10x) your social media organic reach.</strong></p>
+            <p>a content ecosystem — building your garden full of butterflies. we&apos;ve accumulated 300M+ views &amp; 3M+ followers for our clients. we position your brand as the protagonist of a book, movie, or series — because story is key. through edification, encouragement, authenticity, vulnerability, and unforgettable wisdom.</p>
+            <p>we dial-in your avatar, brand-positioning &amp; unique-story-proposition for you to implement into your short-form content. our collective mission is to serve &amp; scale social media the way Christ calls us to serve.</p>
           </div>
 
           <div className="offers-grid offers-grid-single">
@@ -488,12 +489,13 @@ export default function Home() {
         <div className="section-inner-sm">
           <span className="eyebrow eyebrow-muted">✦ apply</span>
           <h2 className="section-h2 section-h2-dark">ready to work together?</h2>
-          <p className="section-lead section-lead-dark">fill out the form below and ken will be in touch within 48 hours.</p>
-          <div className="typeform-wrap">
+          <p className="section-lead section-lead-dark">fill out the form below and our team will be in touch within 24 hours.</p>
+          <div className="booking-wrap">
             <iframe
-              src="https://form.typeform.com/to/io6ZyWkn"
+              src="https://tidycal.com/team/osteam/1-1"
               style={{ width: "100%", height: "900px", border: "none" }}
-              title="Work with Ken Tjandra — Application"
+              title="Book a discovery call — Origin Story™"
+              loading="lazy"
             />
           </div>
         </div>

@@ -20,6 +20,13 @@ const originIncludes = [
   "coaching call library — watch past clients go viral, plus weekly recordings",
 ];
 
+const tierIncludes = [
+  "done-for-you content strategy — brand positioning, ideation & ongoing direction",
+  "we hire, train & manage your editing team",
+  "your funnel, app & sales dashboard — built for you",
+  "everything in the coaching program, included",
+];
+
 const floatingElements = [
   { el: "🧧", x: 12, y: 18, size: 2.8, depth: 0.3,  anim: "floatA", delay: 0,   opacity: 0.42 },
   { el: "✝️", x: 78, y: 12, size: 3.2, depth: 0.5,  anim: "floatB", delay: 1.5, opacity: 0.32 },
@@ -343,7 +350,7 @@ export default function Home() {
             <h1>your story is your<br /><em>unfair advantage.</em></h1>
             <p className="hero-sub">for faith-based creators &amp; entrepreneurs looking to scale their personal brand.</p>
             <div className="hero-ctas">
-              <a href="#coaching-form" className="btn-primary">apply for 1-1 coaching →</a>
+              <a href="#coaching-form" className="btn-primary">apply for coaching →</a>
             </div>
             <p className="hero-tagline">real is the new viral.</p>
           </div>
@@ -426,19 +433,17 @@ export default function Home() {
         <div className="section-inner">
           <span className="eyebrow eyebrow-muted">✦ the offer</span>
           <h2 className="section-h2 section-h2-dark">Origin Story™</h2>
-          <p className="section-lead section-lead-dark">grow your personal brand by reflecting on who you truly are &amp; who you truly serve.</p>
 
-          <div className="origin-usp">
-            <p><strong>Origin Story™ is a 6-month personal brand program built to 2x–10x your organic reach — turning content marketing into high-quality lead flow.</strong></p>
-            <p>a content ecosystem — building your garden full of butterflies. we&apos;ve accumulated 300M+ views &amp; 3M+ followers for our clients. we position your brand as the protagonist of a book, movie, or series — because story is key. through edification, encouragement, authenticity, and vulnerability, we turn viewers into a nurtured audience that trusts you.</p>
-            <p>we dial-in your avatar, brand-positioning &amp; unique-story-proposition, then steward it into authority positioning that compounds. your story is your testimony — evidence of what God has done — and visibility becomes kingdom impact: reach that serves something bigger than you. our collective mission is to serve &amp; scale social media the way Christ calls us to serve.</p>
+          <div className="origin-usp origin-usp-split">
+            <p>grow by reflecting on who you truly are &amp; who you truly serve. your story is your testimony — evidence of what God has done — so we make you the protagonist worth following.</p>
+            <p>a content ecosystem — a garden full of butterflies. 300M+ views &amp; 3M+ followers built for our clients. visibility becomes kingdom impact: reach that serves something bigger than you.</p>
           </div>
 
-          <div className="offers-grid offers-grid-single">
+          <div className="offers-grid offers-grid-tiers">
             <div className="offer-card offer-origin">
               <span className="offer-badge badge-red">now enrolling</span>
               <div>
-                <div className="offer-who">Origin Story™</div>
+                <div className="offer-who">the program</div>
                 <h3 className="offer-title">6-Month Personal Brand<br />Coaching Program</h3>
               </div>
 
@@ -461,6 +466,30 @@ export default function Home() {
                 </div>
               </div>
               <a href="#coaching-form" className="offer-cta cta-garden">apply now →</a>
+            </div>
+
+            <div className="offer-card offer-tier">
+              <span className="offer-badge badge-white-outline">members only</span>
+              <div>
+                <div className="offer-who">the next level</div>
+                <h3 className="offer-title">The Business Tier</h3>
+              </div>
+
+              <p className="offer-tagline">for founders ready to hand off execution — we build the team &amp; systems while you stay the face of the brand.</p>
+              <div className="offer-divider" />
+              <ul className="offer-features">
+                {tierIncludes.map(f => (
+                  <li className="offer-feature" key={f}><span className="feature-check">✦</span>{f}</li>
+                ))}
+              </ul>
+              <div className="offer-divider" />
+              <div className="origin-meta">
+                <div className="origin-meta-item">
+                  <span className="origin-meta-label">access</span>
+                  <span className="origin-meta-value">by application — inside origin story™ only</span>
+                </div>
+              </div>
+              <a href="#coaching-form" className="offer-cta cta-tier">enquire →</a>
             </div>
           </div>
         </div>

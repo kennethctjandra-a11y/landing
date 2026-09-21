@@ -1075,9 +1075,11 @@ body {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.closed-cta {
-  margin-top: 2.25rem;
-  display: flex;
+.booking-wrap {
+  margin-top: 2.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 /* ─── STUDENT WINS MARQUEE ─────────────────────────────────── */

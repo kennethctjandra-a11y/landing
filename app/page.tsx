@@ -6,7 +6,7 @@ import StoryTimeline from "@/components/landing/StoryTimeline";
 
 /* ─── DATA ───────────────────────────────────────────────── */
 
-const APPLY = "https://tidycal.com/team/osteam/1-1";
+const DM = "https://instagram.com/kentjandraa";
 
 const originIncludes = [
   "8-phase video curriculum — branding, ideation, scripting, filming, editing, posting & monetising",
@@ -271,7 +271,7 @@ export default function Home() {
         <a href="mailto:support@kentjandra.com" className="nav-email">support@kentjandra.com</a>
         <div className="nav-actions">
           <a href="#offers" className="btn-ghost">the offers</a>
-          <a href={APPLY} target="_blank" rel="noopener noreferrer" className="btn-red">apply now →</a>
+          <a href={DM} target="_blank" rel="noopener noreferrer" className="btn-red">dm me →</a>
         </div>
       </nav>
 
@@ -350,7 +350,7 @@ export default function Home() {
             <h1>your story is your<br /><em>unfair advantage.</em></h1>
             <p className="hero-sub">for faith-based creators &amp; entrepreneurs looking to scale their personal brand.</p>
             <div className="hero-ctas">
-              <a href="#coaching-form" className="btn-primary">apply for coaching →</a>
+              <a href={DM} target="_blank" rel="noopener noreferrer" className="btn-primary">dm me →</a>
             </div>
             <p className="hero-tagline">real is the new viral.</p>
           </div>
@@ -465,7 +465,7 @@ export default function Home() {
                   <span className="origin-meta-value">limited — reviewed personally by ken</span>
                 </div>
               </div>
-              <a href="#coaching-form" className="offer-cta cta-garden">apply now →</a>
+              <a href={DM} target="_blank" rel="noopener noreferrer" className="offer-cta cta-garden">dm me →</a>
             </div>
 
             <div className="offer-card offer-tier">
@@ -489,7 +489,7 @@ export default function Home() {
                   <span className="origin-meta-value">by application — inside origin story™ only</span>
                 </div>
               </div>
-              <a href="#coaching-form" className="offer-cta cta-tier">enquire →</a>
+              <a href={DM} target="_blank" rel="noopener noreferrer" className="offer-cta cta-tier">dm me →</a>
             </div>
           </div>
         </div>
@@ -514,19 +514,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── COACHING FORM ── */}
+      {/* ── ENROLMENT (closed) ── */}
       <section className="section section-light" id="coaching-form">
         <div className="section-inner-sm">
-          <span className="eyebrow eyebrow-muted">✦ apply</span>
-          <h2 className="section-h2 section-h2-dark">ready to work together?</h2>
-          <p className="section-lead section-lead-dark">fill out the form below and our team will be in touch within 24 hours.</p>
-          <div className="booking-wrap">
-            <iframe
-              src="https://tidycal.com/team/osteam/1-1"
-              style={{ width: "100%", height: "900px", border: "none" }}
-              title="Book a discovery call — Origin Story™"
-              loading="lazy"
-            />
+          <span className="eyebrow eyebrow-muted">✦ enrolment</span>
+          <h2 className="section-h2 section-h2-dark">spots are now closed.</h2>
+          <p className="section-lead section-lead-dark">the current cohort is full — the next cohort is coming soon. dm me on instagram to get on the waitlist for the next opening.</p>
+          <div className="closed-cta">
+            <a href={DM} target="_blank" rel="noopener noreferrer" className="btn-primary">dm me on instagram →</a>
           </div>
         </div>
       </section>
@@ -559,7 +554,7 @@ export default function Home() {
           <span className="eyebrow eyebrow-light">✦ ready?</span>
           <h2>come as you are.<br /><em>leave as who you&apos;re meant to be.</em></h2>
           <div className="final-cta-btns">
-            <a href={APPLY} target="_blank" rel="noopener noreferrer" className="btn-primary-light">apply for Origin Story™ →</a>
+            <a href={DM} target="_blank" rel="noopener noreferrer" className="btn-primary-light">dm me →</a>
           </div>
         </div>
       </section>
@@ -572,7 +567,7 @@ export default function Home() {
           <a href="https://www.tiktok.com/@kentjandraa"    target="_blank" rel="noopener noreferrer">tiktok</a>
           <a href="https://www.linkedin.com/in/kentjandra"  target="_blank" rel="noopener noreferrer">linkedin</a>
           <a href="https://www.youtube.com/@kentjandra"    target="_blank" rel="noopener noreferrer">youtube</a>
-          <a href={APPLY}                                  target="_blank" rel="noopener noreferrer">origin story™</a>
+          <a href="#offers"                                rel="noopener noreferrer">origin story™</a>
           <a href="https://docs.google.com/document/d/1pXNcOx7kqadX1OX2gwMfh9EDX2F3Cz1FEMukHBY3u5s/edit?usp=drive_link" target="_blank" rel="noopener noreferrer">policies</a>
         </div>
         <p className="footer-copy">© {new Date().getFullYear()} ken tjandra. all rights reserved.</p>
